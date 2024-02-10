@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPLH</title>
+    
+    <link rel="stylesheet" href="../css/stylekikd.css">
+    <link rel="stylesheet" href="../fontawesome/fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ADDITIONAL JQUERY -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+</head>
+
+<style>
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+    
+    img{
+        border: 1px solid #000000;
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <!-- HEADER AREA START-->
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>PPLH</h3>
+        </div>
+        <div class="right_area">
+            <a href="menu.html" class="logout_btn">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div> 
+    </header>
+    <!-- HEADER AREA END tulis tahap-->
+
+    <!-- SIDEBAR START -->
+    <nav class="sidebar">
+        <div class="profile_info">
+            <h3>Materi</h3>
+            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
+        </div>
+        <ul>
+            <li><a href="pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
+            <li><a href="#" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+            <ul class="menu-show">
+                <li><a href="Kuis1_PilihanGanda.html"><span class="numbering_text">Kuis 1</span></a></li>
+            </ul>
+            </li>
+            <li><a href="#" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
+                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text">Pencemaran Air</span></a></li>
+                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
+                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
+                 </ul>
+            </li>
+            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan</span></a>
+            <li><a href="#" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah<i class="fas fa-caret-down"></i></span></a>
+                <ul class="dropdown-container">
+                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text">Penanganan Limbah Cair</span></a></li>
+                    <li><a href="#"><span class="numbering">4.2</span><span class="numbering_text">Penanganan Limbah Padat</span></a></li>
+                    <li><a href="#"><span class="numbering">4.3</span><span class="numbering_text">Penanganan Limbah Gas</span></a></li>
+                    <li><a href="#"><span class="numbering">4.4</span><span class="numbering_text">Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
+                 </ul>
+            <li><a href="5dinamika.html" class="menu-btn"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="#"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
+                    <li><a href="#"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
+                </ul>
+            <li><a href="Evaluasi.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
+        </ul>
+    </nav>
+    <!-- SIDEBAR END -->
+
+    <!-- CONTENT AREA START-->
+    <div class="content">
+        <div id="area">
+        <div class="card-header-bab"><center>Kegiatan Kelompok CL 1: Keseimbangan dan Perubahan Lingkungan Hidup</center></div>
+
+            <div class="card-header-2" id="menu-btn">Petunjuk <i class="fas fa-caret-down"></i></div>
+            <div class= "content-card">
+            <p>Petunjuk Pengerjaan</p>
+            <ol>
+                <li>Perhatikan perintah pada masing-masing soal.</li>
+                <li>Kerjakan soal dan diskusikan dengan masing-masing kelompok.</li>
+                <li>Pilihlah jawaban yang dianggap benar.</li>
+                <li>Setelah semua perintah selesai dikerjakan, tekan tombol "kirim" untuk mengirim semua jawaban.</li>
+            </ol>
+            </div>
+            <br>
+            
+            <div class="card-header-2">Pertanyaan</div>
+            <div class="content-card">
+                <ol>
+                <!--soal 1-->
+                <li>Cermati berbagai gambar perubahan lingkungan berikut. Selain itu, kalian dapat mengamati perubahan lingkungan di sekitar jika ada.</li>
+                
+                <table>
+                    <tr>
+                        <td><img src="images/Gambar 1.jpeg">
+                            <center><a href="https://www.detik.com/sulsel/berita/d-6315092/15-warga-di-kalsel-tertimbun-longsor-6-orang-tewas-4-masih-hilang">Gambar 1. Tanah Longsor</a></center></td>
+                            
+                        <td><img src="images/Gambar 2.png">
+                            <center><a href="https://www.popmama.com/life/health/amelia-putri/bencana-banjir-di-kalimantan-selatan">Gambar 2. Banjir</a></center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/Gambar 3.jpg">
+                           <center><a href="https://mediaindonesia.com/nusantara/461309/ratusan-ton-sampah-penuhi-sungai-di-kalsel">Gambar 3. Sampah di Sungai</a></center>
+                        </td>
+                        <td><img src="images/Gambar 4.webp">
+                            <center><a href="https://www.liputan6.com/news/read/4064864/akibat-yang-ditimbulkan-dari-kebakaran-hutan-dan-lahan-menurut-bnpb">Gambar 4. Kebakaran Hutan</a></center>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <!--soal 2-->
+                <li>Centanglah faktor penyebab perubahan lingkungan soal 1 pada tabel di bawah ini.</li>
+                <table style="width:100%">
+                    <tr>
+                    <th>No.</th>
+                    <th>Perubahan Lingkungan</th>
+                    <th>Faktor Alam</th>
+                    <th>Faktor Manusia</th>
+                    <th>Keterangan</th>
+                    </tr>
+                    <tr id="satu">
+                    <td>1.</td>
+                    <td>Tanah Longsor</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check" onclick="only(this)" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle2" name="check" onclick="only(this)" value="salah"></td>
+                    <td>
+                        <p id="jawaban"></p>
+                      </td>
+                    </tr>
+
+                    <tr id="dua">
+                    <td>2.</td>
+                    <td>Banjir</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" onclick="only2(this)" name="check2" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle2" onclick="only2(this)" name="check2" value="salah"></td>
+                    <td>
+                        <p id="jawaban"></p>
+                    </td>
+                    
+                   </tr>
+                   <tr id="tiga">
+                    <td>3.</td>
+                    <td>Sampah di sungai</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check3" onclick="only3(this)" value="salah"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check3" onclick="only3(this)" value="benar"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+
+                    
+                   </tr>
+                   <tr id="empat">
+                    <td>4.</td>
+                    <td>Kebakaran hutan</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check4" onclick="only4(this)" value="salah"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check4" onclick="only4(this)" value="benar"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+                   </tr>
+                   </table>
+                   <br>
+                   <center><button class="button-utama" id="cekJawaban2"><p>Cek Jawaban</p></button></center>
+                   <br>
+                             
+                   
+                <!--soal 3-->
+                <li>Cocokkan masalah perubahan lingkungan yang terjadi pada soal 1 dengan solusinya</li>
+                </ol>
+                <div class="wrapper">
+                 <center><div class="box">
+                <div id="Hutan Mangrove" class="task" draggable="true">Hutan Mangrove</div>
+        
+                <div id="Bank Sampah" class="task" draggable="true">Bank Sampah</div>
+            
+                <div id="Reboisasi" class="task" draggable="true">Reboisasi</div>
+          
+                <div id="Melestarikan Vegetasi" class="task" draggable="true">Melestarikan Vegetasi</div>
+              
+        </div></center>
+
+        <table style="width:100%">
+         <tr>
+         <th>No.</th>
+         <th>Perubahan Lingkungan</th>
+         <th>Solusi</th>
+         </tr>
+         <tr>
+         <td>1.</td>
+         <td>Tanah Longsor</td>
+         <td><center><div class="box1" id="isian1" style="padding: 5px; width: 200px;"></td>
+         </tr>
+         <tr>
+         <td>2.</td>
+         <td>Banjir</td>
+         <td><center><div class="box1" id="isian2" style="padding: 5px; width: 200px;"></div></center></td>
+        </tr>
+        <tr>
+         <td>3.</td>
+         <td>Sampah di sungai</td>
+         <td><center><div class="box1" id="isian3" style="padding: 5px; width: 200px;"></div></center></td>
+        </tr>
+        <tr>
+         <td>4.</td>
+         <td>Kebakaran hutan</td>
+         <td><center><div class="box1" id="isian4" style="padding: 5px; width: 200px;"></div></center></td>
+        </tr>
+        </table>
+        <center><button class="button-utama" id="cekJawaban3"><p>Cek Jawaban</p></button></center>           
+        </ol>
+        </div>
+        <br>
+        <center><button onclick="return printArea('area')">Cetak Jawaban</button></center>
+        </div>
+        </div>
+        
+        
+        <div class="footer-nav">
+            <a href="#" class="footer-number">Sebelumnya</a>
+            <a href="#" class="footer-number">1</a>
+            <a href="#" class="footer-number">2</a>
+            <a href="#" class="footer-number">3</a>
+            <a href="../COBA PPLH/Kuis1_PilihanGanda.html" class="footer-number">Selanjutnya</a>
+        </div>
+        </div>
+        
+    <!--CONTENT AREA END -->
+    
+    <!-- JAVASCRIPT AREA START-->
+    
+        <script src="js/keseimbanganlatihan.js"></script>
+        <script src="js/dropdownkonten.js"></script>
+        <script>
+            function printArea(area){
+                var printPage = document.getElementById(area).innerHTML;
+                var oriPage = document.body.innerHTML;
+                document.body.innerHTML = printPage;
+                window.print();
+                document.body.innerHTML = oriPage;
+
+            }
+        </script>
+    <!-- JAVASCRIPT AREA END -->
+</body>
+
+</html>

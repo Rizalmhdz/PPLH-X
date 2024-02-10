@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tekanan Zat</title>
+    <link rel="stylesheet" href="../css/stylekikd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ADDITIONAL JQUERY -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+</head>
+
+<style>
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+</style>
+
+<body>
+    <!-- HEADER AREA START-->
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>PPLH</h3>
+        </div>
+        <div class="right_area">
+            <a href="menu.html" class="logout_btn">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div> 
+    </header>
+    <!-- HEADER AREA END -->
+
+    <!-- SIDEBAR START -->
+    <div class="content">
+    <nav class="sidebar">
+        <div class="profile_info">
+            <h3>Materi</h3>
+            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
+        </div>
+        <ul>
+            <li><a href="1.Pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
+            <li><a href="1Keseimbangan.html" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="Kuis1_PilihanGanda.html"><span class="numbering_text">Kuis 1</span></a></li>
+                </ul>
+            <li><a href="2.1udara.html" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a></li>
+                <ul class="menu-show">
+                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
+                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text"> Pencemaran Air</span></a></li>
+                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
+                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
+                    <li><a href="Kuis2_PilihanGanda.html"><span class="numbering_text">Kuis 2</span></a></li>
+                 </ul>
+            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="Kuis3_PilihanGanda.html"><span class="numbering_text">Kuis 3</span></a></li>
+                </ul>
+            <li><a href="4.1cair.html" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah &emsp;&emsp;&emsp;&ensp;<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text"> Penanganan Limbah Cair</span></a></li>
+                    <li><a href="4.2padat.html"><span class="numbering">4.2</span><span class="numbering_text"> Penanganan Limbah Padat</span></a></li>
+                    <li><a href="4.3gas.html"><span class="numbering">4.3</span><span class="numbering_text"> Penanganan Limbah Gas</span></a></li>
+                    <li><a href="4.4b3.html"><span class="numbering">4.4</span><span class="numbering_text"> Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
+                    <li><a href="Kuis2_PilihanGanda.html"><span class="numbering_text">Kuis 4</span></a></li>
+                 </ul>
+            <li id="active"><a href="5dinamika.html" class="menu-btn" id="hitam"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="5dinamika.html"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
+                    <li><a href="5.2adaptasi.html"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
+                    <li><a href="Kuis1_PilihanGanda.html"><span class="numbering_text">Kuis 5</span></a></li>
+                </ul>
+            <li><a href="#" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
+
+        </ul>
+    </nav>
+    <!-- SIDEBAR END -->
+
+    <!-- CONTENT AREA START-->
+
+        <div class="card-header-bab"><center>2.2 Pencemaran Air</center></div>
+        <div class="card-header-2">Langkah 4: Ayo Belajar Bersama!</div>
+        <div class="content-card">
+            <center><h1>Pencemaran Air</h1></center>
+
+            <div class="baris">
+                <p style="text-align: justify; text-indent: 0.5in;">
+                    Setiap hari kita membutuhkan air untuk minum, memasak, mandi, mencuci, dan lain-lain. 
+                    Bagaimana jika air yang tersedia di rumah tercemar sehingga berbau, berubah warna dan rasa? 
+                    Pasti tidak nyaman dengan kondisi tersebut karena berisiko mengganggu Kesehatan tubuh, seperti gatal-gatal di kulit, sakit perut (diare), muntah, atau cacingan. 
+                </p>
+
+                <p style="text-align: justify; text-indent: 0.5in;">
+                    Pencemaran air adalah masuknya makhluk hidup atau zat lain ke dalam air yang menyebabkan kualitas air menurun ke tingkat tertentu sehingga tidak dapat berfungsi sesuai peruntukannya. Pencemaran dapat terjadi pada air di darat maupun di laut. 
+                    Untuk menentukan air sudah tercemar atau belum, dapat dilakukan pengujian terhadap tiga parameter, yaitu sebagai berikur. 
+                </p>
+
+                <ol>
+                    <li>Parameter fisik meliputi kandungan partikel padar, zas padar terlarut, kekeruhan, warna, bau, suhu, dan pH air. 
+                    Air normal yang dapat dikonsumsi memiliki sifat tidak berbau, tidak berwarna, dan tidak berasa. 
+                    Air normal memiliki pH sekitar 6,5—7,5.</li>
+                    <li>Parameter kimia meliputi BOD (biochemical oxygen demand), COD (chemical oxygen demand), dan DO (dissolved oxygen). 
+                        BOD adalah ukuran kandungan oksigen terlarut yang diperlukan oleh mikroorganisme untuk menguraikan bahan organik di dalam air. 
+                        COD adalah ukuran kandungan oksigen yang diperlukan agar bahan buangan di dalam air dapat teroksidasi melalui reaksi kimia (biasanya digunakan dalam indikator limbah cair industri). 
+                        DO adalah ukuran kandungan oksigen terlarut dalam air. 
+                        Kandungan zat atau senyawa kimiawi, misalnya amonia bebas, nitrogen organik, nitrit, nitrat, fosfor organik, fosfor anorganik, sulfat, klorida, belerang, logam dan gas, juga dapat dijadikan indikator pencemaran air. </li>
+                    <li>Parameter biologi digunakan untuk mengetahui jenis dan jumlah mikroorganisme air yang dapat menyebabkan penyakit, contohnya Escherichia coli, Vibrio cholerae, Salmonella typhosa, dan Entamoeba histolytica. </li>
+                </ol>
+
+                <p style="text-align: justify; text-indent: 0.5in;">
+                Penyebab pencemaran air dapat berasal dari sumber langsung dan sumber tidak langsung. 
+                Sumber pencemaran langsung berupa buangan (efluen) yang langsung dibuang ke badan air, misalnya sungai, saluran air, selokan, laut, dan danau. 
+                Sumber pencemaran tidak langsung merupakan kontaminan yang masuk melalui air tanah akibat pencemaran air permukaan oleh limbah industri maupun limbah domestik. 
+                Pencemaran air disebabkan oleh limbah dari berbagai kegiatan manusia, antara lain sebagai berikut.    
+                </p>
+
+                <ul>
+                    <li>Limbah domestik, yaitu limbah yang berasal dari perumahan, pusat perdagangan, perkantoran, hotel, rumah sakit, dan tempat umum lainnya. 
+                        Limbah domestik, misalnya detergen, sampah organik, tinja hewan, dan tinja manusia. 
+                        Air sungai yang tercemar limbah tidak layak untuk dikonsumsi manusia karena dapat menimbulkan berbagai penyakit seperti tifus, kolera, disentri, diare, cacingan, dan gatal pada kulit.
+                    </li>
+                    <li>Limbah industri, yaitu limbah yang berasal dari industri (pabrik). 
+                        Limbah industri berupa bahan-bahan sisa yang mengandung logam berat berbahaya dan beracun seperti merkuri (Hg), timbal (Pb), tembaga (Cu), krom (Cr), seng (Zn) dan nikel (Ni). 
+                        Logam berat ini biasanya terakumulasi dalam organisme air, seperti ikan. 
+                        Manusia yang mengonsumsi ikan yang tercemar logam berat akan mengalami gangguan kesehatan. 
+                        Salah satu kasus yang pernah terjadi, yaitu kematian penduduk akibat penyakit Minamata di Jepang. 
+                        Hal tersebut diakibatkan warga mengonsumsi ikan yang tercemar limbah merkuri di Teluk Minamata.
+                    </li>
+                    <li>Limbah pertanian, yaitu limbah dari kegiatan pertanian berupa pupuk kimia dan pestisida. 
+                        Kelebihan pupuk di lahan pertanian akan tercuci oleh hujan dan masuk ke saluran irigasi, sungai, dan danau, sehingga menyebabkan terjadinya peningkatan unsur hara di badan perairan yang disebut eutrofikasi. 
+                        Peningkatan unsur hara menyebabkan terjadinya blooming, yaitu pertumbuhan ganggang atau enceng gondok secara cepat sehingga menutup permukaan air. 
+                        Permukaan air yang tertutup ganggang atau enceng gondok akan menghambat masuknya cahaya matahari ke dalam perairan dan menurunkan oksigen terlarut di air. 
+                        Akibatnya, banyak organisme air yang mati kekurangan oksigen.
+                    </li>
+                    <li>Limbah pertambangan, yaitu limbah yang berasal dari area pertambangan. 
+                        Contohnya, tambang emas yang menggunakan merkuri (Hg) untuk memisahkan emas dari bijihnya. 
+                        Tumpahan minyak dari pertambangan minyak lepas pantai dan kebocoran kapal tanker akan mematikan organisme di laut, misalnya ganggang, ikan, mamalia laut, dan burung pemakan ikan di laut.
+                    </li>
+                </ul>
+            </div>
+            </div>
+                  <div class="footer-nav">
+                    <a href="#" class="footer-number">Sebelumnya</a>
+                    <a href="#" class="footer-number">1</a>
+                    <a href="#" class="footer-number">2</a>
+                    <a href="#" class="footer-number">3</a>
+                    <a href="#" class="footer-number">Selanjutnya</a>
+                </div>
+                </div>
+                <script src="js/dropdownkonten.js"></script>
+                </body>
+                </html>
+                

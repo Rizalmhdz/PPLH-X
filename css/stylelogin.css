@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300&display=swap');
+
+/*------------ Jenis Tulisan dan warna background ------------*/
+body{
+    font-family: 'Nunito', sans-serif;
+    color: #555;
+    background: #AAD8D3;
+}
+
+/*------------ Ukuran Kotak Tengah ------------*/
+
+.box-area{
+    width: 850px;
+}
+
+/*------------ Kotak Kanan ------------*/
+
+.right-box{
+    padding: 40px 30px 40px 40px;
+}
+
+.logo img {
+    width: 27px;
+    margin-right: 0.3rem;
+}
+  
+.logo-back{
+    font-size: 2.5rem;
+    color: #555;
+    font-weight: bolder;
+    text-decoration: none;
+}
+  
+.logo-back h4:hover{
+    color: #AAD8D3;
+}
+  
+.logo-back h4 {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: -9px;
+    letter-spacing: -0.5px;
+    color: #555;
+}  
+
+.kamusiapa{
+    font-size: 0.9rem;
+}
+.linklogin {
+    color: #2607f0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  
+.linklogin:hover {
+    color:  #8371fd;
+}
+
+/*------------ Tulisan Bayangan Inputan ------------*/
+
+::placeholder{
+    font-size: 16px;
+}
+
+.rounded-4{
+    border-radius: 20px;
+}
+.rounded-5{
+    border-radius: 30px;
+}
+
+
+/*------------ Tampilan Kecil------------*/
+
+@media only screen and (max-width: 768px){
+
+     .box-area{
+        margin: 0 10px;
+
+     }
+     .left-box{
+        height: 100px;
+        overflow: hidden;
+     }
+     .right-box{
+        padding: 20px;
+     }
+
+}

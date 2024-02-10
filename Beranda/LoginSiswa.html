@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../fontawesome/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../css/stylelogin.css">
+    <title>PPLH | Login Siswa</title>
+</head>
+<body>
+
+    <!----------------------- Konten Tengah -------------------------->
+
+     <div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+    <!----------------------- Kotak Login Tengah Putih -------------------------->
+
+       <div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+    <!--------------------------- Kotak Kiri Login Siswa ----------------------------->
+
+       <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #e9f7f5;">
+           <div class="featured-image mb-3">
+            <img src="../images/436.png" class="img-fluid" style="width: 400px;">
+           </div>
+           <div class="fw-bold text-center" >
+           <p>Media Pembelajaran Interaktif</p>
+           <p>Perubahan dan Pelestarian Lingkungan Hidup</p>
+           </div>
+       </div> 
+
+    <!--------------------------- Kotak Kanan Login Siswa ---------------------------->
+        
+       <div class="col-md-6 right-box">
+          <div class="row align-items-center">
+                <div class="header-text mb-4">
+                    <a href="../index.html" class="logo-back"><h4><i class="fa-solid fa-seedling"></i> PPLH</h4></a>
+                </div>
+                <div class="header-text mb-4">
+                     <h2 class="fw-bold">Login Siswa</h2>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control form-control-lg bg-light fs-6" placeholder="NISN" id="nisnInp">
+                </div>
+                <div class="input-group mb-1">
+                    <input type="password" class="form-control form-control-lg bg-light fs-6 rounded-2" placeholder="Password" id="passInp">
+                    <i data-feather="eye"></i>
+                </div>
+                <div class="header-text mb-4">
+                </div>
+                <div class="input-group mb-3">
+                    <button class="btn btn-lg btn-primary w-100 fs-6" id="sub_btn">Login</button>
+                </div>
+                <div class="header-text mb-1 text-center">
+                    <p class="kamusiapa">Apakah Anda Guru? <a href="LoginGuru.html" class="linklogin" ><u>Login Guru</u></a></p>
+                </div>
+          </div>
+       </div> 
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+  
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+          apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
+          authDomain: "pplh-70ccb.firebaseapp.com",
+          projectId: "pplh-70ccb",
+          storageBucket: "pplh-70ccb.appspot.com",
+          messagingSenderId: "823611849079",
+          appId: "1:823611849079:web:a0f8c81197a46a2e1dc972"
+        };
+  
+  //----------------- Initialize Firebase --------------
+      const app = initializeApp(firebaseConfig);
+  
+      import{getDatabase, ref, get, set, child, update }
+        from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+  
+      const db = getDatabase(); 
+      //siswa
+      const nisn = document.getElementById('nisnInp');
+      let pass = document.getElementById('passInp');
+      let submit = document.getElementById('sub_btn');
+      //guru
+      
+  
+      // console.log(pass);
+        //login siswa
+      function AuntheticateUser(){
+        const dbref = ref(db);
+        // get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+        //     if (snapshot.exists()) {
+        //       console.log(snapshot.val());
+        //     } else {
+        //       console.log("No data available");
+        //     }
+        //   }).catch((error) => {
+        //     console.error(error);
+        //   });
+  
+        get(child(dbref, "dataSiswa/"+ nisn.value)).then((snapshot)=>{
+          if(snapshot.exists()){
+            console.log(pass.value);
+  
+            let dbnisn = snapshot.val().nisn;
+            let dbnama = snapshot.val().nama;
+            let dbkelas = snapshot.val().kelas;
+            let dbkel = snapshot.val().kelompok;
+            let dbpass = snapshot.val().password;
+  
+            if (dbpass == pass.value) {
+              swal({
+              title: "Selamat!",
+              text: "Anda berhasil masuk.",
+              icon: "success",
+              button: "OK",
+              }).then((result) => {
+                sessionStorage.setItem('nisn', dbnisn);
+                sessionStorage.setItem('nama', dbnama);
+                sessionStorage.setItem('kelas', dbkelas);
+                sessionStorage.setItem('kelompok', dbkel);
+                sessionStorage.setItem('password', dbpass);
+                
+                login(snapshot.val());
+              });
+              
+            }
+  
+            else{
+              swal({
+              title: "Perhatian!",
+              text: "Pengguna tidak ditemukan!",
+              icon: "warning",
+              button: "OK",
+            });
+              // alert("Pengguna tidak ditemukan")
+            } 
+          }
+  
+          else{
+            swal({
+              title: "Perhatian!",
+              text: "Nama pengguna atau password salah!",
+              icon: "warning",
+              button: "OK",
+            });
+            // alert("Nama pengguna atau password salah!")
+          }
+        });
+      }
+      function login(user){
+        
+          sessionStorage.setItem('user', user);
+          window.location="../index.html";
+      }
+  
+      submit.addEventListener('click', AuntheticateUser);
+        
+      //login guru
+    
+    
+      </script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+</html>

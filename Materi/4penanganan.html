@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPLH</title>
+    <link rel="stylesheet" href="css/stylekikd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ADDITIONAL JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+</head>
+
+<style>
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+</style>
+
+<body>
+    <!-- HEADER AREA START-->
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>PPLH</h3>
+        </div>
+        <div class="right_area">
+            <a href="menu.html" class="logout_btn">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div> 
+    </header>
+    <!-- HEADER AREA END -->
+
+    <!-- SIDEBAR START -->
+    <nav class="sidebar">
+        <div class="profile_info">
+            <h3>Materi</h3>
+            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
+        </div>
+        <ul>
+            <li><a href="pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
+            <li><a href="1Keseimbangan.html" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup</span></a></li>
+            <li><a href="#" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
+                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text">Pencemaran Air</span></a></li>
+                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
+                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
+                 </ul>
+            </li>
+            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan</span></a>
+            <li><a href="#" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text">Penanganan Limbah Cair</span></a></li>
+                    <li><a href="4.2padat.html"><span class="numbering">4.2</span><span class="numbering_text">Penanganan Limbah Padat</span></a></li>
+                    <li><a href="4.3gas.html"><span class="numbering">4.3</span><span class="numbering_text">Penanganan Limbah Gas</span></a></li>
+                    <li><a href="4.4b3.html"><span class="numbering">4.4</span><span class="numbering_text">Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
+                 </ul>
+            <li><a href="5dinamika.html" class="menu-btn"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="5.1komunitas.html"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
+                    <li><a href="5.2adaptasi.html"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
+                </ul>
+            <li><a href="Evaluasi.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
+        </ul>
+    </nav>
+    <!-- SIDEBAR END -->
+
+    <!-- CONTENT AREA START-->
+    <div class="content">
+        <div class="card-header">4. Penanganan Limbah</div>
+        <div class="card-header-2">Tujuan Pembelajaran</div>
+        <div class="content-card">
+            <p>Tujuan yang ingin dicapai dalam pembelajaran ini, yaitu:</p>
+            <ul>
+                <li>Peserta didik dapat mengemukakan penanganan berbagai jenis limbah (cair, gas, padat, dan B3).</li>
+                <li>Peserta didik dapat melakukan daur ulang limbah yang dapat bermanfaat bagi kehidupan.</li>
+            </ul>
+        </div>
+        
+        <div class="card-header-2">Penjelasan</div>
+        <div class="content-card">
+            <div class ="baris">
+                <p style="text-align: justify; text-indent: 0.5in;"> 
+                    Berdasarkan wujudnya, limbah dapat dibedakan menjadi tiga macam, yaitu limbah cair, limbah gas, dan limbah padat. 
+                    Limbah yang merupakan sisa kegiatan manusia tidak selalu berupa bahan yang mengganggu lingkungan, melainkan ada pula berupa bahan yang masih bermanfaat dan memiliki nilai ekonomi. 
+                    Limbah yang masih bermanfaat, contohnya ampas tahu dan ampas kacang dapat dimanfaatkan untuk membuat oncom dan makanan ternak, limbah kayu dari industri furnitur dapat digunakan untuk membuat mainan anak-anak, dan sisa bahan makanan dan sayuran, sampah daun, dan kotoran ternak dapat dimanfaatkan untuk membuat pupuk kompos. 
+                </p>
+                
+            </div>
+        </div>     
+        
+        <div class="footer-nav">
+            <a href="#" class="footer-number">Sebelumnya</a>
+            <a href="#" class="footer-number">1</a>
+            <a href="#" class="footer-number">2</a>
+            <a href="#" class="footer-number">3</a>
+            <a href="#" class="footer-number">Selanjutnya</a>
+        </div>
+    </div>
+    <!--CONTENT AREA END -->
+    
+    <!-- JAVASCRIPT AREA START-->
+    <script src="js/dropdownkonten.js"></script>
+    <script type="text/javascript">
+
+    //progressbar
+    window.onscroll = function() {myFunction()};
+    function myFunction() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
+
+    //dropdown menu
+    $(document).ready(function () {
+        $(".menu-btn").click(function () {
+            if ($(this).siblings(".menu-show").css("display") == "block") {
+                $(this).siblings(".menu-show").css("display", "none");
+            } else {
+                $('.menu-show').css("display", "none");
+                $(this).siblings(".menu-show").css("display", "block");
+            }
+        });
+
+        $("li ul li").click(function () {
+            $("li ul li").removeClass("active");
+            $(this).addClass("active");
+        });
+    
+        $('.nav_btn').click(function () {
+            $('.mobile_nav_items').toggleClass('active');
+        });
+    });
+
+
+    //drag and drop
+    
+    </script>
+    <!-- JAVASCRIPT AREA END -->
+</body>
+
+</html>
+

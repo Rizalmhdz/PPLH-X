@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPLH</title>
+    <link rel="stylesheet" href="../css/stylekikd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ADDITIONAL JQUERY -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+</head>
+
+<style>
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+</style>
+
+<body>
+    <!-- HEADER AREA START-->
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>PPLH</h3>
+        </div>
+        <div class="right_area">
+            <a href="menu.html" class="logout_btn">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div> 
+    </header>
+    <!-- HEADER AREA END -->
+
+    <!-- SIDEBAR START -->
+    <nav class="sidebar">
+        <div class="profile_info">
+            <h3>Materi</h3>
+            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
+        </div>
+        <ul>
+            <li><a href="pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
+            <li><a href="1Keseimbangan.html" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup</span></a></li>
+            <li><a href="#" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
+                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text">Pencemaran Air</span></a></li>
+                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
+                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
+                 </ul>
+            </li>
+            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan</span></a>
+            <li><a href="#" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text">Penanganan Limbah Cair</span></a></li>
+                    <li><a href="4.2padat.html"><span class="numbering">4.2</span><span class="numbering_text">Penanganan Limbah Padat</span></a></li>
+                    <li><a href="4.3gas.html"><span class="numbering">4.3</span><span class="numbering_text">Penanganan Limbah Gas</span></a></li>
+                    <li><a href="4.4b3.html"><span class="numbering">4.4</span><span class="numbering_text">Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
+                 </ul>
+            <li><a href="5dinamika.html" class="menu-btn"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="5.1komunitas.html"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
+                    <li><a href="5.2adapatasi.html"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
+                </ul>
+            <li><a href="Evaluasi.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
+        </ul>
+    </nav>
+    <!-- SIDEBAR END -->
+
+    <!-- CONTENT AREA START-->
+    <div class="content">
+        <div class="card-header-bab"><center>3. Akumulasi Bahan Pencemar dalam Rantai Makanan</center></div>
+        <div class="card-header-2">Langkah 4: Ayo Belajar Bersama!</div>
+        <div class="content-card">
+            <div class ="baris">
+                <p style="text-align: justify; text-indent: 0.5in;"> 
+                    Bahan pencemar yang sulit atau tidak dapat terurai di lingkungan dapat masuk ke dalam tubuh organisme dan berpindah dari satu organisme ke organisme lain melalui rantai makanan atau jaring-jaring makanan. 
+                    Contohnya, bahan pencemar DDT (dikloro difenil trikloroetana) yang digunakan oleh petani sebagai insektisida. 
+                    DDT sulit terurai sehingga residunya tetap berada di air atau tanah, yang kemudian terserap oleh ganggang atau tumbuh-tumbuhan. 
+                    DDT juga tidak dapat terurai oleh reaksi di dalam tubuh makhluk hidup. 
+                    Jika ganggang atau tumbuhan tersebut dimakan oleh herbivor, DDT akan berpindah ke tubuh herbivor, karnivor, dan seterusnya hingga ke konsumen pada tingkat trofik tertinggi. 
+                    Pada setiap tingkatan trofik, akan terjadi peningkatan akumulasi DDT. Akumulasi terbanyak terdapat pada tingkatan trofik paling tinggi. 
+                    Proses peningkatan akumulasi bahan pencemar pada tingkatan trofik melalui rantai makanan disebut biomagnifikasi. 
+                    Akumulasi DDT di dalam tubuh organisme dapat menyebabkan terjadinya gangguan fisiologi tubuh dan mutasi genetik (gen atau kromosom). 
+                </p>
+                <p style="text-align: justify; text-indent: 0.5in;"> 
+                    Konsentrasi bahan pencemar dinyatakan dalam satuan ppm (part per million), yaitu perbandingan bagian dalam satu juta bagian yang lain. 
+                    Sebagai contoh, bila konsentrasi DDT di dalam tubuh ikan besar dua ppm, berarti terdapat dua mg DDT dalam satu kg massa tubuh ikan besar. 
+                </p>
+            </div>
+        </div>     
+        
+        <div class="footer-nav">
+            <a href="#" class="footer-number">Sebelumnya</a>
+            <a href="#" class="footer-number">1</a>
+            <a href="#" class="footer-number">2</a>
+            <a href="#" class="footer-number">3</a>
+            <a href="3akumulasilatihan.html" class="footer-number">Selanjutnya</a>
+        </div>
+    </div>
+    <!--CONTENT AREA END -->
+    
+    <!-- JAVASCRIPT AREA START-->
+    <script type="text/javascript">
+
+    //progressbar
+    window.onscroll = function() {myFunction()};
+    function myFunction() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
+
+    //dropdown menu
+    $(document).ready(function () {
+        $(".menu-btn").click(function () {
+            if ($(this).siblings(".menu-show").css("display") == "block") {
+                $(this).siblings(".menu-show").css("display", "none");
+            } else {
+                $('.menu-show').css("display", "none");
+                $(this).siblings(".menu-show").css("display", "block");
+            }
+        });
+
+        $("li ul li").click(function () {
+            $("li ul li").removeClass("active");
+            $(this).addClass("active");
+        });
+    
+        $('.nav_btn').click(function () {
+            $('.mobile_nav_items').toggleClass('active');
+        });
+    });
+
+
+    //drag and drop
+    
+    </script>
+    <!-- JAVASCRIPT AREA END -->
+</body>
+
+</html>

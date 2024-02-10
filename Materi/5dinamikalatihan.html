@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPLH</title>
+    <link rel="stylesheet" href="css/stylekikd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ADDITIONAL JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+</head>
+
+<style>
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+    
+    img{
+        border: 1px solid #000000;
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <!-- HEADER AREA START-->
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>PPLH</h3>
+        </div>
+        <div class="right_area">
+            <a href="menu.html" class="logout_btn">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div> 
+    </header>
+    <!-- HEADER AREA END tulis tahap-->
+
+    <!-- SIDEBAR START -->
+    <nav class="sidebar">
+        <div class="profile_info">
+            <h3>Materi</h3>
+            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
+        </div>
+        <ul>
+            <li><a href="pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
+            <li><a href="1Keseimbangan.html" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup</span></a></li>
+            <li><a href="#" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
+                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text">Pencemaran Air</span></a></li>
+                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
+                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
+                 </ul>
+            </li>
+            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan</span></a>
+            <li><a href="#" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text">Penanganan Limbah Cair</span></a></li>
+                    <li><a href="4.2padat.html"><span class="numbering">4.2</span><span class="numbering_text">Penanganan Limbah Padat</span></a></li>
+                    <li><a href="4.3gas.html"numbering">4.3</span><span class="numbering_text">Penanganan Limbah Gas</span></a></li>
+                    <li><a href="4.4b3.html"><span class="numbering">4.4</span><span class="numbering_text">Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
+                 </ul>
+            <li><a href="#" class="menu-btn"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="5dinamika.html"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
+                    <li><a href="5.2adaptasi.html"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
+                </ul>
+            <li><a href="#" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
+        </ul>
+    </nav>
+    <!-- SIDEBAR END -->
+
+    <!-- CONTENT AREA START-->
+    <div class="content">
+        <div class="card-header">Kegiatan Kelompok CL 5: Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</div>
+
+            <div class="card-header-2" id="menu-btn">Petunjuk <i class="fas fa-caret-down"></i></div>
+            <div class= "content-card" id="menu-show">
+            <p>Petunjuk Pengerjaan</p>
+            <ol>
+                <li>Perhatikan perintah pada masing-masing soal.</li>
+                <li>Kerjakan soal dan diskusikan dengan masing-masing kelompok.</li>
+                <li>Pilihlah jawaban yang dianggap benar.</li>
+                <li>Setelah semua perintah selesai dikerjakan, tekan tombol "kirim" untuk mengirim semua jawaban.</li>
+            </ol>
+            </div>
+            <br>
+            
+            <div class="card-header-2">Pertanyaan</div>
+            <div class="content-card">
+                <ol>
+                    <!--soal 1-->
+                <li>Pasangkan faktor dengan suksesi primer dan sekunder pada tabel berdasarkan kotak pilihan yang ada.</li>
+                <div class="wrapper">
+                    <center><div class="box">
+                   <div id="Asal Kehidupan" class="task" draggable="true">Asal Kehidupan</div>
+           
+                   <div id="Lahan" class="task" draggable="true">Lahan</div>
+               
+                   <div id="Vegetasi awal perkembangan ekosistem" class="task" draggable="true">Vegetasi awal perkembangan ekosistem</div>
+             
+                   <div id="Komunitas asal" class="task" draggable="true">Komunitas asal</div>
+                   </div></center>
+                <table style="width:100%">
+                    <tr>
+                    <th>No.</th>
+                    <th>Faktor</th>
+                    <th>Suksesi Primer</th>
+                    <th>Suksesi Sekunder</th>
+                    </tr>
+         <tr>
+         <td>1.</td>
+         <td><center><div class="box1" id="isian5" style="padding: 5px; width: 200px;"></div></center></td>
+         <td>Hilang</td>
+         <td>Masih ada sebagian</td>
+         </tr>
+         <tr>
+         <td>2.</td>
+         <td><center><div class="box1" id="isian6" style="padding: 5px; width: 200px;"></div></center></td>
+         <td>Terbuka</td>
+         <td>Lahan tertutup oleh vegetasi yang terganggu (rusak)</td>
+        </tr>
+        <tr>
+         <td>3.</td>
+         <td><center><div class="box1" id="isian7" style="padding: 5px; width: 200px;"></div></center></td>
+         <td>Vegetasi perintis (ganggang biru, liken)</td>
+         <td>Selain vegetasi perintis (misalnya, perdu/pohon)</td>
+        </tr>
+        <tr>
+         <td>4.</td>
+         <td><center><div class="box1" id="isian8" style="padding: 5px; width: 200px;"></div></center></td>
+         <td>Di luar habitat asli</td>
+         <td>Sebagian dari habitat asli dan sebagian lainnya dari luar</td>
+        </tr>
+        </table>
+        <center><button class="button-utama" id="cekJawaban51"><p>Cek Jawaban</p></button></center> 
+        <br>          
+
+        
+        <!--soal 2-->
+        <li>Berilah tanda centang <input type="checkbox"> pada pernyataan yang sesuai dengan data suksesi di Kepulauan Krakatau.</li></ol>
+        <table style="width:100%">
+            <tr>
+            <th>No.</th>
+            <th>Pernyataan</th>
+            <th>Ya</th>
+            <th>Tidak</th>
+            <th>Keterangan</th>
+            </tr>
+            <tr id="satu">
+            <td>1.</td>
+            <td>Kerusakan berat di Kepulauan Krakatau akibat meletusnya gunung anak Krakatau pada tahun 1883</td>
+            <td><input type="checkbox" class="ceklis" id="vehicle1" name="check" onclick="only(this)" value="benar"></td>
+            <td><input type="checkbox" class="ceklis" id="vehicle2" name="check" onclick="only(this)" value="salah"></td>
+            <td>
+                <p id="jawaban"></p>
+              </td>
+            </tr>
+
+            <tr id="dua">
+            <td>2.</td>
+            <td>Tumbuhan <i>Ficus sp.</i> di Kepulauan Krakatau menunjukkan peran burung dan kelelawar sebagai penyebar benih di hutan.</td>
+            <td><input type="checkbox" class="ceklis" id="vehicle1" onclick="only2(this)" name="check2" value="salah"></td>
+            <td><input type="checkbox" class="ceklis" id="vehicle2" onclick="only2(this)" name="check2" value="benar"></td>
+            <td>
+                <p id="jawaban"></p>
+            </td>
+            
+           </tr>
+           <tr id="tiga">
+            <td>3.</td>
+            <td>Spesies flora di Kepulauan Krakatau merupakan spesies invasif dari Pulau Jawa dan Sumatra.</td>
+            <td><input type="checkbox" class="ceklis" id="vehicle1" name="check3" onclick="only3(this)" value="benar"></td>
+                <td><input type="checkbox" class="ceklis" id="vehicle2" name="check3" onclick="only3(this)" value="salah"></td>
+                <td>
+                    <p id="jawaban"></p>
+                </td>
+
+            
+           </tr>
+           <tr id="empat">
+            <td>4.</td>
+            <td>Para peneliti datang ke Kepulauan Krakatau sekaligus melakukan reboisasi</td>
+            <td><input type="checkbox" class="ceklis" id="vehicle1" name="check4" onclick="only4(this)" value="salah"></td>
+            <td><input type="checkbox" class="ceklis" id="vehicle2" name="check4" onclick="only4(this)" value="benar"></td>
+                <td>
+                    <p id="jawaban"></p>
+                </td>
+           </tr>
+
+           <tr id="lima">
+            <td>5.</td>
+            <td>Suksesi di Kepulauan Krakatau akan berakhir setelah mencapai komunitas stabil</td>
+            <td><input type="checkbox" class="ceklis" id="vehicle1" name="check5" onclick="only5(this)" value="salah"></td>
+                <td><input type="checkbox" class="ceklis" id="vehicle2" name="check5" onclick="only5(this)" value="benar"></td>
+                <td>
+                    <p id="jawaban"></p>
+                </td>
+           </tr>
+           </table>
+           <br>
+           <center><button class="button-utama" id="cekJawaban52"><p>Cek Jawaban</p></button></center>
+           <br>
+           </div>
+        <div class="footer-nav">
+            <a href="#" class="footer-number">Sebelumnya</a>
+            <a href="#" class="footer-number">1</a>
+            <a href="#" class="footer-number">2</a>
+            <a href="#" class="footer-number">3</a>
+            <a href="#" class="footer-number">Selanjutnya</a>
+        </div>
+    <!--CONTENT AREA END -->
+    
+    <!-- JAVASCRIPT AREA START-->
+    
+        <script src="js/5dinamikalatihan.js"></script>
+        <script src="js/dropdownkonten.js"></script>
+        
+    <!-- JAVASCRIPT AREA END -->
+</body>
+
+</html>

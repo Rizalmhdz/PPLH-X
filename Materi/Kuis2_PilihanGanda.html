@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPLH|Kuis 1</title>
+    <link rel="stylesheet" href="../css/style_kuis.css" />
+    <link rel="stylesheet" href="../fontawesome/fontawesome/css/all.min.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+
+    <!--Feather Icons-->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!--my style-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="fontawesome/fontawesome/css/all.css">
+  </head>
+  <body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+ <!--Navbar start-->
+ <nav class="navbar">
+  <a class="navbar-logo"><i class="fa-solid fa-seedling"></i> PPLH</a>
+
+  
+</nav>
+<!--Navbar end-->
+<div class="content_kegiatan-1">
+<h3>Kuis 2</h3>
+    <h3>Pencemaran Lingkungan Hidup</h3>  
+    
+</div>
+    <!--Area Progres bar end-->
+      <div class="content_pendahuluan">
+    <!--Area Kolom Soal start-->
+          <div id="opening_window" class="opening_window">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div id="op" >
+                    <div class="tabk">
+                      <button class="tablinks" onclick="openMenu(event, 'Petunjuk Pengerjaan')" id="defaultOpen">Petunjuk Pengerjaan</button>
+                    </div>
+                    
+                    <div id="Petunjuk Pengerjaan" class="tabcontent1">
+                        <ol>
+                            <li>Kuis ini terdiri dari 10 soal pilihan ganda.</li>
+                            <li>Setiap soal memiliki bobot sebanyak 10 poin.</li>
+                            <li>Waktu pengerjaan kuis selama 30 menit.</li>
+                            <li>Jawablah soal kuis dengan benar dan tidak terburu-buru.</li>
+                            <li>Ketika semua soal kuis selesai dijawab, silahkan klik tombol "Selesai" untuk melihat hasil skor yang diperoleh.</li>
+                            <li>Tekan "Mulai Kuis" untuk memulai pengerjaan kuis.</li>
+                        </ol>
+                    </div>
+                  </div>
+                </div>
+                <!-- end col -->
+                
+                <div class="col-lg-6">
+                  <div id="op" >
+                
+                    <div class="tabk">
+                      <button class="tablinks" onclick="openMenu(event, 'Petunjuk Pengerjaan')" id="defaultOpen">Identitas Siswa</button>
+                    </div>
+                    <div id="Petunjuk Pengerjaan" class="tabcontent2">
+                        <center><table>
+                          <tr>
+                            <td>Nama </td>
+                            <td height="40" width="40">
+                                <center>:</center>
+                            </td>
+                            <td><span id="nama"></span></td>
+                          </tr>
+
+                          <tr>
+                            <td>NISN </td>
+                            <td height="40" width="40">
+                                <center>:</center>
+                            </td>
+                            <td><span id="nisn"></span></td>
+                          </tr>
+
+                          <tr>
+                            <td>Kelas </td>
+                            <td height="40" width="40">
+                                <center>:</center>
+                            </td>
+                            <td><span id="kelas"></span></td>
+                          </tr>
+                        </table></center>
+                        <br>
+                        <center>
+                          <a href="2.1udara.html" class="kembali">Kembali ke Materi</a>
+                          <button type="button" class="mulai" onclick="startEva()">Mulai Kuis</button>
+                        </center>
+                    </div>	
+                  
+                  <br>
+                  <br>
+                  
+                </div>
+                </div>
+              <!-- end col -->
+              </div>
+          </div>
+
+          
+              
+          
+          <p></p>
+
+          <div id="quis_window" >
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="card border border-dark">
+                  <div class="card-header bg-transparent border-dark">
+                    <h5 class="nomor">Nomor Soal</h5>
+                  </div>
+                  <div class="card-body">
+                    <span class="number-btn"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- end col -->
+
+              <div class="col-lg-8">
+                <div class="card border border-dark">
+                  <div class="card-header bg-transparent border-dark">
+                    <h5 class="nomor">
+                      Soal Kuis 2 |
+                      <div class="btn btn-sm btn-success col-sm-2 text-center" id="time">00 : 00</div>
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="btn-action text-center">
+                      <button id="back" class="btn btn-md btn-secondary shadow">Kembali</button>
+                      <button id="next" class="btn btn-md btn-primary shadow">Selanjutnya</button>
+                      <button id="submit_" class="btn btn-md btn-danger shadow">Selesai</button>
+                    </div>
+                    <div class="quiz-container">
+                      <div id="quiz"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- end col -->
+            </div>
+          </div>
+          <!-- end kuis window -->
+
+          <div id="closing_window" >
+              <div id="end">
+                <!-- <h1 id="new-score">Score yang anda peroleh<br>0</h1> -->
+             </div>
+             
+              <p></p>
+              <center>
+              <div style="width:500px">
+                <div id="op" >
+                  <div id="Petunjuk Pengerjaan" class="tabcontent2">
+
+                    <center><table>
+                      <tr>
+                        <td>Nama </td>
+                        <td height="40" width="40">
+                            <center>:</center>
+                        </td>
+                        <td><span id="nama1"></span></td>
+                      </tr>
+
+                      <tr>
+                        <td>NISN </td>
+                        <td height="40" width="40">
+                            <center>:</center>
+                        </td>
+                        <td><span id="nisn1"></span></td>
+                      </tr>
+
+                      <tr>
+                        <td>Kelas </td>
+                        <td height="40" width="40">
+                            <center>:</center>
+                        </td>
+                        <td><span id="kelas1"></span></td>
+                      </tr>
+
+                      <tr>
+                        <td>Skor </td>
+                        <td height="40" width="40">
+                            <center>:</center>
+                        </td>
+                        <td><span id="new-score"></span></td>
+                      </tr>
+                    </table></center>
+                  <center>
+                  </div>	
+                  <br>
+                  <p id="wrong-correct">Jawaban Benar: <b>0</b>, Jawaban Salah: <b>20</b></p>
+                </div>
+              </center>
+              <h5 style="color: #555; text-shadow: none; padding-top: 0px; margin-top: 0px;" id="ucapan"></h5>
+
+              <a href="2.1udara.html" style="text-decoration: none; width: 150px;"  id="subbtn" class="btn btn-primary position-relative top-0 start-50 translate-middle-x">Lanjut Belajar</button></a> 
+
+              <a href="Kuis2_PilihanGanda.html" style="text-decoration: none;"><button id="btn-reload" class="btn btn-danger position-relative top-0 start-50 translate-middle-x">Ulangi Kuis</button></a>
+              <br>
+          </div>
+        </div>
+      </div>
+   
+
+
+    <!--Area Kolom soal end-->
+
+    <!--Feather icons-->
+    <script>
+      feather.replace();
+    </script>
+    
+
+    <!--My javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/soalkuis2.js"></script>
+<script>
+			function startEva(){
+				document.getElementById('opening_window').style.display="none";
+				document.getElementById('quis_window').style.display="block";
+			}
+			///////////////////////////////////////////////////
+			///// Fungsi mengacak soal dan menampilkan soal////
+			///////////////////////////////////////////////////
+
+      let randomQuestion = questions.sort((a, b) => {
+        return 0.5 - Math.random();
+      });
+      let sliceQuestion = randomQuestion.slice(0, 20);
+
+      function warna(questionNumber){
+        let tomSoal = document.querySelectorAll('.text-dark');
+        tomSoal[questionNumber].classList.add('sdh-bjwb');
+      }
+
+      function buildQuiz() {
+        const output = [];
+        let currentNumber = 1;
+
+        sliceQuestion.forEach((currentQuestion, questionNumber) => {
+          const answers = [];
+
+          for (letter in currentQuestion.answers) {
+            answers.push(
+              `
+                    <label onclick="warna(${questionNumber});"> 
+                        <input type="radio" name="question${questionNumber}" value="${letter}">
+                        <span>${letter}. ${currentQuestion.answers[letter]}<span>
+                    </label>
+                `
+            );
+          }
+
+          output.push(
+            `
+                <div class="slide">
+                    <div class="card">
+                        <div class="card-body border border-success">
+                            <div class="question">${currentNumber}. ${currentQuestion.question}</div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body border border-success">
+                            <div class="answers">${answers.join('')}</div>
+                        </div>
+                    </div>
+                </div>
+            `
+          );
+          currentNumber++;
+        });
+        questionContainer.innerHTML = output.join('');
+      }
+
+      /////////////////////////////////////////////////////////
+      ///// Fungsi untuk mengecek berapa benar dan salah///////
+      /////////////////////////////////////////////////////////
+
+
+      function results() {
+        const answerContainers = questionContainer.querySelectorAll('.answers');
+        let correctAnswer = sessionStorage.getItem('correct');
+	      let wrongAnswer = sessionStorage.getItem('wrong');
+	      let namaUser = sessionStorage.getItem('nama');
+	      let questionLength = sessionStorage.getItem('questionLength');
+	      let newScore = document.querySelector('#new-score');
+        let wrongCorrect = document.querySelector('#wrong-correct');
+        
+        
+        let numCorrect = 0;
+        let numWrong = 0;
+
+        sliceQuestion.forEach((currentQuestion, questionNumber) => {
+          const answerContainer = answerContainers[questionNumber];
+
+          const selector = `input[name=question${questionNumber}]:checked`;
+          const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+        /////////////////////////////////////////////////////////
+        let numberButton = document.querySelector('.number-btn');
+      	for (i = 0; i < sliceQuestion.length; i++) {
+        let li = document.createElement('span');
+        li.innerHTML = `<button type="button" class="btn btn-sm btn btn-outline-primary mx-1 mt-2 text-dark" onclick="paginationSlide(${i})">${i + 1}</button>`;
+        numberButton.appendChild(li);
+      	}
+      	/////////////////////////////////////////////////////////
+          	
+
+          if (userAnswer === currentQuestion.correctAnswer) {
+            numCorrect++;
+
+          } else {
+            numWrong++;
+
+          }
+
+
+
+          //////////////////////////////////////////////////////////////
+          ///// Menaruh jumlah salah dan benar ke local dan session/////
+          //////////////////////////////////////////////////////////////
+
+          sessionStorage.setItem('questionLength', sliceQuestion.length);
+          sessionStorage.setItem('correct', numCorrect);
+          sessionStorage.setItem('wrong', numWrong);
+
+          localStorage.setItem('questionLength', sliceQuestion.length);
+          localStorage.setItem('correct', numCorrect);
+          localStorage.setItem('wrong', numWrong);
+
+          let note;
+		      let score = (parseInt(numCorrect) / parseInt(sliceQuestion.length)) * 100;
+		      if (score >= 75) {
+		        note = 'Lulus';
+  		        document.getElementById('btn-reload').style.display="none";
+		        	document.getElementById('subbtn').style.display="block";
+              document.getElementById('ucapan').style.color="green";
+							document.getElementById('ucapan').innerHTML = "Selamat, Nilai Kuis 1 anda memenuhi KKM silahkan tekan tombol 'Selesai Kuis' untuk mengirimkan nilai ke database."
+							sessionStorage.setItem('kuis1', score);
+							localStorage.setItem('kuis1', score);
+							newScore.innerHTML = `${score}`;
+        			wrongCorrect.innerHTML = `Jawaban Benar: <b>${numCorrect}</b>, Jawaban Salah: <b>${numWrong}</b>`;
+		      } else {
+		        note = 'Tidak Lulus';
+		        document.getElementById('btn-reload').style.display="block";
+	        	document.getElementById('subbtn').style.display="none";
+						document.getElementById('ucapan').style.color="red"
+						document.getElementById('ucapan').innerHTML = "Maaf, nilai anda belum memenuhi KKM silahkan tekan tombol 'Ulangi Kuis' untuk mengerjakan kembali soal."
+						sessionStorage.setItem('kuis1', score);
+						localStorage.setItem('kuis1', score);
+						newScore.innerHTML = `${score}`;
+		        wrongCorrect.innerHTML = `Jawaban Benar: <b>${numCorrect}</b>, Jawaban Salah: <b>${numWrong}</b>`;
+		      }
+          // location.href = 'hasil.html';
+        });
+      }
+      /////////////////////////////////////////////////////////////
+      ///// Fungsi untuk tombol selanjutnya, back dan selesai./////
+      /////////////////////////////////////////////////////////////
+
+      function showSlide(n) {
+        slides[currentSlide].classList.remove('active-slide');
+        slides[n].classList.add('active-slide');
+        currentSlide = n;
+
+        if (currentSlide === 0) {
+          backButton.style.display = 'none';
+        } else {
+          backButton.style.display = 'inline-block';
+        }
+
+        if (currentSlide === slides.length - 1) {
+          nextButton.style.display = 'none';
+          submitButton.style.display = 'inline-block';
+        } else {
+          nextButton.style.display = 'inline-block';
+          submitButton.style.display = 'none';
+        }
+      }
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+      function backSlide() {
+        showSlide(currentSlide - 1);
+      }
+
+      function paginationSlide(n) {
+        showSlide(n);
+      }
+
+      ///////////////////////////////
+      ///// Kode memulai evaluasi////
+      ///////////////////////////////
+
+
+      let questionContainer = document.querySelector('#quiz');
+      let nextButton = document.querySelector('#next');
+      let backButton = document.querySelector('#back');
+      let submitButton = document.querySelector('#submit_');
+
+      buildQuiz();
+
+      const slides = document.querySelectorAll('.slide');
+      let currentSlide = 0;
+
+      showSlide(currentSlide);
+      nextButton.addEventListener('click', nextSlide);
+      backButton.addEventListener('click', backSlide);
+
+
+
+      ////////////////////////////////////////
+      ////// Tampilan untuk navigasi soal/////
+      ////////////////////////////////////////
+
+
+      let numberButton = document.querySelector('.number-btn');
+      for (i = 0; i < sliceQuestion.length; i++) {
+        let li = document.createElement('span');
+        li.innerHTML = `<button type="button" style="font-size:22px; margin-left: 20%;" class="btn btn-sm btn btn-outline-success mx-1 mt-2 text-dark" onclick="paginationSlide(${i})">${i + 1}</button>`;
+        numberButton.appendChild(li);
+      }
+
+      ///////////////////////////////////////////
+      ///// Fungsi menampilkan jam atau waktu////
+      ///////////////////////////////////////////
+
+      let showTime = document.querySelector('#time');
+      let startMinutes = 30;
+      let seconds = 0;
+
+      function countdown() {
+        setTimeout(countdown, 1000);
+        seconds = seconds < 10 ? `0${seconds}` : seconds;
+        showTime.innerHTML = `${startMinutes} : ${seconds}`;
+
+        seconds--;
+        if (seconds < 0) {
+          seconds = 59;
+          startMinutes--;
+        }
+
+        if (startMinutes < 0) {
+          startMinutes = 0;
+          seconds = 0;
+        }
+
+        if (startMinutes === 0 && seconds === 0) {
+          results();
+        }
+      }
+      countdown();
+
+      ///////Fungsi stop kuis/////////
+			//   function stopQuiz(){
+
+			// 	document.getElementById('quis_window').style.display="none"
+			// 	document.getElementById('closing_window').style.display="block"
+			// 	document.getElementById('scoreText').innerHTML = "Score Kamu... <br>"+ total_score11
+
+			// 	if (total_score11>=80) {
+			// 		document.getElementById('sub-btn').style.display="block"
+			// 		document.getElementById('ucapan').innerHTML = "Selamat, Nilai kuis anda memenuhi KKM silahkan tekan tombol 'Selesai Kuis' untuk membuka akses materi berikutnya"
+			// 		sessionStorage.setItem('kuis11', total_score11);
+			// 		localStorage.setItem('kuis11', total_score11);
+			// 	}
+			// 	else{
+			// 		document.getElementById('btn-reload').style.display="block"
+			// 		document.getElementById('ucapan').style.color="red"
+			// 		document.getElementById('ucapan').innerHTML = "Maaf, nilai anda belum memenuhi KKM silahkan tekan tombol 'Ulangi Materi' untuk mempelajari kembali materi."
+			// 	}
+			// 	return
+			// }
+
+      //////////////////////////////////////////////////////////////////////////////////////
+    	///// Menghitung dan menampilkan Kuis 1 lalu menaruh nilai ke local dan session/////
+      //////////////////////////////////////////////////////////////////////////////////////
+
+
+      let correctAnswer = sessionStorage.getItem('correct');
+      let wrongAnswer = sessionStorage.getItem('wrong');
+      let namaUser = sessionStorage.getItem('nama');
+      let questionLength = sessionStorage.getItem('questionLength');
+
+      let note;
+      let score = (parseInt(correctAnswer) / parseInt(questionLength)) * 100;
+      if (score >= 75) {
+        note = 'Lulus';
+        	// document.getElementById('sub-btn').style.display="block"
+          // document.getElementById('ucapan').style.color="green"
+					// document.getElementById('ucapan').innerHTML = "Selamat, Nilai evaluasi anda memenuhi KKM silahkan tekan tombol 'Selesai Kuis' untuk mengirimkan nilai ke database."
+					sessionStorage.setItem('kuis1', score);
+					localStorage.setItem('kuis1', score);
+      } else {
+        note = 'Tidak Lulus';
+        document.getElementById('btn-reload').style.display="block"
+				// document.getElementById('ucapan').style.color="red"
+				// document.getElementById('ucapan').innerHTML = "Maaf, nilai anda belum memenuhi KKM silahkan tekan tombol 'Ulangi evaluasi' untuk mengerjakan kembali soal."
+      }
+
+      function newResults(numCorrect, numWrong, score) {
+        let newScore = document.querySelector('#new-score');
+        let wrongCorrect = document.querySelector('#wrong-correct');
+
+        newScore.innerHTML = `Score yang anda peroleh<br/>${score}`;
+        wrongCorrect.innerHTML = `Jawaban Benar: <b>${numCorrect}</b>, Jawaban Salah: <b>${numWrong}</b><hr>`;
+      }
+
+      newResults(correctAnswer, wrongAnswer, score);
+
+      //////////////////////////////////////////
+      ///// Fungsi untuk mengakhiri evaluasi////
+      //////////////////////////////////////////
+
+
+      
+
+    </script>
+
+
+  <script type="module">
+// --------------------References---------------------------
+  	let element = document.getElementById("barProgres");
+  	let nama = document.getElementById('nama');
+  	let nisn = document.getElementById('nisn');
+  	let kelas = document.getElementById('kelas'); 
+    let nama1 = document.getElementById('nama1');
+  	let nisn1 = document.getElementById('nisn1');
+  	let kelas1 = document.getElementById('kelas1'); 
+  	var currentProgres = null; 
+    const submit = document.getElementById('sub-btn');
+    let currentUser = null;
+    let currentFullName = null;
+    let currentClass = null;
+    let currentUser1 = null;
+    let currentFullName1 = null;
+    let currentClass1 = null;
+    let currentKuis1 = null;
+
+//---------------------Function-----------------------------
+		function getProgres(){
+			let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+
+			 if(!keepLoggedIn == "yes"){
+        currentProgres = localStorage.getItem('barprogres');
+      }
+      else{
+        currentProgres = sessionStorage.getItem('barprogres'); 
+      }
+		}
+
+
+ //------------------FIREBASE CONFIG------------------------
+
+    // Import the functions you need from the SDKs you need
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
+        authDomain: "pplh-70ccb.firebaseapp.com",
+        projectId: "pplh-70ccb",
+        storageBucket: "pplh-70ccb.appspot.com",
+        messagingSenderId: "823611849079",
+        appId: "1:823611849079:web:a0f8c81197a46a2e1dc972"
+      };
+
+//----------------- Initialize Firebase --------------
+    const app = initializeApp(firebaseConfig);
+
+    import{getDatabase, ref, get, set, child, update }
+      from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+
+    const db = getDatabase(); 
+    // var submitButton = document.querySelector('#submit_');
+
+    submitButton.addEventListener('click', function () {
+        Swal.fire({
+          title: 'Apa kamu yakin mengakhiri menjawab?',
+          text: '',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Iya',
+          cancelButtonText: 'Batal',
+        }).then((result) => {
+          if (result.value) {
+            results();
+            UpdateData();
+		      	document.getElementById('quis_window').style.display="none"
+						document.getElementById('closing_window').style.display="block"
+          }
+        });
+      });
+
+// ----------------------Function-----------------
+
+
+
+
+	//-------------- update progres function in database---------------
+	  function UpdateData() {
+	  	// getUsername();
+      let currentUser = sessionStorage.getItem('nisn');
+      let currentKuis1 = sessionStorage.getItem('kuis1');
+	  	
+	  		update(ref(db, "dataSiswa/"+ currentUser),{
+	      	kuis1 : currentKuis1
+	    	})
+	    	.then(()=>{
+	      	alert("Nilai kuis berhasil diupdate.");
+          // location.href = "#.html"
+
+	    	})
+	    	.catch((error)=>{
+	      	alert("unsucsessful, error"+error);
+	    	});
+	  
+	  }
+
+    function getUsername(){
+      currentUser = sessionStorage.getItem('nisn');
+      currentClass = sessionStorage.getItem('kelas');
+      currentFullName = sessionStorage.getItem('nama');
+      currentUser1 = sessionStorage.getItem('nisn1');
+      currentClass1 = sessionStorage.getItem('kelas1');
+      currentFullName1 = sessionStorage.getItem('nama1');
+
+    }
+	  	getUsername();
+      nisn.innerText = currentUser;
+      nama.innerText = currentFullName;
+      kelas.innerText = currentClass;
+      nisn1.innerText = currentUser;
+      nama1.innerText = currentFullName;
+      kelas1.innerText = currentClass;
+
+	    // --------update data pada database--------------
+	 //  function UpdateData() {
+	 //    update(ref(db, "UserList/"+' username'),{
+	 //    	barprogres : currentProgres
+	 //    })
+	 //    .then(()=>{
+	 //      alert("data update successfully");
+
+	 //    })
+	 //    .catch((error)=>{
+	 //      alert("unsucsessful, error"+error);
+	 //    });
+	 //  }
+
+	 // updBtn.addEventListener('click',UpdateData);
+
+// --------------------ASSIGN THE EVENTS---------------------
+
+    // submit.addEventListener('click', UpdateData);
+
+	</script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPLH|Beranda</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="fontawesome/fontawesome/css/all.css">
+
+</head>
+<body>
+    
+<!--------------------------- Header ---------------------------->
+<header class="header">
+
+    <a href="#" class="logo"><i class="fa-solid fa-seedling"></i> PPLH</a>
+
+    <nav class="navbar">
+        <a href="#Beranda">Beranda</a>
+        <a href="#Menu">Menu</a>
+        <a href="#Materi">Materi</a>
+    </nav>
+
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+</header>
+
+<!--------------------------- Penghalat 1 Beranda ---------------------------->
+<section class="Beranda" id="Beranda">
+
+    <div class="content">
+        <h3>Selamat Datang!</h3>
+        <b><span id="nama"></span></b>
+        <p>di Media Pembelajaran Interaktif Perubahan dan Pelestarian Lingkungan Hidup
+        untuk SMA Kelas X</p>
+        <a href="Beranda/LoginSiswa.html" ><span class="btn" id="btn">Masuk</span></a>
+        <a href="Materi/1.Pengantar.html"><span class="btn_materi" id="btn_materi">Materi</span></a>
+        
+    </div>
+
+    <div class="image">
+        <img src="images/436.png" alt="">
+    </div>
+
+</section>
+
+
+<!--------------------------- Penghalat 2 Menu lainnya ---------------------------->
+<section class="Menu" id="Menu">
+
+    <h1 class="heading"> Fitur <span>Menu</span> Lainnya </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <i class="fa-solid fa-book"></i>
+            <h3>Kurikulum</h3>
+            <p>Kurikulum merdeka berisi capaian pembelajaran dan tujuan pembelajaran.</p>
+            <a href="Beranda/Kurikulum.html" class="btn">Buka</a>
+        </div>
+
+        <div class="box">
+            <i class="fa-solid fa-sitemap"></i>
+            <h3>Peta Konsep</h3>
+            <p>Peta konsep berisi ringkasan bagan materi yang akan dipelajari.</p> 
+            <a href="Beranda/PetaKonsep.html" class="btn">Buka</a>
+        </div>
+
+        <div class="box">
+            <i class="fa-solid fa-circle-info"></i>
+            <h3>Informasi</h3>
+            <p>Informasi berisi informasi aplikasi dan daftar pustaka.</p>
+            <a href="Beranda/Informasi.html" class="btn">Buka</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!--------------------------- Penghalat 3 Materi Pembahasan ---------------------------->
+<section class="Materi" id="Materi">
+
+    <h1 class="heading"> <span>Materi</span> Pembahasan </h1>
+    
+    <div class="row">
+
+        <div class="content">
+            
+            <div class="icons-container">
+                <div class="icons">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <h3>Keseimbangan dan Perubahan Lingkungan Hidup</h3>
+                    <p>Membahas tentang keseimbangan lingkungan dan kriterianya serta faktor penyebab perubahan lingkungan.</p>
+                </div>
+                <div class="icons">
+                    <i class="fa-solid fa-house-flood-water"></i>
+                    <h3>Pencemaran Lingkungan</h3>
+                    <p>Membahas tentang berbagai pencemaran seperti pencemaran udara, air, tanah, dan suara.</p>
+                </div>
+                <div class="icons">
+                    <i class="fa-solid fa-leaf"></i>
+                    <h3>Akumulasi Bahan Pencemar dalam Rantai Makanan</h3>
+                    <p>Membahas tentang bahan pencemar yang sulit atau tidak dapat terurai di lingkungan masuk ke dalam tubuh satu organisme ke organisme lainnya melalui rantai makanan.</p>
+                </div>
+                <div class="icons">
+                    <i class="fa-solid fa-recycle"></i>
+                    <h3>Penanganan Limbah</h3>
+                    <p>Membahas tentang penanganan berdasarkan wujudnya dibedakan menjadi 3, yaitu limbah cair, gas, padat. Serta membahas penanganan limbah bahan berbahaya dan beracun (B3).</p>
+                </div>
+                <div class="icons">
+                    <i class="fa-solid fa-arrow-up-right-dots"></i>
+                    <h3>Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</h3>
+                    <p>Membahas tentang pembentukan kembali komunitas (dinamika komunitas), penyesuaian diri (adaptasi) , dan serangkaian upaya untuk menanggulangi dampak perubahan lingkungan (mitigasi). </p>
+                </div>
+            </div>
+            <a href="#Beranda" class="btn_lengkap">Pelajari Selengkapnya <i class="fa-solid fa-circle-arrow-right"></i></i></a>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!--------------------------- Footer Copyright ---------------------------->
+<section class="footer">
+
+
+    <div class="credit"> Mahdina Khairini &copy;2024 | Media Pembelajaran PPLH</div>
+
+</section>
+
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+<script>
+    let nm = sessionStorage.getItem('nama');
+    let nama = document.getElementById('nama');
+    let tom_mat = document.getElementById('btn_materi');
+    let tom_mas = document.getElementById('btn');
+   
+    if (nm != null){
+        tom_mat.style.display="block";
+        nama.innerHTML = `${nm}`;
+        tom_mas.style.display="none";
+
+    }
+    else{
+        tom_mat.style.display="none";
+        nama.style.display = "none";
+        tom_mas.style.display="block";
+    }
+    
+</script>
+</body>
+</html>

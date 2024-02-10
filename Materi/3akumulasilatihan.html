@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPLH</title>
+    <link rel="stylesheet" href="../css/stylekikd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ADDITIONAL JQUERY -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+</head>
+
+<style>
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+    
+    img{
+        border: 1px solid #000000;
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <!-- HEADER AREA START-->
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>PPLH</h3>
+        </div>
+        <div class="right_area">
+            <a href="menu.html" class="logout_btn">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div> 
+    </header>
+    <!-- HEADER AREA END tulis tahap-->
+
+    <!-- SIDEBAR START -->
+    <nav class="sidebar">
+        <div class="profile_info">
+            <h3>Materi</h3>
+            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
+        </div>
+        <ul>
+            <li><a href="pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
+            <li><a href="1Keseimbangan.html" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup</span></a></li>
+            <li><a href="#" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
+                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text">Pencemaran Air</span></a></li>
+                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
+                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
+                 </ul>
+            </li>
+            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan</span></a>
+            <li><a href="#" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text">Penanganan Limbah Cair</span></a></li>
+                    <li><a href="4.2padat.html"><span class="numbering">4.2</span><span class="numbering_text">Penanganan Limbah Padat</span></a></li>
+                    <li><a href="4.3gas.html"><span class="numbering">4.3</span><span class="numbering_text">Penanganan Limbah Gas</span></a></li>
+                    <li><a href="4.4b3.html"><span class="numbering">4.4</span><span class="numbering_text">Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
+                 </ul>
+            <li><a href="5dinamika.html" class="menu-btn"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="#"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
+                    <li><a href="#"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
+                </ul>
+            <li><a href="Evaluasi.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
+        </ul>
+    </nav>
+    <!-- SIDEBAR END -->
+
+    <!-- CONTENT AREA START-->
+    <div class="content">
+        <div class="card-header-bab"><center>Kegiatan Kelompok CL 3: Akumulasi Bahan Pencemar dalam Rantai Makanan</center></div>
+
+            <div class="card-header-2" id="menu-btn">Petunjuk <i class="fas fa-caret-down"></i></div>
+            <div class= "content-card" id="menu-show">
+            <p>Petunjuk Pengerjaan</p>
+            <ol>
+                <li>Perhatikan perintah pada masing-masing soal.</li>
+                <li>Kerjakan soal dan diskusikan dengan masing-masing kelompok.</li>
+                <li>Pilihlah jawaban yang dianggap benar.</li>
+                <li>Setelah semua perintah selesai dikerjakan, tekan tombol "kirim" untuk mengirim semua jawaban.</li>
+            </ol>
+            </div>
+            <br>
+            
+            <div class="card-header-2">Pertanyaan</div>
+            <div class="content-card">
+                <ol>
+                <!--soal 1-->
+
+                <li>Berilah tanda centang <input type="checkbox"> pada pernyataan yang sesuai dengan data informasi pencemaran merkuri.</li>
+                <table style="width:100%">
+                    <tr>
+                    <th>No.</th>
+                    <th>Perubahan Lingkungan</th>
+                    <th>Sesuai</th>
+                    <th>Tidak Sesuai</th>
+                    <th>Keterangan</th>
+                    </tr>
+                    <tr id="sebelas">
+                    <td>1.</td>
+                    <td>Merkuri mudah terurai di lingkungan karena mudah menguap dan mengemisi uap beracun.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check11" onclick="only11(this)" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle2" name="check11" onclick="only11(this)" value="salah"></td>
+                    <td>
+                        <p id="jawaban"></p>
+                      </td>
+                    </tr>
+
+                    <tr id="duabelas">
+                    <td>2.</td>
+                    <td>Aktivitas pertambangan emas skala kecil (PESK) ilegal memungkinkan terjadinya kasus penyakit minamata.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" onclick="only12(this)" name="check12" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle2" onclick="only12(this)" name="check12" value="salah"></td>
+                    <td>
+                        <p id="jawaban"></p>
+                    </td>
+                    
+                   </tr>
+                   <tr id="tigabelas">
+                    <td>3.</td>
+                    <td>Air raksa digunakan untuk memisahkan butiran emas dari material batuan.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check13" onclick="only13(this)" value="benar"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check13" onclick="only13(this)" value="salah"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+
+                    
+                   </tr>
+                   <tr id="empatbelas">
+                    <td>4.</td>
+                    <td>Limbah merkuri dari pabrik batu baterai merupakan bahan berbahaya dan beracun (B3).</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check14" onclick="only14(this)" value="benar"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check14" onclick="only14(this)" value="salah"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+                   </tr>
+
+                   <tr id="limabelas">
+                    <td>5.</td>
+                    <td>Menurut ahli kesehatan, kandungan rata-rata Hg dalam urine penduduk di sekitar area penambangan emas ilegal masih aman.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check15" onclick="only15(this)" value="salah"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check15" onclick="only15(this)" value="benar"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+                   </tr>
+                   </table>
+                   <br>
+                   <center><button class="button-utama" id="cekJawaban8"><p>Cek Jawaban</p></button></center>
+                   <br>
+
+                   <!--soal 2-->
+                   <li>Berilah tanda centang <input type="checkbox"> pada kolom Benar atau Salah untuk setiap pernyataan terkait bahaya merkuri terhadap kehidupan.</li>
+                <table style="width:100%">
+                    <tr>
+                    <th>No.</th>
+                    <th>Pernyataan</th>
+                    <th>Benar</th>
+                    <th>Salah</th>
+                    <th>Keterangan</th>
+                    </tr>
+
+                    <tr id="enambelas">
+                    <td>1.</td>
+                    <td>Jika plankton, zooplankton, lele, dan ikan cere (gupi) membentuk rantai makanan di dalam sungai yang tercemar merkuri, akumulasi Hg tertinggi di tubuh ikan cere.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check16" onclick="only16(this)" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle2" name="check16" onclick="only16(this)" value="salah"></td>
+                    <td>
+                        <p id="jawaban"></p>
+                      </td>
+                    </tr>
+
+                    <tr id="tujuhbelas">
+                    <td>2.</td>
+                    <td>Pada ibu hamil, penyakit minamata dapat merusak otak janin sehingga menyebabkan makrosefalus.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" onclick="only17(this)" name="check17" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle2" onclick="only17(this)" name="check17" value="salah"></td>
+                    <td>
+                        <p id="jawaban"></p>
+                    </td>
+                    
+                   </tr>
+                   <tr id="delapanbelas">
+                    <td>3.</td>
+                    <td>Pada kasus di Minamata, kandungan merkuri pada tubuh laki-laki umumnya lebih tinggi dibandingkan perempuan.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check18" onclick="only18(this)" value="benar"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check18" onclick="only18(this)" value="salah"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+
+                    
+                   </tr>
+                   <tr id="sembilanbelas">
+                    <td>4.</td>
+                    <td>Di antara organisme yang hidup di perairan tercemar merkuri, kandungan Hg kadar terendah pada produsen.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check19" onclick="only19(this)" value="benar"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check19" onclick="only19(this)" value="salah"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+                   </tr>
+
+                   <tr id="duapuluh">
+                    <td>5.</td>
+                    <td>Penduduk yang tubuhnya mengandung merkuri lebih dari 5,55 mikrogram/liter berisiko menderita penyakit Minamata.</td>
+                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check20" onclick="only20(this)" value="salah"></td>
+                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check20" onclick="only20(this)" value="benar"></td>
+                        <td>
+                            <p id="jawaban"></p>
+                        </td>
+                   </tr>
+                   </table>
+                   <br>
+                   <center><button class="button-utama" id="cekJawaban9"><p>Cek Jawaban</p></button></center>
+                   <br>
+                                      
+        </ol>
+        </div>
+        <div class="footer-nav">
+            <a href="#" class="footer-number">Sebelumnya</a>
+            <a href="#" class="footer-number">1</a>
+            <a href="#" class="footer-number">2</a>
+            <a href="#" class="footer-number">3</a>
+            <a href="#" class="footer-number">Selanjutnya</a>
+        </div>
+    <!--CONTENT AREA END -->
+    
+    <!-- JAVASCRIPT AREA START-->
+    
+        
+        <script src="js/dropdownkonten.js"></script>
+        <script src="js/3akumulasilatihan.js"></script>
+    <!-- JAVASCRIPT AREA END -->
+</body>
+
+</html>

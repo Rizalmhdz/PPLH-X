@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPLH</title>
+    <link rel="stylesheet" href="../css/stylekikd.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- ADDITIONAL JQUERY -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
+</head>
+
+<style>
+    td.upper_line { border-top:solid 1px black; }
+    table.fraction { text-align: center; vertical-align: middle;
+        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
+</style>
+
+<body>
+    <!-- HEADER AREA START-->
+    <input type="checkbox" id="check">
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>PPLH</h3>
+        </div>
+        <div class="right_area">
+            <a href="menu.html" class="logout_btn">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div> 
+    </header>
+    <!-- HEADER AREA END -->
+
+    <!-- SIDEBAR START -->
+    <nav class="sidebar">
+        <div class="profile_info">
+            <h3>Materi</h3>
+            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
+        </div>
+        <ul>
+            <li><a href="pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
+            <li><a href="1Keseimbangan.html" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup</span></a></li>
+            <li><a href="#" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
+                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text">Pencemaran Air</span></a></li>
+                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
+                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
+                 </ul>
+            </li>
+            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan</span></a>
+            <li><a href="#" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text">Penanganan Limbah Cair</span></a></li>
+                    <li><a href="#"><span class="numbering">4.2</span><span class="numbering_text">Penanganan Limbah Padat</span></a></li>
+                    <li><a href="#"><span class="numbering">4.3</span><span class="numbering_text">Penanganan Limbah Gas</span></a></li>
+                    <li><a href="#"><span class="numbering">4.4</span><span class="numbering_text">Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
+                 </ul>
+            <li><a href="5dinamika.html" class="menu-btn"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
+                <ul class="menu-show">
+                    <li><a href="#"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
+                    <li><a href="#"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
+                </ul>
+            <li><a href="#" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
+        </ul>
+    </nav>
+    <!-- SIDEBAR END -->
+
+    <!-- CONTENT AREA START-->
+    <div class="content">
+        <div class="card-header">2. Pencemaran Lingkungan Hidup</div>
+        <div class="card-header-2">Tujuan Pembelajaran</div>
+        <div class="content-card">
+            <ul>
+                <li> Peserta didik dapat mengidentifikasi jenis-jenis limbah penyebab berbagai pencemaran</li>
+                    
+            </ul>
+        </div>
+
+        <div class="card-header-2">Penjelasan</div>
+        <div class="content-card">
+            <div class="baris">
+                <p style="text-align: justify; text-indent: 0.5in;">
+                    Lingkungan menyediakan sumber daya alam yang dibutuhkan manusia untuk menunjang kehidupannya. 
+                    Namun, berbagai aktivitas manusia menghasilkan limbah yang sebagian besar tidak dikelola dengan baik dan dibuang ke lingkungan. 
+                    Menurut Peraturan Pemerintah RI No. 18 Tahun 1999, limbah adalah sisa suatu usaha dan atau kegiatan. 
+                    Terkadang limbah tersebut membahayakan kesehatan atau kehidupan manusia dan makhluk hidup lainnya. </p>
+                <p style="text-align: justify; text-indent: 0.5in;">
+                    Menurut UU No. 23 Tahun 1997 pasal 1 ayat 12, pencemaran lingkungan hidup adalah masuknya atau dimasukkannya makhluk hidup, zat, energi, dan atau komponen lain ke dalam lingkungan hidup oleh kegiatan manusia sehingga kualitasnya turun sampai ke tingkat tertentu yang menyebabkan lingkungan hidup tidak dapat berfungsi sesuai dengan peruntukannya. 
+                    Bahan penyebab pencemaran disebut polutan. 
+                    Suatu lingkungan dikatakan tercemar apabila jumlah atau kadar polutan melebihi ambang batas sehingga menyebabkan menurunnya kualitas atau daya dukung lingkungan dan terganggunya kehidupan makhluk hidup. 
+                    </p>
+                <p style="text-align: justify; text-indent: 0.5in;">
+                    Pencemaran dapat dibedakan menjadi empat macam, yaitu pencemaran udara, pencemaran air, pencemaran tanah, dan pencemaran suara. 
+                    </p>
+
+                </div>
+                </div>
+
+        
+        <div class="footer-nav">
+            <a href="#" class="footer-number">Sebelumnya</a>
+            <a href="#" class="footer-number">1</a>
+            <a href="#" class="footer-number">2</a>
+            <a href="#" class="footer-number">3</a>
+            <a href="#" class="footer-number">Selanjutnya</a>
+        </div>
+    </div>
+    <!-- CONTENT AREA END -->
+    
+    <!-- JAVASCRIPT AREA START-->
+    <script src="js/dropdownkonten.js"></script>
+    <script type="text/javascript">
+
+    //progressbar
+    window.onscroll = function() {myFunction()};
+    function myFunction() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
+
+    //dropdown menu
+    $(document).ready(function () {
+        $(".menu-btn").click(function () {
+            if ($(this).siblings(".menu-show").css("display") == "block") {
+                $(this).siblings(".menu-show").css("display", "none");
+            } else {
+                $('.menu-show').css("display", "none");
+                $(this).siblings(".menu-show").css("display", "block");
+            }
+        });
+
+        $("li ul li").click(function () {
+            $("li ul li").removeClass("active");
+            $(this).addClass("active");
+        });
+    
+        $('.nav_btn').click(function () {
+            $('.mobile_nav_items').toggleClass('active');
+        });
+    });
+
+
+    //drag and drop
+    
+    </script>
+
+<script>
+    //cek jawaban isian
+    function cekJawaban(){
+
+        
+        let isi1 = document.getElementById("isian1").value.toLowerCase();
+        let jawaban1 = new RegExp('osmosis');
+        let result1 = jawaban1.test(isi1);
+
+         if(result1 == true){
+              document.getElementById("cekIsian1").style.color = "green";
+              document.getElementById("isian1").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian1").style.color = "red";
+              document.getElementById("isian1").style.border = "2px solid red";
+              }
+        
+        let isi2 = document.getElementById("isian2").value.toLowerCase();
+        let jawaban2 = new RegExp('daya kapilaritas batang');
+        let result2 = jawaban2.test(isi2);
+
+         if(result2 == true){
+              document.getElementById("cekIsian2").style.color = "green";
+              document.getElementById("isian2").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian2").style.color = "red";
+              document.getElementById("isian2").style.border = "2px solid red";
+              }
+
+        let isi3 = document.getElementById("isian3").value.toLowerCase();
+        let jawaban3 = new RegExp('kohesi');
+        let result3 = jawaban3.test(isi3);
+
+         if(result3 == true){
+              document.getElementById("cekIsian3").style.color = "green";
+              document.getElementById("isian3").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian3").style.color = "red";
+              document.getElementById("isian3").style.border = "2px solid red";
+              }
+
+        let isi4 = document.getElementById("isian4").value.toLowerCase();
+        let jawaban4 = new RegExp('adhesi');
+        let result4 = jawaban4.test(isi4);
+
+         if(result4 == true){
+              document.getElementById("cekIsian4").style.color = "green";
+              document.getElementById("isian4").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian4").style.color = "red";
+              document.getElementById("isian4").style.border = "2px solid red";
+              }
+
+        let isi5 = document.getElementById("isian5").value.toLowerCase();
+        let jawaban5 = new RegExp('kohesi');
+        let result5 = jawaban5.test(isi5);
+
+         if(result5 == true){
+              document.getElementById("cekIsian5").style.color = "green";
+              document.getElementById("isian5").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian5").style.color = "red";
+              document.getElementById("isian5").style.border = "2px solid red";
+              }
+
+        let isi6 = document.getElementById("isian6").value.toLowerCase();
+        let jawaban6 = new RegExp('adhesi');
+        let result6 = jawaban6.test(isi6);
+
+         if(result6 == true){
+              document.getElementById("cekIsian6").style.color = "green";
+              document.getElementById("isian6").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian6").style.color = "red";
+              document.getElementById("isian6").style.border = "2px solid red";
+              }
+
+        let isi7 = document.getElementById("isian7").value.toLowerCase();
+        let jawaban7 = new RegExp('daya isap daun');
+        let result7 = jawaban7.test(isi7);
+
+         if(result7 == true){
+              document.getElementById("cekIsian7").style.color = "green";
+              document.getElementById("isian7").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian7").style.color = "red";
+              document.getElementById("isian7").style.border = "2px solid red";
+              }
+
+        let isi8 = document.getElementById("isian8").value.toLowerCase();
+        let jawaban8 = new RegExp('transpirasi');
+        let result8 = jawaban8.test(isi8);
+
+         if(result8 == true){
+              document.getElementById("cekIsian8").style.color = "green";
+              document.getElementById("isian8").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian8").style.color = "red";
+              document.getElementById("isian8").style.border = "2px solid red";
+              }
+
+        let isi9 = document.getElementById("isian9").value.toLowerCase();
+        let jawaban9 = new RegExp('asam amino');
+        let result9 = jawaban9.test(isi9);
+
+         if(result9 == true){
+              document.getElementById("cekIsian9").style.color = "green";
+              document.getElementById("isian9").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian9").style.color = "red";
+              document.getElementById("isian9").style.border = "2px solid red";
+              }
+
+        let isi10 = document.getElementById("isian10").value.toLowerCase();
+        let jawaban10 = new RegExp('floem');
+        let result10 = jawaban10.test(isi10);
+
+         if(result10 == true){
+              document.getElementById("cekIsian10").style.color = "green";
+              document.getElementById("isian10").style.border = "2px solid green"
+         } else{
+              document.getElementById("cekIsian10").style.color = "red";
+              document.getElementById("isian10").style.border = "2px solid red";
+              }
+    }
+    
+    </script>
+</body>
+
+</html>
