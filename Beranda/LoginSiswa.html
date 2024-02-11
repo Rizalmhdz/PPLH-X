@@ -117,6 +117,7 @@
             let dbkelas = snapshot.val().kelas;
             let dbkel = snapshot.val().kelompok;
             let dbpass = snapshot.val().password;
+            let dbconfirm = snapshot.val().konfirmasi;
   
             if (dbpass == pass.value) {
               swal({
@@ -130,6 +131,7 @@
                 sessionStorage.setItem('kelas', dbkelas);
                 sessionStorage.setItem('kelompok', dbkel);
                 sessionStorage.setItem('password', dbpass);
+                sessionStorage.setItem('konfirmasi', dbconfirm);
                 
                 login(snapshot.val());
               });
