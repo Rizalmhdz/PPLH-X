@@ -231,7 +231,6 @@
     let nisnUser = sessionStorage.getItem('nisn');
     let groupUser = sessionStorage.getItem('kelompok');
     let isConfirmUser = sessionStorage.getItem('konfirmasi');
-
     for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
@@ -272,10 +271,27 @@ onValue(que, (snapshot) => {
     sortedGroups.forEach(kelompok => {
         const usersInGroup = groupedUsers[kelompok];
         let list = "";
+        
+        let confirmBtn = "";
         usersInGroup.forEach(user => {
             list += `<input class="form-check-input ms-2" type="radio" id="anggotakelompok" name="namaanggota" value="${user.nama}" ${user.nisn === nisnUser ? "checked" : "disabled"}>
                     <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
+
+            if(user.nisn == nisnUser){
+                if(user.konfirmasi){
+                    confirmBtn += `<button class="btn btn-success" id="konfirmasiya">Terkonfirmasi</button>`
+                } else {
+                        confirmBtn += `<button class="btn btn-success" id="konfirmasiya">Ya</button>
+                    <button class="btn btn-danger" id="konfirmasitidak">Tidak</button>`
+                }
+        
+            }
+            if(user.kelompok != groupUser){
+                confirmBtn += `<button class="btn ${(user.konfirmasi) ? "btn-success" : "btn-danger"} id="status" disabled>${(user.konfirmasi) ? "Terkonfirmasi" : "Belum Konfirmasi"}</button>`
+            } 
         });
+
+        
 
         console.log("groupUser : " + groupUser);
         console.log("kelompok : " + kelompok);
@@ -285,8 +301,7 @@ onValue(que, (snapshot) => {
                 <td class="text-center"><label for="namakelompok">${kelompok}</label></td>
                 <td>${list}</td>
                 <td class="text-center">
-                    <button class="btn btn-success" id="konfirmasiya" ${groupUser == kelompok ? "" : "disabled"}>Ya</button>
-                    <button class="btn btn-danger" id="konfirmasitidak" ${groupUser == kelompok ? "" : "disabled"}>Tidak</button>
+                    ${confirmBtn}
                 </td>
             </tr>
         `;
