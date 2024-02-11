@@ -162,8 +162,9 @@
                     <th>Nama Anggota</th>
                     <th>Konfirmasi</th>
                     </tr>
+                    <tbody id="tbody1"></tbody>
 
-                    <tr id="satu">
+                    <!-- <tr id="satu">
                     <td>1.</td>
                     <td><input type="radio" id="kelompok" name="namakelompok"><label for="namakelompok"> Kelompok A</label></td>
                     <td><input type="radio" id="anggotakelompok" name="namaanggota"><label for="namaanggota"> nama1</label><br>
@@ -174,13 +175,13 @@
                     </td>
                     </tr>
 
-                    <tr id="dua">
-                    <td>2.</td>
+                    <tr id="dua"> -->
+                    <!-- <td>2.</td>
                     <td><input type="radio" id="kelompok" name="namakelompok"><label for="namakelompok"> Kelompok B</label></td>
                     <td><input type="radio" id="anggotakelompok" name="namaanggota"><label for="namaanggota"> nama1</label><br>
                         <input type="radio" id="anggotakelompok" name="namaanggota"><label for="namaanggota"> nama2</label></td>
                     <td><center><button class="button-utama" id="konfirmasiya">Ya</button>
-                        <button class="button-utama" id="konfirmasitidak">Tidak</button></center></td>
+                        <button class="button-utama" id="konfirmasitidak">Tidak</button></center></td> -->
                    </tr>
                    
                    </table>
@@ -201,21 +202,99 @@
     <!--CONTENT AREA END -->
     
     <!-- JAVASCRIPT AREA START-->
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-var i;
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script type="module">
+      //---------project setting firebase-----------
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+      
+      const firebaseConfig = {
+          apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
+          authDomain: "pplh-70ccb.firebaseapp.com",
+          databaseURL: "https://pplh-70ccb-default-rtdb.firebaseio.com",
+          projectId: "pplh-70ccb",
+          storageBucket: "pplh-70ccb.appspot.com",
+          messagingSenderId: "823611849079",
+          appId: "1:823611849079:web:a0f8c81197a46a2e1dc972"
+      };
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
-}
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, equalTo } 
+      from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+      
+      const db = getDatabase();
+        var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    let nisnUser = sessionStorage.getItem('nisn');
+    let groupUser = sessionStorage.getItem('kelompok');
+
+    for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+        } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+    });
+    }
+
+    let tmp = document.querySelector('#tbody1');
+const que = query(ref(db, "dataSiswa/"));
+
+onValue(que, (snapshot) => {
+    console.log(snapshot.val());
+    tmp.innerHTML = "";
+    var no = 1;
+    const users = snapshot.val();
+
+    // Objek untuk menyimpan data pengguna yang dikelompokkan berdasarkan kelompok
+    const groupedUsers = {};
+
+    // Mengelompokkan pengguna berdasarkan kelompok
+    Object.values(users).forEach(user => {
+        const kelompok = user.kelompok;
+        if (!groupedUsers[kelompok]) {
+            groupedUsers[kelompok] = [];
+        }
+        groupedUsers[kelompok].push(user);
+    });
+
+    // Mengurutkan kelompok secara alfabetis
+    const sortedGroups = Object.keys(groupedUsers).sort();
+
+    // Membuat baris tabel untuk setiap kelompok
+    sortedGroups.forEach(kelompok => {
+        const usersInGroup = groupedUsers[kelompok];
+        let list = "";
+        usersInGroup.forEach(user => {
+            list += `<input class="form-check-input ms-2" type="radio" id="anggotakelompok" name="namaanggota" value="${user.nama}" ${user.nisn === nisnUser ? "checked" : "disabled"}>
+                    <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
+        });
+
+        console.log("groupUser : " + groupUser);
+        console.log("kelompok : " + kelompok);
+        let tr = `
+            <tr class="m-1 ms-3">
+                <td class="text-center">${no}</td>
+                <td class="text-center"><label for="namakelompok">${kelompok}</label></td>
+                <td>${list}</td>
+                <td class="text-center">
+                    <button class="btn btn-success" id="konfirmasiya" ${groupUser == kelompok ? "" : "disabled"}>Ya</button>
+                    <button class="btn btn-danger" id="konfirmasitidak" ${groupUser == kelompok ? "" : "disabled"}>Tidak</button>
+                </td>
+            </tr>
+        `;
+        tmp.innerHTML += tr;
+        no++;
+    });
+});
+
+
     </script>
 
     <script>
