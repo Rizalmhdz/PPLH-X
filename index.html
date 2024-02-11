@@ -22,6 +22,7 @@
         <a href="#Beranda">Beranda</a>
         <a href="#Menu">Menu</a>
         <a href="#Materi">Materi</a>
+        <a id="logout" href=""><i class="fa fa-sign-out" aria-hidden="true" style="color:#555555"></i></a>
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -153,6 +154,12 @@
         nama.style.display = "none";
         tom_mas.style.display="block";
     }
+
+    let logout = document.getElementById("logout");
+    logout.addEventListener("click", ()=>{
+        // Membersihkan session storage
+        sessionStorage.clear();
+    });
     
 </script>
 </body>
