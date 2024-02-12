@@ -221,7 +221,7 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
 
-      import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, equalTo } 
+      import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, equalTo, update } 
       from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
       
       const db = getDatabase();
@@ -279,15 +279,15 @@ onValue(que, (snapshot) => {
 
             if(user.nisn == nisnUser){
                 if(user.konfirmasi){
-                    confirmBtn += `<button class="btn btn-success" id="konfirmasiya">Terkonfirmasi</button>`
+                    confirmBtn += `<span class="badge text-bg-success" id="terkonfirmasi">Terkonfirmasi</span><br>`;
                 } else {
-                        confirmBtn += `<button class="btn btn-success" id="konfirmasiya">Ya</button>
-                    <button class="btn btn-danger" id="konfirmasitidak">Tidak</button>`
+                    confirmBtn += `<button class="btn btn-success" id="konfirmasiya">Ya</button>
+                                <button class="btn btn-danger" id="konfirmasitidak">Tidak</button><br>`;
                 }
         
-            }
-            if(user.kelompok != groupUser){
-                confirmBtn += `<button class="btn ${(user.konfirmasi) ? "btn-success" : "btn-danger"} id="status" disabled>${(user.konfirmasi) ? "Terkonfirmasi" : "Belum Konfirmasi"}</button>`
+            } else {
+                confirmBtn += `<span class="badge ${(user.konfirmasi) ? "text-bg-success" : "text-bg-danger"} m-1" id="status">${(user.konfirmasi) ? " Terkonfirmasi " : " Belum Konfirmasi "}</span><br>`;
+
             } 
         });
 
@@ -306,9 +306,55 @@ onValue(que, (snapshot) => {
             </tr>
         `;
         tmp.innerHTML += tr;
+        (isConfirmUser)? "" : tambahkanEventListener();
         no++;
     });
 });
+
+    function tambahkanEventListener() {
+        try {
+
+            // Cari elemen yang ingin Anda tambahkan event listener-nya
+            let konfirmasiBtn = document.getElementById("konfirmasiya");
+
+            // Pastikan elemen ditemukan sebelum menambahkan event listener
+            if (konfirmasiBtn) {
+                    konfirmasiBtn.addEventListener("click", ()=> {
+                        const dbRef = ref(db);
+                        update(child(dbRef, "dataSiswa/"+ nisnUser),
+                        {
+                        konfirmasi: true,
+                        })
+                        .then(()=>{
+                            Swal.fire({
+                                title: "Selamat!",
+                                text: "Konfirmasi Berhasil.",
+                                icon: "success",
+                                button: "Ok",
+                              });
+                        })
+                        .catch((error)=>{
+                            console.error("Error : " + error);
+                            Swal.fire({
+                                title: "Maaf!",
+                                text: "Konfirmasi Gagal.",
+                                icon: "error",
+                                button: "Lanjutkan",
+                              });
+                        });
+                    });
+            } else {
+                console.error('Elemen tidak ditemukan');
+            }
+        } catch (error) {
+            console.error('Terjadi kesalahan:', error);
+        }
+    }
+
+    // Panggil fungsi untuk menambahkan event listener
+    
+
+    
 
 
     </script>
@@ -319,7 +365,10 @@ onValue(que, (snapshot) => {
     
     nama.innerHTML = `<i class="fa-solid fa-user"></i> ${nm}`;
     </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- JAVASCRIPT AREA END -->
+    
 </body>
 
 </html>
