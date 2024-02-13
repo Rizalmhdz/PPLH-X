@@ -215,6 +215,7 @@
             }
         
             .chat-room {
+                z-index: 1000;
               width: 400px;
               height: 500px;
               position: fixed;
@@ -270,6 +271,10 @@
               font-size: 0.8em;
               float: right;
             }
+            .close-btn {
+                margin-top: -30px;
+                float: right;
+            }
           </style>
              <!-- Floating Button -->
   <!-- Floating Button -->
@@ -278,10 +283,8 @@
   <!-- Popup untuk room chat -->
   <div id="chatPopup" class="chat-room" style="display: none;">
     <div class="chat-header">
-      <h3>Nama Kelompok</h3>
-      <button type="button" class="close" aria-label="Close" onclick="closeChat()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+      <h4>Nama Kelompok</h4>
+        <button type="button" class="btn-close close-btn" onclick="closeChat()" aria-label="Close"></button>
     </div>
     <div class="chat-body" id="chatMessages"></div>
     <div class="chat-footer">
@@ -301,34 +304,71 @@
     }
 
     function sendMessage() {
-      let message = document.getElementById('messageInput').value.trim();
-      let currentTime = new Date().toLocaleTimeString();
-
-      if (message !== '') {
-        var chatMessages = document.getElementById('chatMessages');
-
-        var bubble = document.createElement('div');
-        var bubbleClass = 'bubble me';
-        bubble.textContent = message;
-        bubble.classList.add(bubbleClass);
-
-        var timeSpan = document.createElement('span');
-        timeSpan.textContent = currentTime;
-        timeSpan.classList.add('chat-time');
-
-        bubble.appendChild(timeSpan);
-
-        chatMessages.appendChild(bubble);
-
-        document.getElementById('messageInput').value = '';
+        var message = document.getElementById('messageInput').value.trim();
+        var currentTime = new Date();
+        var options = { hour: '2-digit', minute: '2-digit', hour12: false };
+        var formatter = new Intl.DateTimeFormat('id', options);
+        var formattedTime = formatter.format(currentTime);
+    
+        if (message !== '') {
+          var chatMessages = document.getElementById('chatMessages');
+    
+          var bubble = document.createElement('div');
+          var bubbleClass = 'bubble me';
+          bubble.textContent = message;
+    
+          if (bubbleClass === 'bubble me') {
+            bubble.style.float = 'right';
+            bubble.style.backgroundColor = '#007bff';
+          } else {
+            bubble.style.float = 'left';
+            bubble.style.backgroundColor = '#28a745';
+          }
+    
+          bubble.style.color = '#fff';
+          bubble.style.borderRadius = '10px';
+          bubble.style.maxWidth = '70%';
+          bubble.style.marginBottom = '10px';
+          bubble.style.clear = 'both';
+          bubble.style.overflow = 'hidden';
+          bubble.style.paddingTop = '5px'; // Tambahkan padding ke bubble chat
+          bubble.style.paddingLeft = '10px'; // Tambahkan padding ke bubble chat
+          bubble.style.paddingBottom = '20px'; // Tambahkan padding ke bubble chat
+          bubble.style.paddingRight = '20px'; // Tambahkan padding ke bubble chat
+          bubble.style.wordWrap = 'break-word';
+          bubble.style.position = 'relative'; // Container bubble chat harus dalam posisi relatif
+    
+          var timeSpan = document.createElement('span');
+          timeSpan.textContent = formattedTime;
+          timeSpan.style.fontSize = '0.8em';
+          timeSpan.style.position = 'absolute';
+          timeSpan.style.bottom = '5px'; // Jarak dari bawah
+          timeSpan.style.right = '5px'; // Jarak dari kanan
+          timeSpan.style.padding = '0 5px'; // Padding kiri-kanan minimum untuk span waktu
+    
+          // Menghitung lebar minimum span waktu
+          var timeSpanWidth = timeSpan.offsetWidth + 10; // 10 adalah padding tambahan untuk memastikan tidak ada tumpang tindih
+    
+          // Mengatur lebar minimum bubble
+          bubble.style.minWidth = '50px';
+    
+          // Tambahkan timeSpan ke dalam bubble
+          bubble.appendChild(timeSpan);
+    
+          // Tambahkan bubble ke dalam daftar pesan
+          chatMessages.appendChild(bubble);
+    
+          // Kosongkan input teks setelah mengirim
+          document.getElementById('messageInput').value = '';
+        }
       }
-    }
 
-    document.getElementById('floatingButton').addEventListener('click', function () {
+    floatingBtn.addEventListener('click', function () {
       document.getElementById('chatPopup').style.display = 'block';
       document.getElementById('floatingButton').style.display = 'none';
     });
   </script>
+  
 
 
     </div>
