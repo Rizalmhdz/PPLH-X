@@ -331,7 +331,7 @@
           bubble.style.marginBottom = '10px';
           bubble.style.clear = 'both';
           bubble.style.overflow = 'hidden';
-          bubble.style.paddingTop = '5px'; // Tambahkan padding ke bubble chat
+          bubble.style.paddingTop = '10px'; // Tambahkan padding ke bubble chat
           bubble.style.paddingLeft = '10px'; // Tambahkan padding ke bubble chat
           bubble.style.paddingBottom = '20px'; // Tambahkan padding ke bubble chat
           bubble.style.paddingRight = '20px'; // Tambahkan padding ke bubble chat
@@ -340,7 +340,7 @@
     
           var timeSpan = document.createElement('span');
           timeSpan.textContent = formattedTime;
-          timeSpan.style.fontSize = '0.8em';
+          timeSpan.style.fontSize = '0.6em';
           timeSpan.style.position = 'absolute';
           timeSpan.style.bottom = '5px'; // Jarak dari bawah
           timeSpan.style.right = '5px'; // Jarak dari kanan
@@ -357,9 +357,13 @@
     
           // Tambahkan bubble ke dalam daftar pesan
           chatMessages.appendChild(bubble);
+
+      // Auto-scroll ke paling bawah saat ada chat baru
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Kosongkan input teks setelah mengirim
+      document.getElementById('messageInput').value = '';
     
-          // Kosongkan input teks setelah mengirim
-          document.getElementById('messageInput').value = '';
         }
       }
 
@@ -367,6 +371,40 @@
       document.getElementById('chatPopup').style.display = 'block';
       document.getElementById('floatingButton').style.display = 'none';
     });
+
+        document.getElementById('chatMessages').addEventListener('scroll', function() {
+          var floatingButtonDown = document.getElementById('floatingButtonDown');
+      
+          // Jika posisi scroll tidak berada di bagian paling bawah
+          if (this.scrollTop < (this.scrollHeight - this.clientHeight)) {
+              // Munculkan floating button down
+              if (!floatingButtonDown) {
+                  floatingButtonDown = document.createElement('button');
+                  floatingButtonDown.id = 'floatingButtonDown';
+                  floatingButtonDown.innerHTML = '<img src="down-arrow.png" alt="Scroll to bottom">';
+                  floatingButtonDown.style.position = 'absolute';
+                  floatingButtonDown.style.bottom = '20px'; // Adjust as needed
+                  floatingButtonDown.style.right = '20px'; // Adjust as needed
+                  floatingButtonDown.style.width = '40px'; // Adjust as needed
+                  floatingButtonDown.style.height = '40px'; // Adjust as needed
+                  floatingButtonDown.style.borderRadius = '50%';
+                  floatingButtonDown.style.border = '2px solid #007bff'; // Outline biru
+                  floatingButtonDown.style.backgroundColor = '#fff'; // Background putih
+                  floatingButtonDown.style.cursor = 'pointer';
+                  floatingButtonDown.onclick = function() {
+                      var chatMessages = document.getElementById('chatMessages');
+                      chatMessages.scrollTop = chatMessages.scrollHeight;
+                  };
+      
+                  document.getElementById('chatPopup').appendChild(floatingButtonDown);
+              }
+          } else {
+              // Sembunyikan floating button down jika posisi scroll berada di bagian paling bawah
+              if (floatingButtonDown) {
+                  floatingButtonDown.parentNode.removeChild(floatingButtonDown);
+              }
+          }
+      });
   </script>
   
 
