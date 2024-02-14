@@ -311,7 +311,7 @@
   <div id="chatPopup" class="chat-room" style="display: none;">
     <div class="chat-header">
       <h4 class="mt-2 ms-2" id="namaKelompokRoomChat">Nama Kelompok</h4>
-        <button type="button" class="btn-close close-btn" onclick="closeChat()" aria-label="Close"></button>
+        <button type="button" class="btn-close close-btn" id="closeChat" aria-label="Close"></button>
         <div class="ms-2" id="anggota-kelompok-chat">
             
         </div>
@@ -319,213 +319,11 @@
     <div class="chat-body" id="chatMessages"></div>
     <div class="chat-footer">
       <input type="text" class="form-control" id="messageInput" placeholder="Ketik pesan...">
-      <button type="button" class="btn btn-block" id="sendButton" onclick="sendMessage()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+      <button type="button" class="btn btn-block" id="sendButton""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
         <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
       </svg></button>
     </div>
   </div>
-
-  <script>
-
-    let chatPopup = document.getElementById('chatPopup');
-    let floatingBtn = document.getElementById('floatingButton');
-
-    function closeChat() {
-      chatPopup.style.display = 'none';
-      floatingBtn.style.display = 'block';
-    }
-
-   
-
-
-    function createBubbleMsg(sender, message, time){
-          var bubble = document.createElement('div');
-          bubble.textContent = message;
-    
-          if (sender === nm) {
-            var bubbleClass = 'bubble-me';
-            bubble.style.float = 'right';
-            bubble.style.backgroundColor = '#AAD8D3';
-            bubble.style.paddingTop = '10px'; 
-          } else {
-            bubble.style.float = 'left';
-            bubble.style.backgroundColor = '#2F323A';
-            bubble.style.paddingTop = '30px'; 
-
-            var senderSpan = document.createElement('span');
-            senderSpan.textContent = sender;
-            senderSpan.style.fontSize = '1.2em';
-            senderSpan.style.position = 'absolute';
-            senderSpan.style.top = '5px'; 
-            senderSpan.style.left = '10px'; 
-            senderSpan.style.paddingBottom = '5px';
-            senderSpan.style.fontWeight = 'bold';
-
-            bubble.appendChild(senderSpan);
-          }
-    
-          bubble.style.color = '#fff';
-          bubble.style.borderRadius = '10px';
-          bubble.style.maxWidth = '80%';
-          bubble.style.marginBottom = '10px';
-          bubble.style.clear = 'both';
-          bubble.style.overflow = 'hidden';
-          bubble.style.paddingLeft = '10px'; 
-          bubble.style.paddingBottom = '20px'; 
-          bubble.style.paddingRight = '20px'; 
-          bubble.style.wordWrap = 'break-word';
-          bubble.style.position = 'relative'; // Container bubble chat harus dalam posisi relatif
-          bubble.style.minWidth = '50px'; // Mengatur lebar minimum bubble
-    
-          var timeSpan = document.createElement('span');
-          timeSpan.textContent = time;
-          timeSpan.style.fontSize = '0.6em';
-          timeSpan.style.position = 'absolute';
-          timeSpan.style.bottom = '5px'; 
-          timeSpan.style.right = '5px'; 
-          timeSpan.style.padding = '0 5px'; // Padding kiri-kanan minimum untuk span waktu
-    
-          
-    
-          // Tambahkan timeSpan ke dalam bubble
-          bubble.appendChild(timeSpan);
-
-          return bubble
-    }
-
-    function sendMessage() {
-        var message = document.getElementById('messageInput').value.trim();
-        var currentTime = new Date();
-        var options = { hour: '2-digit', minute: '2-digit', hour12: false };
-        var formatter = new Intl.DateTimeFormat('id', options);
-        var formattedTime = formatter.format(currentTime);
-    
-        if (message !== '') {
-          var chatMessages = document.getElementById('chatMessages');
-    
-          // Tambahkan bubble ke dalam daftar pesan
-          chatMessages.appendChild(createBubbleMsg(nm, message, formattedTime));
-
-      // Auto-scroll ke paling bawah saat ada chat baru
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      // Kosongkan input teks setelah mengirim
-      document.getElementById('messageInput').value = '';
-    
-        }
-      }
-
-    floatingBtn.addEventListener('click', function () {
-      document.getElementById('chatPopup').style.display = 'block';
-      document.getElementById('floatingButton').style.display = 'none';
-      sortirBadgeAnggotaKelompok();
-      
-    });
-
-        document.getElementById('chatMessages').addEventListener('scroll', function() {
-          var floatingButtonDown = document.getElementById('floatingButtonDown');
-      
-          // Jika posisi scroll tidak berada di bagian paling bawah
-          if (this.scrollTop < (this.scrollHeight - this.clientHeight)) {
-              // Munculkan floating button down
-              if (!floatingButtonDown) {
-                  floatingButtonDown = document.createElement('button');
-                  floatingButtonDown.id = 'floatingButtonDown';
-                  floatingButtonDown.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2F323A" class="bi bi-arrow-down" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
-                  </svg>`;
-                  floatingButtonDown.style.position = 'absolute';
-                  floatingButtonDown.style.bottom = '80px'; // Adjust as needed
-                  floatingButtonDown.style.right = '40px'; // Adjust as needed
-                  floatingButtonDown.style.width = '40px'; // Adjust as needed
-                  floatingButtonDown.style.height = '40px'; // Adjust as needed
-                  floatingButtonDown.style.borderRadius = '50%';
-                  floatingButtonDown.style.border = '2px solid #2F323A'; // Outline biru
-                  floatingButtonDown.style.backgroundColor = '#fff'; // Background putih
-                  floatingButtonDown.style.cursor = 'pointer';
-                  floatingButtonDown.onclick = function() {
-                      var chatMessages = document.getElementById('chatMessages');
-                      chatMessages.scrollTop = chatMessages.scrollHeight;
-                  };
-      
-                  document.getElementById('chatPopup').appendChild(floatingButtonDown);
-              }
-          } else {
-              // Sembunyikan floating button down jika posisi scroll berada di bagian paling bawah
-              if (floatingButtonDown) {
-                  floatingButtonDown.parentNode.removeChild(floatingButtonDown);
-              }
-          }
-      });
-
-      
-function sortirBadgeAnggotaKelompok(){
-        var spans = document.querySelectorAll("#anggota-kelompok-chat span");
-
-        // Membuat array dari nodeList
-        var spansArray = [];
-
-       // Memasukkan elemen-elemen <span> ke dalam array sementara dan melakukan penggantian nama jika terdiri dari dua kata atau lebih
-        spans.forEach(function(span) {
-            var text = span.textContent.trim();
-            var name = extractName(text);
-            if (name.includes(' ')) {
-                name = name.split(' ')[1];
-            }
-            span.textContent = name;
-            spansArray.push({ element: span, name: name });
-        });
-
-        // Fungsi untuk mengekstrak nama dari teks dan mengembalikan kata kedua jika ada
-        function extractName(text) {
-            var words = text.split(' ');
-            if (words.length > 1) {
-                return words[1];
-            }
-            return text;
-        }
-        console.log(spansArray)
-
-        // Mengurutkan elemen-elemen <span> yang tersisa berdasarkan teks yang ada di dalamnya
-        spansArray.sort(function(a, b) {
-            var textA = a.name.toLowerCase();
-            var textB = b.name.toLowerCase();
-            return textA.localeCompare(textB);
-        });
-
-        // Mencari index elemen <span> yang berisi teks "Anda"
-        var indexAnda = -1;
-        spansArray.forEach(function(span, index) {
-            var spanText = span.name.trim();
-            if (spanText === "Anda") {
-                indexAnda = index;
-            }
-        });
-
-        // Jika elemen <span> yang berisi teks "Anda" ditemukan
-        if (indexAnda !== -1) {
-            // Memindahkan elemen <span> yang berisi teks "Anda" ke urutan pertama
-            var spanAnda = spansArray.splice(indexAnda, 1)[0];
-            spansArray.unshift(spanAnda);
-        }
-
-        // Mendapatkan parent dari elemen <span>
-        var parentElement = document.getElementById("anggota-kelompok-chat");
-
-        // Menghapus semua elemen <span> dari parent
-        parentElement.innerHTML = "";
-
-        spansArray.forEach(function(span) {
-            parentElement.appendChild(span.element);
-        });
-        
-        return console.log(spansArray)
-   
-}
-
-  </script>
-  
-
 
     </div>
     <!--CONTENT AREA END -->
@@ -554,12 +352,10 @@ function sortirBadgeAnggotaKelompok(){
       from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
       
       const db = getDatabase();
-        var acc = document.getElementsByClassName("accordion");
+    var acc = document.getElementsByClassName("accordion");
     var i;
 
-    let nisnUser = sessionStorage.getItem('nisn');
-    let groupUser = sessionStorage.getItem('kelompok');
-    let isConfirmUser = sessionStorage.getItem('konfirmasi');
+   
     for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function() {
         this.classList.toggle("active");
@@ -700,11 +496,252 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
         }
     }
 
-    </script>
+        let chatPopup = document.getElementById('chatPopup');
+        let floatingBtn = document.getElementById('floatingButton');
+
+        let closeChat = document.getElementById('closeChat')
+        closeChat.addEventListener('click', function(){
+          chatPopup.style.display = 'none';
+          floatingBtn.style.display = 'block';
+        })
+    
+       
+    
+    
+        function createBubbleMsg(sender, message, time){
+              var bubble = document.createElement('div');
+              bubble.textContent = message;
+        
+              if (sender === nm) {
+                var bubbleClass = 'bubble-me';
+                bubble.style.float = 'right';
+                bubble.style.backgroundColor = '#AAD8D3';
+                bubble.style.paddingTop = '10px'; 
+              } else {
+                bubble.style.float = 'left';
+                bubble.style.backgroundColor = '#2F323A';
+                bubble.style.paddingTop = '30px'; 
+    
+                var senderSpan = document.createElement('span');
+                senderSpan.textContent = sender;
+                senderSpan.style.fontSize = '1.2em';
+                senderSpan.style.position = 'absolute';
+                senderSpan.style.top = '5px'; 
+                senderSpan.style.left = '10px'; 
+                senderSpan.style.paddingBottom = '5px';
+                senderSpan.style.fontWeight = 'bold';
+    
+                bubble.appendChild(senderSpan);
+              }
+        
+              bubble.style.color = '#fff';
+              bubble.style.borderRadius = '10px';
+              bubble.style.maxWidth = '80%';
+              bubble.style.marginBottom = '10px';
+              bubble.style.clear = 'both';
+              bubble.style.overflow = 'hidden';
+              bubble.style.paddingLeft = '10px'; 
+              bubble.style.paddingBottom = '20px'; 
+              bubble.style.paddingRight = '20px'; 
+              bubble.style.wordWrap = 'break-word';
+              bubble.style.position = 'relative'; // Container bubble chat harus dalam posisi relatif
+              bubble.style.minWidth = '50px'; // Mengatur lebar minimum bubble
+        
+              var timeSpan = document.createElement('span');
+              timeSpan.textContent = time;
+              timeSpan.style.fontSize = '0.6em';
+              timeSpan.style.position = 'absolute';
+              timeSpan.style.bottom = '5px'; 
+              timeSpan.style.right = '5px'; 
+              timeSpan.style.padding = '0 5px'; // Padding kiri-kanan minimum untuk span waktu
+        
+              
+        
+              // Tambahkan timeSpan ke dalam bubble
+              bubble.appendChild(timeSpan);
+    
+              return bubble
+        }
+    
+        function getTimeStamp(){
+            // Mendapatkan tanggal dan waktu saat ini
+            const currentDateTime = new Date();
+    
+            // Mendapatkan tahun
+            const year = currentDateTime.getFullYear();
+    
+            // Mendapatkan bulan (dalam format dua digit)
+            const month = String(currentDateTime.getMonth() + 1).padStart(2, '0');
+    
+            // Mendapatkan tanggal (dalam format dua digit)
+            const date = String(currentDateTime.getDate()).padStart(2, '0');
+    
+            // Mendapatkan jam (dalam format dua digit)
+            const hours = String(currentDateTime.getHours()).padStart(2, '0');
+    
+            // Mendapatkan menit (dalam format dua digit)
+            const minutes = String(currentDateTime.getMinutes()).padStart(2, '0');
+    
+            // Mendapatkan detik (dalam format dua digit)
+            const seconds = String(currentDateTime.getSeconds()).padStart(2, '0');
+    
+            // Mendapatkan milidetik (dalam format tiga digit)
+            const milliseconds = String(currentDateTime.getMilliseconds()).padStart(3, '0');
+    
+            // Gabungkan semua komponen untuk membuat timestamp dalam format yang diinginkan
+            const timestamp = `${year}${month}${date}${hours}${minutes}${seconds}${milliseconds}`;
+    
+            return timestamp
+        }
+        
+        let sendButton = document.getElementById('sendButton')
+        sendButton.addEventListener('click', function(){
+            sendMessage();
+        });
+        
+        function sendMessage() {
+            var message = document.getElementById('messageInput').value.trim();
+            var currentTime = new Date();
+            var options = { hour: '2-digit', minute: '2-digit', hour12: false };
+            var formatter = new Intl.DateTimeFormat('id', options);
+            var formattedTime = formatter.format(currentTime);
+        
+            if (message !== '') {
+              var chatMessages = document.getElementById('chatMessages');
+              // Tambahkan bubble ke dalam daftar pesan
+              chatMessages.appendChild(createBubbleMsg(nm, message, formattedTime));
+    
+              set(ref(db, 'dataKelompok/'+ groupUser + '/chatGroup/'+getTimeStamp()), {
+                usnPengirim : nisnUser,
+                pesan : message,
+                pada  : formattedTime
+              });
+    
+          // Auto-scroll ke paling bawah saat ada chat baru
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+          // Kosongkan input teks setelah mengirim
+          document.getElementById('messageInput').value = '';
+        
+            }
+        }
+    
+        floatingBtn.addEventListener('click', function () {
+          document.getElementById('chatPopup').style.display = 'block';
+          document.getElementById('floatingButton').style.display = 'none';
+          sortirBadgeAnggotaKelompok();
+          
+        });
+    
+            document.getElementById('chatMessages').addEventListener('scroll', function() {
+              var floatingButtonDown = document.getElementById('floatingButtonDown');
+          
+              // Jika posisi scroll tidak berada di bagian paling bawah
+              if (this.scrollTop < (this.scrollHeight - this.clientHeight)) {
+                  // Munculkan floating button down
+                  if (!floatingButtonDown) {
+                      floatingButtonDown = document.createElement('button');
+                      floatingButtonDown.id = 'floatingButtonDown';
+                      floatingButtonDown.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2F323A" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+                      </svg>`;
+                      floatingButtonDown.style.position = 'absolute';
+                      floatingButtonDown.style.bottom = '80px'; // Adjust as needed
+                      floatingButtonDown.style.right = '40px'; // Adjust as needed
+                      floatingButtonDown.style.width = '40px'; // Adjust as needed
+                      floatingButtonDown.style.height = '40px'; // Adjust as needed
+                      floatingButtonDown.style.borderRadius = '50%';
+                      floatingButtonDown.style.border = '2px solid #2F323A'; // Outline biru
+                      floatingButtonDown.style.backgroundColor = '#fff'; // Background putih
+                      floatingButtonDown.style.cursor = 'pointer';
+                      floatingButtonDown.onclick = function() {
+                          var chatMessages = document.getElementById('chatMessages');
+                          chatMessages.scrollTop = chatMessages.scrollHeight;
+                      };
+          
+                      document.getElementById('chatPopup').appendChild(floatingButtonDown);
+                  }
+              } else {
+                  // Sembunyikan floating button down jika posisi scroll berada di bagian paling bawah
+                  if (floatingButtonDown) {
+                      floatingButtonDown.parentNode.removeChild(floatingButtonDown);
+                  }
+              }
+          });
+    
+          
+    function sortirBadgeAnggotaKelompok(){
+            var spans = document.querySelectorAll("#anggota-kelompok-chat span");
+    
+            // Membuat array dari nodeList
+            var spansArray = [];
+    
+           // Memasukkan elemen-elemen <span> ke dalam array sementara dan melakukan penggantian nama jika terdiri dari dua kata atau lebih
+            spans.forEach(function(span) {
+                var text = span.textContent.trim();
+                var name = extractName(text);
+                if (name.includes(' ')) {
+                    name = name.split(' ')[1];
+                }
+                span.textContent = name;
+                spansArray.push({ element: span, name: name });
+            });
+    
+            // Fungsi untuk mengekstrak nama dari teks dan mengembalikan kata kedua jika ada
+            function extractName(text) {
+                var words = text.split(' ');
+                if (words.length > 1) {
+                    return words[1];
+                }
+                return text;
+            }
+            console.log(spansArray)
+    
+            // Mengurutkan elemen-elemen <span> yang tersisa berdasarkan teks yang ada di dalamnya
+            spansArray.sort(function(a, b) {
+                var textA = a.name.toLowerCase();
+                var textB = b.name.toLowerCase();
+                return textA.localeCompare(textB);
+            });
+    
+            // Mencari index elemen <span> yang berisi teks "Anda"
+            var indexAnda = -1;
+            spansArray.forEach(function(span, index) {
+                var spanText = span.name.trim();
+                if (spanText === "Anda") {
+                    indexAnda = index;
+                }
+            });
+    
+            // Jika elemen <span> yang berisi teks "Anda" ditemukan
+            if (indexAnda !== -1) {
+                // Memindahkan elemen <span> yang berisi teks "Anda" ke urutan pertama
+                var spanAnda = spansArray.splice(indexAnda, 1)[0];
+                spansArray.unshift(spanAnda);
+            }
+    
+            // Mendapatkan parent dari elemen <span>
+            var parentElement = document.getElementById("anggota-kelompok-chat");
+    
+            // Menghapus semua elemen <span> dari parent
+            parentElement.innerHTML = "";
+    
+            spansArray.forEach(function(span) {
+                parentElement.appendChild(span.element);
+            });
+            
+            return console.log(spansArray)
+       
+    }
+    
+      </script>
 
     <script>
     let nm = sessionStorage.getItem('nama');
     let nama = document.getElementById('nama');
+    let nisnUser = sessionStorage.getItem('nisn');
+    let groupUser = sessionStorage.getItem('kelompok');
+    let isConfirmUser = sessionStorage.getItem('konfirmasi');
     
     nama.innerHTML = `<i class="fa-solid fa-user"></i> ${nm}`;
     </script>
