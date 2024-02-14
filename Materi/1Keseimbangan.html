@@ -348,7 +348,7 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
 
-      import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, equalTo, update } 
+      import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, onChildAdded, equalTo, update, orderByKey, limitToLast } 
       from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
       
       const db = getDatabase();
@@ -512,7 +512,7 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
               var bubble = document.createElement('div');
               bubble.textContent = message;
         
-              if (sender === nm) {
+              if (sender === nisnUser) {
                 var bubbleClass = 'bubble-me';
                 bubble.style.float = 'right';
                 bubble.style.backgroundColor = '#AAD8D3';
@@ -559,8 +559,9 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
         
               // Tambahkan timeSpan ke dalam bubble
               bubble.appendChild(timeSpan);
-    
-              return bubble
+              
+              var chatMessages = document.getElementById('chatMessages');
+              chatMessages.appendChild(bubble);
         }
     
         function getTimeStamp(){
@@ -595,21 +596,19 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
         }
         
         let sendButton = document.getElementById('sendButton')
-        sendButton.addEventListener('click', function(){
+        sendButton.addEventListener('click', function(){ 
             sendMessage();
         });
-        
+
         function sendMessage() {
-            var message = document.getElementById('messageInput').value.trim();
-            var currentTime = new Date();
-            var options = { hour: '2-digit', minute: '2-digit', hour12: false };
-            var formatter = new Intl.DateTimeFormat('id', options);
-            var formattedTime = formatter.format(currentTime);
+            const message = document.getElementById('messageInput').value.trim();
+            const currentTime = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+            const formatter = new Intl.DateTimeFormat('id', options);
+            const formattedTime = formatter.format(currentTime);
         
             if (message !== '') {
-              var chatMessages = document.getElementById('chatMessages');
-              // Tambahkan bubble ke dalam daftar pesan
-              chatMessages.appendChild(createBubbleMsg(nm, message, formattedTime));
+             const chatMessages = document.getElementById('chatMessages');
     
               set(ref(db, 'dataKelompok/'+ groupUser + '/chatGroup/'+getTimeStamp()), {
                 usnPengirim : nisnUser,
@@ -617,58 +616,91 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
                 pada  : formattedTime
               });
     
-          // Auto-scroll ke paling bawah saat ada chat baru
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-    
-          // Kosongkan input teks setelah mengirim
-          document.getElementById('messageInput').value = '';
+            // Auto-scroll ke paling bawah saat ada chat baru
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+            // Kosongkan input teks setelah mengirim
+            document.getElementById('messageInput').value = '';
         
             }
         }
     
         floatingBtn.addEventListener('click', function () {
-          document.getElementById('chatPopup').style.display = 'block';
-          document.getElementById('floatingButton').style.display = 'none';
-          sortirBadgeAnggotaKelompok();
-          
+            document.getElementById('chatPopup').style.display = 'block';
+            document.getElementById('floatingButton').style.display = 'none';
+            scrollToBottom();
+            sortirBadgeAnggotaKelompok();
         });
-    
-            document.getElementById('chatMessages').addEventListener('scroll', function() {
-              var floatingButtonDown = document.getElementById('floatingButtonDown');
-          
-              // Jika posisi scroll tidak berada di bagian paling bawah
-              if (this.scrollTop < (this.scrollHeight - this.clientHeight)) {
-                  // Munculkan floating button down
-                  if (!floatingButtonDown) {
-                      floatingButtonDown = document.createElement('button');
-                      floatingButtonDown.id = 'floatingButtonDown';
-                      floatingButtonDown.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2F323A" class="bi bi-arrow-down" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
-                      </svg>`;
-                      floatingButtonDown.style.position = 'absolute';
-                      floatingButtonDown.style.bottom = '80px'; // Adjust as needed
-                      floatingButtonDown.style.right = '40px'; // Adjust as needed
-                      floatingButtonDown.style.width = '40px'; // Adjust as needed
-                      floatingButtonDown.style.height = '40px'; // Adjust as needed
-                      floatingButtonDown.style.borderRadius = '50%';
-                      floatingButtonDown.style.border = '2px solid #2F323A'; // Outline biru
-                      floatingButtonDown.style.backgroundColor = '#fff'; // Background putih
-                      floatingButtonDown.style.cursor = 'pointer';
-                      floatingButtonDown.onclick = function() {
-                          var chatMessages = document.getElementById('chatMessages');
-                          chatMessages.scrollTop = chatMessages.scrollHeight;
-                      };
-          
-                      document.getElementById('chatPopup').appendChild(floatingButtonDown);
-                  }
-              } else {
-                  // Sembunyikan floating button down jika posisi scroll berada di bagian paling bawah
-                  if (floatingButtonDown) {
-                      floatingButtonDown.parentNode.removeChild(floatingButtonDown);
-                  }
-              }
-          });
-    
+
+
+        document.getElementById('chatMessages').addEventListener('scroll', function() {
+            var floatingButtonDown = document.getElementById('floatingButtonDown');
+        
+            // Jika posisi scroll tidak berada di bagian paling bawah
+            if (this.scrollTop < (this.scrollHeight - this.clientHeight)) {
+                // Munculkan floating button down
+                if (!floatingButtonDown) {
+                    floatingButtonDown = document.createElement('button');
+                    floatingButtonDown.id = 'floatingButtonDown';
+                    floatingButtonDown.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2F323A" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+                    </svg>`;
+                    floatingButtonDown.style.position = 'absolute';
+                    floatingButtonDown.style.bottom = '80px'; 
+                    floatingButtonDown.style.right = '40px';
+                    floatingButtonDown.style.width = '40px'; 
+                    floatingButtonDown.style.height = '40px'; 
+                    floatingButtonDown.style.borderRadius = '50%';
+                    floatingButtonDown.style.border = '2px solid #2F323A'; 
+                    floatingButtonDown.style.backgroundColor = '#fff'; 
+                    floatingButtonDown.style.cursor = 'pointer';
+                    floatingButtonDown.onclick = function() {
+                        var chatMessages = document.getElementById('chatMessages');
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    };
+        
+                    document.getElementById('chatPopup').appendChild(floatingButtonDown);
+                }
+            } else {
+                // Sembunyikan floating button down jika posisi scroll berada di bagian paling bawah
+                if (floatingButtonDown) {
+                    floatingButtonDown.parentNode.removeChild(floatingButtonDown);
+                }
+            }
+        });
+
+       
+// =========================================================================================
+function loadMessages() {
+    const groupChatRef = ref(db, 'dataKelompok/' + groupUser + '/chatGroup/');
+
+    // Mengurutkan data berdasarkan kunci secara menurun dan membatasi hanya 20 data terakhir
+    const que = query(groupChatRef, orderByKey());
+
+    // Mendapatkan data dengan query yang sudah dibuat
+    onChildAdded(que, (snapshot) => { // Menggunakan onChildAdded untuk hanya mendapatkan pesan baru
+        const chatData = snapshot.val();
+        // Lakukan sesuatu dengan data chat
+        console.log(chatData);
+        createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
+       
+    });
+}
+
+function scrollToBottom(){
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+
+// Memuat pesan saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    loadMessages();
+});
+
+
+// =======================================================================================
+  
           
     function sortirBadgeAnggotaKelompok(){
             var spans = document.querySelectorAll("#anggota-kelompok-chat span");
