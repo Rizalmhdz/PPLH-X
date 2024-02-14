@@ -237,7 +237,7 @@
             .chat-body {
               overflow-y: auto;
               padding: 10px;
-              height: calc(100% - 110px);
+              height: calc(100% - 140px);
             }
         
             .chat-footer {
@@ -281,26 +281,26 @@
 
             /* Style untuk elemen input teks */
             #messageInput {
-                width: calc(100% - 60px); /* Menyesuaikan lebar input text dengan tombol send */
-                border: 2px solid #AAD8D3; /* Garis tepi input text */
-                border-radius: 5px; /* Sudut lengkung pada input text */
-                margin-right: 10px; /* Jarak dari tombol send */
-                box-sizing: border-box; /* Memastikan padding dihitung dalam lebar */
+                width: calc(100% - 60px); 
+                border: 2px solid #AAD8D3; 
+                border-radius: 5px; 
+                margin-right: 10px; 
+                box-sizing: border-box; 
             }
 
             /* Style untuk tombol kirim */
             #sendButton {
-                width: 40px; /* Lebar tombol kirim */
-                height: 40px; /* Tinggi tombol kirim */
-                background-color: #AAD8D3; /* Warna latar belakang tombol kirim */
-                border: none; /* Menghilangkan border */
-                border-radius: 100%; /* Membuat tombol kirim menjadi lingkaran */
-                color: #fff; /* Warna teks pada tombol kirim */
-                font-size: 1.2em; /* Ukuran teks pada tombol kirim */
-                cursor: pointer; /* Mengubah kursor menjadi tanda tangan saat mengarahkan ke tombol kirim */
+                width: 40px; 
+                height: 40px; 
+                background-color: #AAD8D3; 
+                border: none; 
+                border-radius: 100%; 
+                color: #fff;
+                font-size: 1.2em; 
+                cursor: pointer;
             }
             #sendButton:hover{
-                background-color: #2F323A; /* Warna latar belakang tombol kirim */
+                background-color: #2F323A; 
             }
           </style>
              <!-- Floating Button -->
@@ -310,8 +310,15 @@
   <!-- Popup untuk room chat -->
   <div id="chatPopup" class="chat-room" style="display: none;">
     <div class="chat-header">
-      <h4>Nama Kelompok</h4>
+      <h4 class="mt-2 ms-2">Nama Kelompok</h4>
         <button type="button" class="btn-close close-btn" onclick="closeChat()" aria-label="Close"></button>
+        <div class="ms-2" id="anggota-kelompok">
+            <span class="me-1 badge text-bg-success">You</span>
+            <span class="me-1 badge text-bg-danger">Budi</span>
+            <span class="me-1 badge text-bg-danger">Mirna</span>
+            <span class="me-1 badge text-bg-danger">Mamat</span>
+
+        </div>
     </div>
     <div class="chat-body" id="chatMessages"></div>
     <div class="chat-footer">
@@ -332,6 +339,61 @@
       floatingBtn.style.display = 'block';
     }
 
+    function createBubbleMsg(sender, message, time){
+          var bubble = document.createElement('div');
+          bubble.textContent = message;
+    
+          if (sender === nm) {
+            var bubbleClass = 'bubble-me';
+            bubble.style.float = 'right';
+            bubble.style.backgroundColor = '#AAD8D3';
+            bubble.style.paddingTop = '10px'; 
+          } else {
+            bubble.style.float = 'left';
+            bubble.style.backgroundColor = '#2F323A';
+            bubble.style.paddingTop = '30px'; 
+
+            var senderSpan = document.createElement('span');
+            senderSpan.textContent = sender;
+            senderSpan.style.fontSize = '1.2em';
+            senderSpan.style.position = 'absolute';
+            senderSpan.style.top = '5px'; 
+            senderSpan.style.left = '10px'; 
+            senderSpan.style.paddingBottom = '5px';
+            senderSpan.style.fontWeight = 'bold';
+
+            bubble.appendChild(senderSpan);
+          }
+    
+          bubble.style.color = '#fff';
+          bubble.style.borderRadius = '10px';
+          bubble.style.maxWidth = '80%';
+          bubble.style.marginBottom = '10px';
+          bubble.style.clear = 'both';
+          bubble.style.overflow = 'hidden';
+          bubble.style.paddingLeft = '10px'; 
+          bubble.style.paddingBottom = '20px'; 
+          bubble.style.paddingRight = '20px'; 
+          bubble.style.wordWrap = 'break-word';
+          bubble.style.position = 'relative'; // Container bubble chat harus dalam posisi relatif
+          bubble.style.minWidth = '50px'; // Mengatur lebar minimum bubble
+    
+          var timeSpan = document.createElement('span');
+          timeSpan.textContent = time;
+          timeSpan.style.fontSize = '0.6em';
+          timeSpan.style.position = 'absolute';
+          timeSpan.style.bottom = '5px'; 
+          timeSpan.style.right = '5px'; 
+          timeSpan.style.padding = '0 5px'; // Padding kiri-kanan minimum untuk span waktu
+    
+          
+    
+          // Tambahkan timeSpan ke dalam bubble
+          bubble.appendChild(timeSpan);
+
+          return bubble
+    }
+
     function sendMessage() {
         var message = document.getElementById('messageInput').value.trim();
         var currentTime = new Date();
@@ -342,50 +404,8 @@
         if (message !== '') {
           var chatMessages = document.getElementById('chatMessages');
     
-          var bubble = document.createElement('div');
-          var bubbleClass = 'bubble me';
-          bubble.textContent = message;
-    
-          if (bubbleClass === 'bubble me') {
-            bubble.style.float = 'right';
-            bubble.style.backgroundColor = '#007bff';
-          } else {
-            bubble.style.float = 'left';
-            bubble.style.backgroundColor = '#28a745';
-          }
-    
-          bubble.style.color = '#fff';
-          bubble.style.borderRadius = '10px';
-          bubble.style.maxWidth = '70%';
-          bubble.style.marginBottom = '10px';
-          bubble.style.clear = 'both';
-          bubble.style.overflow = 'hidden';
-          bubble.style.paddingTop = '10px'; // Tambahkan padding ke bubble chat
-          bubble.style.paddingLeft = '10px'; // Tambahkan padding ke bubble chat
-          bubble.style.paddingBottom = '20px'; // Tambahkan padding ke bubble chat
-          bubble.style.paddingRight = '20px'; // Tambahkan padding ke bubble chat
-          bubble.style.wordWrap = 'break-word';
-          bubble.style.position = 'relative'; // Container bubble chat harus dalam posisi relatif
-    
-          var timeSpan = document.createElement('span');
-          timeSpan.textContent = formattedTime;
-          timeSpan.style.fontSize = '0.6em';
-          timeSpan.style.position = 'absolute';
-          timeSpan.style.bottom = '5px'; // Jarak dari bawah
-          timeSpan.style.right = '5px'; // Jarak dari kanan
-          timeSpan.style.padding = '0 5px'; // Padding kiri-kanan minimum untuk span waktu
-    
-          // Menghitung lebar minimum span waktu
-          var timeSpanWidth = timeSpan.offsetWidth + 10; // 10 adalah padding tambahan untuk memastikan tidak ada tumpang tindih
-    
-          // Mengatur lebar minimum bubble
-          bubble.style.minWidth = '50px';
-    
-          // Tambahkan timeSpan ke dalam bubble
-          bubble.appendChild(timeSpan);
-    
           // Tambahkan bubble ke dalam daftar pesan
-          chatMessages.appendChild(bubble);
+          chatMessages.appendChild(createBubbleMsg('me', message, formattedTime));
 
       // Auto-scroll ke paling bawah saat ada chat baru
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -410,14 +430,16 @@
               if (!floatingButtonDown) {
                   floatingButtonDown = document.createElement('button');
                   floatingButtonDown.id = 'floatingButtonDown';
-                  floatingButtonDown.innerHTML = '<img src="down-arrow.png" alt="Scroll to bottom">';
+                  floatingButtonDown.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2F323A" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+                  </svg>`;
                   floatingButtonDown.style.position = 'absolute';
-                  floatingButtonDown.style.bottom = '20px'; // Adjust as needed
-                  floatingButtonDown.style.right = '20px'; // Adjust as needed
+                  floatingButtonDown.style.bottom = '80px'; // Adjust as needed
+                  floatingButtonDown.style.right = '40px'; // Adjust as needed
                   floatingButtonDown.style.width = '40px'; // Adjust as needed
                   floatingButtonDown.style.height = '40px'; // Adjust as needed
                   floatingButtonDown.style.borderRadius = '50%';
-                  floatingButtonDown.style.border = '2px solid #007bff'; // Outline biru
+                  floatingButtonDown.style.border = '2px solid #2F323A'; // Outline biru
                   floatingButtonDown.style.backgroundColor = '#fff'; // Background putih
                   floatingButtonDown.style.cursor = 'pointer';
                   floatingButtonDown.onclick = function() {

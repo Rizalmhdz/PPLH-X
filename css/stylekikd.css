@@ -103,7 +103,7 @@ header {
     position: fixed;
     left: 0;
     width: 300px;
-    height: calc(100% - 9%);
+    height: calc(100%);
     transition: 0.5s;
     transition-property: left;
     overflow-y: auto;
