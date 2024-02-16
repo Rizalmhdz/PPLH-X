@@ -368,11 +368,12 @@
     });
     }
 
+    let anggota_kelompok = {}
+
     let tmp = document.querySelector('#tbody1');
     const que = query(ref(db, "dataSiswa/"));
 
     onValue(que, (snapshot) => {
-        console.log(snapshot.val());
         tmp.innerHTML = "";
         var no = 1;
         const users = snapshot.val();
@@ -399,7 +400,12 @@
             
             let confirmBtn = "";
             usersInGroup.forEach(user => {
-                (user.kelompok == groupUser)? tambahAnggotaGroupBadge(user.nama, user.konfirmasi) : "";
+                
+
+                if(user.kelompok == groupUser){ 
+                    tambahAnggotaGroupBadge(user.nama, user.konfirmasi);
+                    anggota_kelompok[user.nisn] = user.nama;
+                };
                 list += `<input class="form-check-input ms-2" type="radio" id="anggotakelompok" name="namaanggota" value="${user.nama}" ${user.nisn === nisnUser ? "checked" : "disabled"}>
                         <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
 
@@ -418,9 +424,6 @@
                 } 
                 
             });
-
-        console.log("groupUser : " + groupUser);
-        console.log("kelompok : " + kelompok);
         let tr = `
             <tr class="m-1 ms-3">
                 <td class="text-center">${no}</td>
@@ -505,6 +508,8 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
           floatingBtn.style.display = 'block';
         })
     
+
+        console.log(anggota_kelompok)
        
     
     
@@ -517,21 +522,26 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
                 bubble.style.float = 'right';
                 bubble.style.backgroundColor = '#AAD8D3';
                 bubble.style.paddingTop = '10px'; 
+                bubble.style.minWidth = '50px';
+                
               } else {
                 bubble.style.float = 'left';
                 bubble.style.backgroundColor = '#2F323A';
                 bubble.style.paddingTop = '30px'; 
     
                 var senderSpan = document.createElement('span');
-                senderSpan.textContent = sender;
-                senderSpan.style.fontSize = '1.2em';
+                senderSpan.textContent = anggota_kelompok[sender];
+                senderSpan.style.fontSize = '0.8em';
                 senderSpan.style.position = 'absolute';
-                senderSpan.style.top = '5px'; 
+                senderSpan.style.top = '10px'; 
                 senderSpan.style.left = '10px'; 
-                senderSpan.style.paddingBottom = '5px';
+                senderSpan.style.paddingRight = '20px'; 
                 senderSpan.style.fontWeight = 'bold';
+                
     
                 bubble.appendChild(senderSpan);
+
+                bubble.style.minWidth = anggota_kelompok[sender].length * 0.8 + 'em'; // Mengatur lebar minimum bubble
               }
         
               bubble.style.color = '#fff';
@@ -542,10 +552,9 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
               bubble.style.overflow = 'hidden';
               bubble.style.paddingLeft = '10px'; 
               bubble.style.paddingBottom = '20px'; 
-              bubble.style.paddingRight = '20px'; 
               bubble.style.wordWrap = 'break-word';
               bubble.style.position = 'relative'; // Container bubble chat harus dalam posisi relatif
-              bubble.style.minWidth = '50px'; // Mengatur lebar minimum bubble
+
         
               var timeSpan = document.createElement('span');
               timeSpan.textContent = time;
@@ -624,6 +633,21 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
         
             }
         }
+
+        console.log("isConfirmUser : " + isConfirmUser)
+
+        if (isConfirmUser == "false" ){
+            floatingBtn.setAttribute("disabled", "true");
+            createTooltip(floatingBtn, "Harap konfirmasi kelompok Terlebih dahulu");
+            
+        } else if (isConfirmUser == "true" ){
+            floatingBtn.removeAttribute("disabled");
+        } else {
+            floatingBtn.setAttribute("disabled", "true");
+            createTooltip(floatingBtn, "Harapkon login Terlebih dahulu");
+        }
+
+        
     
         floatingBtn.addEventListener('click', function () {
             document.getElementById('chatPopup').style.display = 'block';
@@ -631,6 +655,32 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
             scrollToBottom();
             sortirBadgeAnggotaKelompok();
         });
+
+        function createTooltip(item, pesan){
+            item.addEventListener('mouseover', function() {
+                // Buat elemen tooltip
+                const tooltip = document.createElement('div');
+                tooltip.textContent = pesan;
+            
+               // Gaya untuk tooltip
+                tooltip.style.position = 'absolute';
+                tooltip.style.background = '#333';
+                tooltip.style.color = '#fff';
+                tooltip.style.padding = '5px';
+                tooltip.style.borderRadius = '5px';
+                tooltip.style.right = '20px'; // Letakkan di samping kiri tombol
+                tooltip.style.bottom = '-290px'; // Letakkan di atas tombol
+                        
+                // Menambahkan tooltip ke dalam dokumen
+                document.body.appendChild(tooltip);
+            
+                // Menghapus tooltip setelah beberapa detik (opsional)
+                setTimeout(function() {
+                    tooltip.parentNode.removeChild(tooltip);
+                }, 2000);
+            });
+        }
+        
 
 
         document.getElementById('chatMessages').addEventListener('scroll', function() {
@@ -680,8 +730,6 @@ function loadMessages() {
     // Mendapatkan data dengan query yang sudah dibuat
     onChildAdded(que, (snapshot) => { // Menggunakan onChildAdded untuk hanya mendapatkan pesan baru
         const chatData = snapshot.val();
-        // Lakukan sesuatu dengan data chat
-        console.log(chatData);
         createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
        
     });
@@ -727,7 +775,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return text;
             }
-            console.log(spansArray)
     
             // Mengurutkan elemen-elemen <span> yang tersisa berdasarkan teks yang ada di dalamnya
             spansArray.sort(function(a, b) {
@@ -761,8 +808,6 @@ document.addEventListener('DOMContentLoaded', () => {
             spansArray.forEach(function(span) {
                 parentElement.appendChild(span.element);
             });
-            
-            return console.log(spansArray)
        
     }
     
