@@ -149,6 +149,7 @@
                         <th>No.</th>
                         <th>Kelompok</th>
                         <th>Token</th>
+                        <th>Pengawas</th>
                         <th>Aksi</th>
                         
                       </tr>
@@ -172,11 +173,17 @@
                     <form action="" style="background-color: white;">
                       <div class="mb-3">
                         <label>Kelompok :</label>
-                        <input type="text" class="form-control" id="namaKelas">
+                        <input type="text" class="form-control" id="namaKelas" required>
                       </div>
                       <div class="mb-3">
                         <label>Token :</label>
-                        <input type="text" class="form-control" id="tokenKelas">
+                        <input type="text" class="form-control" id="tokenKelas" required
+                      </div>
+                      <div class="mb-3">
+                        <label>Guru Pengawas :</label>
+                        <select class="form-control" id="pengawasKelompok" required>
+                          <option value = "" disable>---- Pilih Guru Pengawas ----</option>
+                        </select>
                       </div>
                     
                       <div class="modal-footer">
@@ -224,51 +231,6 @@
       from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
       
       const db = getDatabase();
-      //------------------------------------------------------------Tambah data------------------------------------------------------------
-    //   let btnTambahData = document.getElementById('submit');
-    //   btnTambahData.addEventListener('click', function(){
-    //     console.log(btnTambahData);
-    //     let tambahNisn = document.getElementById("tambahNisnbox").value;
-    //     let tambahNama = document.getElementById("tambahNamabox").value;
-    //     let tambahKelas = document.getElementById("tambahKelasbox").value;
-    //     let tambahKelompok = document.getElementById("tambahKelompokbox").value;
-    //     let tambahPassword = document.getElementById("tambahPasswordbox").value;
-    //     console.log(tambahNisn);
-
-    //     const dbRef = ref(db);
-
-
-    //       get(child(dbRef, "dataSiswa/" + tambahNisn)).then((snapshot)=>{
-    //         if(snapshot.exists()){
-    //           alert("Akun telah ada!");
-    //         }
-    //         else{
-    //           set(ref(db, "dataSiswa/"+ tambahNisn),
-    //           {
-    //             nisn: tambahNisn,
-    //             nama: tambahNama,
-    //             kelas: tambahKelas,
-    //             kelompok: tambahKelompok,
-    //             password: tambahPassword,
-    //           })
-    //           .then(()=>{
-    //             console.log(tambahNisn);
-    //             alert("Pengguna Berhasil ditambahkan")
-    //           })
-    //           .catch((error)=>{
-    //             alert("error"+error);
-    //           })
-    //         }
-    //       })
-        
-    //   })
-
-      // const dbRef = ref(db);
-      // onValue(usersRef, (snapshot)=>{
-      //   const users = snapshot.val();
-      //   tbody1.innerHTML = "";
-      // });
-
       //-------------------------------------------------------------Menampilkan semua data siswa--------------------------------------------
       //---------------------filling the table-------------
       var stdNo = 0;
@@ -280,72 +242,12 @@
       let password = document.getElementById('passInp');
       let kelasT = document.getElementById("namaKelas");
       let token = document.getElementById("tokenKelas");
+      let pengawasKelompok = document.getElementById("pengawasKelompok");
 
       console.log(kelasT.value);
 
       let kelasfix = "";
       let cek11 = 0;
-
-    //   function AddItemToTable(nisn, nama, kelas, kelompok, password){
-    //       let trow = document.createElement("tr");
-    //       let td1 = document.createElement('td');
-    //       let td2 = document.createElement('td');
-    //       let td3 = document.createElement('td');
-    //       let td4 = document.createElement('td');
-    //       let td5 = document.createElement('td');
-    //       let td6 = document.createElement('td');
-    //       let td7 = document.createElement('td');
-
-
-    //       td1.innerHTML= ++stdNo;
-    //       td2.innerHTML= nisn;
-    //       td3.innerHTML= nama;
-    //       td4.innerHTML= kelas;
-    //       td5.innerHTML= kelompok;
-    //       td6.innerHTML= password;
-    //       td7.innerHTML= `<button type="button" class="delete btn btn-danger">Hapus</button> <button type="button" class="btn btn-primary">Edit</button>`;
-
-
-    //       trow.appendChild(td1);
-    //       trow.appendChild(td2);
-    //       trow.appendChild(td3);
-    //       trow.appendChild(td4);
-    //       trow.appendChild(td5);
-    //       trow.appendChild(td6);
-    //       trow.appendChild(td7);
-
-    //       tbody.appendChild(trow);
-
-          
-    //   }
-
-      // function AddAllItemsToTable(TheStudent){
-      //     stdNo=0;
-      //     tbody.innerHTML="";
-      //     TheStudent.forEach(element => {
-      //         AddItemToTable(element.nisn, element.nama, element.kelas, element.kelompok, element.password);
-      //     });
-      // }
-
-                                
-
-
-      //------------------------ambil semua data--------------
-      // function GetAllDataOnce(){
-      //     const dbRef = ref(db);
-
-      //     get(child(dbRef, "dataSiswa"))
-      //     .then((snapshot)=>{
-      //         var students = [];
-
-      //         snapshot.forEach(childSnapshot =>{
-      //             students.push(childSnapshot.val());
-      //         });
-
-      //         AddAllItemsToTable(students);
-      //     })
-      // }
-      // window.onload = GetAllDataOnce;
 
       let tmp = document.querySelector('#tbody1');
       const que = query(ref(db, "dataKelompok/"), orderByChild("nisn"));
@@ -361,6 +263,7 @@
                                           <td>${no}</td>
                                           <td>${userVal.kelompok}</td>
                                           <td>${userVal.token}</td>
+                                          <td>${userVal.pengawas}</td>
                                           <td><button class="delete btn btn-danger">Hapus</button></td>
                                                                                     
                                         <tr>
@@ -427,6 +330,7 @@
       
                                   kelompok: kelas,
                                   token: token,
+                                  pengawas : pengawasKelompok,
                                 })
                                   .then(() => {
                                     Swal.fire({
