@@ -263,7 +263,7 @@
                                           <td>${no}</td>
                                           <td>${userVal.kelompok}</td>
                                           <td>${userVal.token}</td>
-                                          <td>${userVal.pengawas}</td>
+                                          <td>${guru[userVal.pengawas]}</td>
                                           <td><button class="delete btn btn-danger">Hapus</button></td>
                                                                                     
                                         <tr>
@@ -325,7 +325,7 @@
                                 updateform = document.querySelector(".update form");
 
                         
-                              function writeUserData(kelas, token) {
+                              function writeUserData(kelas, token, pengawasKelompok) {
                                 set(ref(db, "dataKelompok/" + kelas), {
       
                                   kelompok: kelas,
@@ -351,11 +351,53 @@
                                   });
                               }
 
+                               // Mengambil data siswa dari Firebase
+                               let tambahKelompok = document.getElementById("tambah")
+                               tambahKelompok.addEventListener("click", () => {
+                                const selectElement = pengawasKelompok;
+                                for (const key in guru) {
+                                  const option = document.createElement('option');
+                                  option.value = key;
+                                  option.text = guru[key]; // Ubah 'nama' sesuai dengan properti yang Anda inginkan
+                                  selectElement.appendChild(option);
+                                }
+                               })
+
+                              
+                              let guru = {};
+                               // Mendengarkan perubahan pada path 'dataGuru'
+                              onValue(ref(db, "dataGuru/"), (snapshot) => {
+                              // Memeriksa apakah snapshot ada (data ditemukan)
+                              if (snapshot.exists()) {
+                                  // Mendapatkan nilai dari snapshot (data guru)
+                                  const data = snapshot.val();
+
+                                  // Mengosongkan objek guru
+                                  //guru = {};
+
+                                  // Iterasi melalui setiap entri data guru
+                                  for (const key in data) {
+                                      // Menyimpan username sebagai kunci dan nama sebagai nilai dalam objek guru
+                                      guru[data[key].username] = data[key].name;
+                                  }
+
+                                  console.log(guru)
+                              } else {
+                                  // Jika data guru tidak ditemukan
+                                  console.log("Data Guru tidak ditemukan.");
+                              }
+                            }, (error) => {
+                              // Menangani kesalahan jika ada
+                              console.error("Error:", error);
+                            });
+                              
+                              
+
                               addUser.addEventListener("click", () => {
                                   // document.querySelector(".add").classList.add("active");
                                   addform.addEventListener("submit", (e) => {
                                     e.preventDefault();
-                                    writeUserData(kelasT.value, token.value);
+                                    writeUserData(kelasT.value, token.value, pengawasKelompok.value);
                                   });
                                 });
   </script>
