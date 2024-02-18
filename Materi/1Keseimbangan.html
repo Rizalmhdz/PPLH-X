@@ -368,10 +368,36 @@
     });
     }
 
+    let isConfirmUser = "";
+    let floatingBtn = document.getElementById('floatingButton');
+        
+        
+    onValue(ref(db, "dataSiswa/" + nisnUser), (snapshot) => {
+        let data = snapshot.val();
+            isConfirmUser = data.konfirmasi;
+            console.log(data.konfirmasi)
+            if (isConfirmUser === false ){
+                floatingBtn.setAttribute("disabled", "true");
+                createTooltip(floatingBtn, "Harap konfirmasi kelompok Terlebih dahulu");
+                
+            } else if (isConfirmUser === true ){
+                
+                console.log("test")
+                floatingBtn.removeAttribute("disabled");
+            } else {
+                floatingBtn.setAttribute("disabled", "true");
+                createTooltip(floatingBtn, "Harapkon login Terlebih dahulu");
+            }
+    });
+
+    
+
     let anggota_kelompok = {}
 
     let tmp = document.querySelector('#tbody1');
     const que = query(ref(db, "dataSiswa/"));
+    
+
 
     onValue(que, (snapshot) => {
         tmp.innerHTML = "";
@@ -415,7 +441,7 @@
                     } else {
                         confirmBtn += `<button class="btn btn-success" id="konfirmasiya">Ya</button>
                                     <button class="btn btn-danger" id="konfirmasitidak">Tidak</button><br>`;
-                        anggotKelompokChat.appendChild('<span class="me-1 badge text-bg-danger">Anda</span>');
+                        anggotKelompokChat.innerHTML += '<span class="me-1 badge text-bg-danger">Anda</span>';
                     }
             
                 } else {
@@ -435,29 +461,10 @@
             </tr>
         `;
         tmp.innerHTML += tr;
-        (isConfirmUser)? "" : tambahkanEventListener();
+        (isConfirmUser == true)? "" : tambahkanEventListener();
         no++;
     });
 });
-
-$('#namaKelompokRoomChat').text("Kelompok " + groupUser)
-
-
-function tambahAnggotaGroupBadge(nama, konfirmasi){
-    // Membuat elemen span baru
-    var newSpan = document.createElement("span");
-    newSpan.className = `me-1 badge text-bg-${konfirmasi == true? "success" : "danger"}`; // Menetapkan kelas CSS
-
-    // Membuat teks yang akan ditampilkan di dalam span
-    var newText = document.createTextNode(`${nama===nm? "Anda" : nama}`);
-
-    // Menambahkan teks ke dalam elemen span
-    newSpan.appendChild(newText);
-
-    let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
-    // Menambahkan elemen span ke dalam elemen anggotKelompokChat
-    anggotKelompokChat.appendChild(newSpan);
-}
 
     function tambahkanEventListener() {
         try {
@@ -499,18 +506,35 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
         }
     }
 
-        let chatPopup = document.getElementById('chatPopup');
-        let floatingBtn = document.getElementById('floatingButton');
+// ================================= CHAT KELOMPOK ========================================
+
+    let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
+    $('#namaKelompokRoomChat').text("Kelompok " + groupUser)
+
+    function tambahAnggotaGroupBadge(nama, konfirmasi){
+        // Membuat elemen span baru
+        var newSpan = document.createElement("span");
+        newSpan.className = `me-1 badge text-bg-${konfirmasi == true? "success" : "danger"}`; // Menetapkan kelas CSS
+
+        // Membuat teks yang akan ditampilkan di dalam span
+        var newText = document.createTextNode(`${nama===nm? "Anda" : nama}`);
+
+        // Menambahkan teks ke dalam elemen span
+        newSpan.appendChild(newText);
+
+        // Menambahkan elemen span ke dalam elemen anggotKelompokChat
+        anggotKelompokChat.appendChild(newSpan);
+    }
+    
+
+    let chatPopup = document.getElementById('chatPopup');
+        
 
         let closeChat = document.getElementById('closeChat')
         closeChat.addEventListener('click', function(){
           chatPopup.style.display = 'none';
           floatingBtn.style.display = 'block';
         })
-    
-
-        console.log(anggota_kelompok)
-       
     
     
         function createBubbleMsg(sender, message, time){
@@ -636,17 +660,6 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
 
         console.log("isConfirmUser : " + isConfirmUser)
 
-        if (isConfirmUser == "false" ){
-            floatingBtn.setAttribute("disabled", "true");
-            createTooltip(floatingBtn, "Harap konfirmasi kelompok Terlebih dahulu");
-            
-        } else if (isConfirmUser == "true" ){
-            floatingBtn.removeAttribute("disabled");
-        } else {
-            floatingBtn.setAttribute("disabled", "true");
-            createTooltip(floatingBtn, "Harapkon login Terlebih dahulu");
-        }
-
         
     
         floatingBtn.addEventListener('click', function () {
@@ -719,8 +732,6 @@ function tambahAnggotaGroupBadge(nama, konfirmasi){
             }
         });
 
-       
-// =========================================================================================
 function loadMessages() {
     const groupChatRef = ref(db, 'dataKelompok/' + groupUser + '/chatGroup/');
 
@@ -747,7 +758,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// =======================================================================================
+
+
+
   
           
     function sortirBadgeAnggotaKelompok(){
@@ -810,17 +823,22 @@ document.addEventListener('DOMContentLoaded', () => {
             });
        
     }
-    
+
+    // =======================================================================================
       </script>
 
     <script>
     let nm = sessionStorage.getItem('nama');
     let nama = document.getElementById('nama');
-    let nisnUser = sessionStorage.getItem('nisn');
-    let groupUser = sessionStorage.getItem('kelompok');
-    let isConfirmUser = sessionStorage.getItem('konfirmasi');
     
     nama.innerHTML = `<i class="fa-solid fa-user"></i> ${nm}`;
+    let nisnUser = sessionStorage.getItem('nisn');
+    let groupUser = sessionStorage.getItem('kelompok');
+
+
+    
+
+    
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
