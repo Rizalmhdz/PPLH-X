@@ -375,14 +375,11 @@
     onValue(ref(db, "dataSiswa/" + nisnUser), (snapshot) => {
         let data = snapshot.val();
             isConfirmUser = data.konfirmasi;
-            console.log(data.konfirmasi)
             if (isConfirmUser === false ){
                 floatingBtn.setAttribute("disabled", "true");
                 createTooltip(floatingBtn, "Harap konfirmasi kelompok Terlebih dahulu");
                 
             } else if (isConfirmUser === true ){
-                
-                console.log("test")
                 floatingBtn.removeAttribute("disabled");
             } else {
                 floatingBtn.setAttribute("disabled", "true");
@@ -392,13 +389,9 @@
 
     
 
-    let anggota_kelompok = {}
-
+   
     let tmp = document.querySelector('#tbody1');
     const que = query(ref(db, "dataSiswa/"));
-    
-
-
     onValue(que, (snapshot) => {
         tmp.innerHTML = "";
         var no = 1;
@@ -429,8 +422,17 @@
                 
 
                 if(user.kelompok == groupUser){ 
-                    tambahAnggotaGroupBadge(user.nama, user.konfirmasi);
-                    anggota_kelompok[user.nisn] = user.nama;
+                    if(!anggota_kelompok[user.kelompok]){ 
+                        anggota_kelompok[user.kelompok] = {};
+                    };
+                    if(!anggota_kelompok[user.kelompok][user.nisn]){ 
+                        anggota_kelompok[user.kelompok][user.nisn] = {};
+                    };
+                    anggota_kelompok[user.kelompok][user.nisn] = {
+                      nama : user.nama,
+                      konfirmasi : user.konfirmasi,
+                      guru : false,
+                    };
                 };
                 list += `<input class="form-check-input ms-2" type="radio" id="anggotakelompok" name="namaanggota" value="${user.nama}" ${user.nisn === nisnUser ? "checked" : "disabled"}>
                         <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
@@ -508,26 +510,87 @@
 
 // ================================= CHAT KELOMPOK ========================================
 
-    let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
-    $('#namaKelompokRoomChat').text("Kelompok " + groupUser)
+let anggota_kelompok = {}
 
-    function tambahAnggotaGroupBadge(nama, konfirmasi){
-        // Membuat elemen span baru
-        var newSpan = document.createElement("span");
-        newSpan.className = `me-1 badge text-bg-${konfirmasi == true? "success" : "danger"}`; // Menetapkan kelas CSS
+const queA = query(ref(db, "dataKelompok/" + groupUser));
+onValue(queA, async (snapshot) => {
+    const usersGroup = snapshot.val();
+    const usernameGuru = usersGroup.pengawas;
 
-        // Membuat teks yang akan ditampilkan di dalam span
-        var newText = document.createTextNode(`${nama===nm? "Anda" : nama}`);
+    try {
+        const specificRef = ref(db, 'dataGuru/' + usernameGuru);
+        const snapshotGuru = await get(specificRef);
 
-        // Menambahkan teks ke dalam elemen span
-        newSpan.appendChild(newText);
+        if (snapshotGuru.exists()) {
+            // Data ditemukan, lakukan sesuatu dengan snapshotGuru.val()
+            const user = snapshotGuru.val();
 
-        // Menambahkan elemen span ke dalam elemen anggotKelompokChat
-        anggotKelompokChat.appendChild(newSpan);
+            if (!anggota_kelompok[groupUser]) { 
+                anggota_kelompok[groupUser] = {};
+            }
+            if (!anggota_kelompok[groupUser][usernameGuru]) { 
+                anggota_kelompok[groupUser][usernameGuru] = {};
+            }
+
+            anggota_kelompok[groupUser][usernameGuru] = {
+                nama : user.name,
+                konfirmasi : true,
+                guru : true,
+              };
+            console.log("Nama Guru:", anggota_kelompok[usersGroup][usernameGuru].nama);
+        } else {
+            // Data tidak ditemukan
+            console.log("Data Guru tidak ditemukan.");
+        }
+    } catch (error) {
+        // Tangani kesalahan jika ada
+        console.error("Error:", error);
     }
+});
+
+
+    function tambahAnggotaGroupBadge(kelompok){
+      
+        let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
+        anggotKelompokChat.innerHTML = "";
+        $('#namaKelompokRoomChat').text("Kelompok " + kelompok)
+        // Mendapatkan array dari semua keys (nama properti) dalam objek
+        const keys = Object.keys(anggota_kelompok[kelompok]);
+  
+        // Iterasi melalui array keys dan akses nilai dari setiap properti
+        keys.forEach(key => {
+          const user = anggota_kelompok[kelompok][key];
+  
+           // Membuat elemen span baru
+           var newSpan = document.createElement("span");
+           let badgeColor = "";
+           let nama = ""
+           if(user.guru){
+            badgeColor = "warning";
+            nama = "Gr. " + user.nama;
+           } else {
+            badgeColor = (user.konfirmasi == true)? "success" : "danger";
+            nama = user.nama===nm? "Anda" : user.nama;
+           }
+           newSpan.className = `me-1 badge text-bg-${badgeColor}`; // Menetapkan kelas CSS
+   
+           // Membuat teks yang akan ditampilkan di dalam span
+           var newText = document.createTextNode(`${nama}`);
+   
+           // Menambahkan teks ke dalam elemen span
+           newSpan.appendChild(newText);
+   
+           // Menambahkan elemen span ke dalam elemen anggotKelompokChat
+           anggotKelompokChat.appendChild(newSpan);
+        });
+  
+         
+      }
     
 
     let chatPopup = document.getElementById('chatPopup');
+
+    console.log(anggota_kelompok[groupUser])
         
 
         let closeChat = document.getElementById('closeChat')
@@ -546,15 +609,22 @@
                 bubble.style.float = 'right';
                 bubble.style.backgroundColor = '#AAD8D3';
                 bubble.style.paddingTop = '10px'; 
+                bubble.style.paddingRight = '10px'; 
                 bubble.style.minWidth = '50px';
                 
               } else {
                 bubble.style.float = 'left';
                 bubble.style.backgroundColor = '#2F323A';
                 bubble.style.paddingTop = '30px'; 
-    
+                let namaSender = anggota_kelompok[groupUser][sender].nama;
+
+                if(anggota_kelompok[groupUser][sender].guru){
+                    bubble.style.backgroundColor = '#FFC107';
+                    
+                    namaSender = "Guru " + anggota_kelompok[groupUser][sender].nama;
+                }
                 var senderSpan = document.createElement('span');
-                senderSpan.textContent = anggota_kelompok[sender];
+                senderSpan.textContent = namaSender;
                 senderSpan.style.fontSize = '0.8em';
                 senderSpan.style.position = 'absolute';
                 senderSpan.style.top = '10px'; 
@@ -565,7 +635,7 @@
     
                 bubble.appendChild(senderSpan);
 
-                bubble.style.minWidth = anggota_kelompok[sender].length * 0.8 + 'em'; // Mengatur lebar minimum bubble
+                bubble.style.minWidth = namaSender.length * 0.8 + 'em'; // Mengatur lebar minimum bubble
               }
         
               bubble.style.color = '#fff';
@@ -658,15 +728,16 @@
             }
         }
 
-        console.log("isConfirmUser : " + isConfirmUser)
-
+        
         
     
         floatingBtn.addEventListener('click', function () {
             document.getElementById('chatPopup').style.display = 'block';
             document.getElementById('floatingButton').style.display = 'none';
             scrollToBottom();
+            tambahAnggotaGroupBadge(groupUser);
             sortirBadgeAnggotaKelompok();
+            loadMessages();
         });
 
         function createTooltip(item, pesan){
@@ -732,17 +803,23 @@
             }
         });
 
+// Variabel untuk menyimpan referensi event listener saat ini
+let currentListener = null;
+
 function loadMessages() {
     const groupChatRef = ref(db, 'dataKelompok/' + groupUser + '/chatGroup/');
-
-    // Mengurutkan data berdasarkan kunci secara menurun dan membatasi hanya 20 data terakhir
     const que = query(groupChatRef, orderByKey());
 
-    // Mendapatkan data dengan query yang sudah dibuat
-    onChildAdded(que, (snapshot) => { // Menggunakan onChildAdded untuk hanya mendapatkan pesan baru
+    // Hapus event listener sebelumnya jika ada
+    if (currentListener) {
+        currentListener(); // Panggil event listener untuk menghapusnya
+    }
+
+    // Tambahkan event listener baru untuk kelompok saat ini
+    currentListener = onChildAdded(que, (snapshot) => {
         const chatData = snapshot.val();
         createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
-       
+        scrollToBottom();
     });
 }
 
@@ -751,18 +828,6 @@ function scrollToBottom(){
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-
-// Memuat pesan saat halaman dimuat
-document.addEventListener('DOMContentLoaded', () => {
-    loadMessages();
-});
-
-
-
-
-
-  
-          
     function sortirBadgeAnggotaKelompok(){
             var spans = document.querySelectorAll("#anggota-kelompok-chat span");
     
@@ -823,6 +888,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
        
     }
+
+
 
     // =======================================================================================
       </script>

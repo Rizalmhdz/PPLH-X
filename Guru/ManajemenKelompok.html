@@ -188,7 +188,7 @@
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary delete-progress">Kembali</button>
                         <button type="submit" class="btn btn-success" id="tambahBtn">Tambah</button>
-                        <button type="button" class="btn btn-warning" id="simpanBtn">Simpan</button>
+                        <button type="button" class="btn btn-warning" id="simpanBtn">Ubah</button>
                       </div>
                     </form>
                   </div>
@@ -310,6 +310,10 @@
 <!-- Floating Button -->
 <!-- <button id="floatingButton" class="btn btn-primary floating-button">Chat</button> -->
 
+
+
+<div id="container-chat"></div>
+
 <!-- Popup untuk room chat -->
 <div id="chatPopup" class="chat-room" style="display: none;">
 <div class="chat-header">
@@ -366,8 +370,6 @@
       let token = document.getElementById("tokenKelas");
       let pengawasKelompok = document.getElementById("pengawasKelompok");
 
-      console.log(kelasT.value);
-
       
       let guru = {};
       // Mendengarkan perubahan pada path 'dataGuru'
@@ -382,23 +384,24 @@
              guru[data[key].username].nama = data[key].name;
              
          }
-         console.log(guru)
          
      });
 
       let kelasfix = "";
       let cek11 = 0;
 
+      let anggota_kelompok = {}
+      let chat_aktif = "";
+
       let tmp = document.querySelector('#tbody1');
       const que = query(ref(db, "dataKelompok/"), orderByChild("nisn"));
                           onValue(que, (snapshot) => {
-                                console.log(snapshot.val());
                                 tmp.innerHTML = "";
                                 var no = 1;
                                 const users = snapshot;
                                 users.forEach(user => {
                                   const userVal = user.val();
-                                  let pengawas = guru[userVal.pengawas].nama
+                                 // let pengawas = guru[userVal.pengawas].nama
                                    // Pastikan guru[userVal.pengawas] sudah terdefinisi
                                   if (!guru[userVal.pengawas]) {
                                     guru[userVal.pengawas] = {}; // Inisialisasi objek jika belum terdefinisi
@@ -408,13 +411,13 @@
                                     guru[userVal.pengawas].kelompok = []; // Inisialisasi kelompok sebagai array kosong jika belum terdefinisi
                                   }
                                    guru[userVal.pengawas].kelompok.push(userVal.kelompok)
-                                    console.log(guru)
+
                                     let tr = `
                                         <tr data-id = ${user.key}>
                                           <td>${no}</td>
                                           <td>${userVal.kelompok}</td>
                                           <td>${userVal.token}</td>
-                                          <td>${pengawas}</td>
+                                          <td>${guru[userVal.pengawas].nama}</td>
                                           <td>
                                             
                                             <button class="chat btn btn-primary" id="chat-${userVal.kelompok}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
@@ -519,19 +522,52 @@
                                 });
                                 //////////////////////////////////////////////////////////
                                   
-                                //edit
+                                //chat
                                 let chatButtons = document.querySelectorAll(".chat");
                                 chatButtons.forEach((chatButton) => {
-                                  const extractedId = chatButton.id.replace('chat-', '');
-                                  if(!guru[username].kelompok.includes(extractedId)){
+                                  const extractedIdKelompok = chatButton.id.replace('chat-', '');
+                                  
+                                  if(!guru[username].kelompok.includes(extractedIdKelompok)){
                                     chatButton.disabled = true;
                                   } else {
-                                    chatButton.addEventListener("click", () => {
-                                      document.getElementById('chatPopup').style.display = 'block';
-                                      scrollToBottom();
-                                      sortirBadgeAnggotaKelompok();
-                                      
-                                      });
+                                      chatButton.addEventListener('click', ()=> {
+                                        if(!anggota_kelompok[extractedIdKelompok]){
+                                          anggota_kelompok[extractedIdKelompok]= {};
+                                            anggota_kelompok[extractedIdKelompok][username]= {};
+                                        }
+                                          anggota_kelompok[extractedIdKelompok][username]= {
+                                            nama: nm,
+                                            konfirmasi: true
+                                        }
+                                        console.log(anggota_kelompok[extractedIdKelompok][username].nama)
+                                        
+                                        let chatBody = document.getElementById('chatMessages');
+                                        let anggota_badge = document.getElementById('anggota-kelompok-chat');
+                                        if(extractedIdKelompok in anggota_kelompok){
+                                          if(chat_aktif === extractedIdKelompok){
+
+                                          } else {
+                                            chatBody.innerHTML = "";
+                                            anggota_badge.innerHTML = ""
+                                            
+                                            chat_aktif = extractedIdKelompok;
+                                            loadMessages(extractedIdKelompok);
+                                            tambahAnggotaGroupBadge(extractedIdKelompok)
+                                            sortirBadgeAnggotaKelompok();
+                                            
+                                          }
+                                          
+                                          document.getElementById('chatPopup').style.display = 'block';
+                                        } else {
+                                          createTooltip(chatButton, "Tidak ada anggota kelompok, Harap tambahkan terlebih dahulu!");
+    
+                                        }
+
+                                        
+                                          
+                                        scrollToBottom();
+                                      })
+                                    
                                   }
                                   
                                 });
@@ -543,6 +579,43 @@
 
                               });
 
+   
+
+                              
+
+
+// ======================================= DAPATKAN GROUP YAN GBERISI SISWA =================================
+
+
+    let sendButton = document.getElementById('sendButton')
+    sendButton.addEventListener('click',  () => {
+      sendMessage(chat_aktif); 
+    })
+
+
+
+    const queA = query(ref(db, "dataSiswa/"));
+    onValue(queA, (snapshot) => {
+      const users = snapshot.val();
+      // Mengelompokkan pengguna berdasarkan kelompok
+      Object.values(users).forEach(user => {
+        if(!anggota_kelompok[user.kelompok]){ 
+            anggota_kelompok[user.kelompok] = {};
+        };
+        if(!anggota_kelompok[user.kelompok][user.nisn]){ 
+            anggota_kelompok[user.kelompok][user.nisn] = {};
+        };
+        anggota_kelompok[user.kelompok][user.nisn] = {
+          nama : user.nama,
+          konfirmasi : user.konfirmasi
+        };
+      });
+    });
+
+    console.log(anggota_kelompok)
+
+  /// ========================================================================================================                   
+
     // Menambahkan data ke tabel
     var stdNo = 0;
                               var tbody = document.querySelector("tbody1");
@@ -552,7 +625,7 @@
                                 updateform = document.querySelector(".update form");
 
                         
-                              function writeUserData(kelas, token, pengawasKelompok, status) {
+                              function writeUserData(kelas, token, pengawasKelompok) {
                                 set(ref(db, "dataKelompok/" + kelas), {
       
                                   kelompok: kelas,
@@ -562,7 +635,7 @@
                                   .then(() => {
                                     Swal.fire({
                                           title: "Selamat!",
-                                          text: `Kelompok berhasil di${status}`,
+                                          text: `Kelompok berhasil ditambahkan`,
                                           icon: "success",
                                           button: "Lanjutkan",
                                         });
@@ -572,7 +645,34 @@
                                   .catch((errorr) => {
                                     Swal.fire({
                                           title: "Maaf!",
-                                          text: `Kelompok gagal di${status}.`,
+                                          text: `Kelompok gagal ditambahkan`,
+                                          icon: "error",
+                                          button: "Lanjutkan",
+                                        });
+                                  });
+                              }
+
+                              function updateUserData(kelas, token, pengawasKelompok) {
+                                update(ref(db, "dataKelompok/" + kelas), {
+      
+                                  kelompok: kelas,
+                                  token: token,
+                                  pengawas : pengawasKelompok,
+                                })
+                                  .then(() => {
+                                    Swal.fire({
+                                          title: "Selamat!",
+                                          text: `Kelompok berhasil di update`,
+                                          icon: "success",
+                                          button: "Lanjutkan",
+                                        });
+                                    addform.reset();
+                                  $('#tambahModal').modal('hide');
+                                  })
+                                  .catch((errorr) => {
+                                    Swal.fire({
+                                          title: "Maaf!",
+                                          text: `Kelompok gagal di update.`,
                                           icon: "error",
                                           button: "Lanjutkan",
                                         });
@@ -626,7 +726,7 @@
                                   
                                   Swal.fire({
                                     title: "Selamat!",
-                                    text: "Data berhasil dihapus.",
+                                    text: "Progress berhasil dihapus.",
                                     icon: "success",
                                     button: "Lanjutkan",
                                   });
@@ -642,7 +742,7 @@
                               
                               simpanBtn.addEventListener("click", (e) => {
                                     e.preventDefault();
-                                    writeUserData(kelasT.value, token.value, pengawasKelompok.value, "-edit");
+                                    updateUserData(kelasT.value, token.value, pengawasKelompok.value);
                               });
 
 
@@ -652,31 +752,38 @@
                                   tambahBtn.style.display = "block";
                                   addform.addEventListener("submit", (e) => {
                                     e.preventDefault();
-                                    writeUserData(kelasT.value, token.value, pengawasKelompok.value, "simpan");
+                                    writeUserData(kelasT.value, token.value, pengawasKelompok.value);
     
                                   });
                                 });
 
+                                function createTooltip(item, pesan){
+                                  $(document).ready(function(){
+                                    $(item).tooltip({
+                                      title: pesan,
+                                      placement: "top"
+                                    });
+                                  });
+                                }
+                                
 
 
 // ================================= CHAT KELOMPOK ========================================
-let anggota_kelompok = {}
-let groupUser = "";
+//function chatKelompok(groupUser){
 
-
-    const queGroup = query(ref(db, "dataKelompok/"));
+  /*
+  const queGroup = query(ref(db, "dataKelompok/" + groupUser));
     onValue(queGroup, (snapshot) => {
         // Memproses snapshot yang berisi nilai terbaru dari path tersebut
         if (snapshot.exists()) {
             // Jika snapshot tidak kosong
-            snapshot.forEach((groupSnapshot) => {
-                const group = groupSnapshot.val();
+         //   snapshot.forEach((groupSnapshot) => {
+                const group = snapshot.val();
                 if (group.pengawas == username) {
                     groupUser += group.kelompok;
-                    console.log("Kelompok Guru:", groupUser);
                     // Lakukan sesuatu dengan data
                 }
-            });
+       //     });
         } else {
             // Jika snapshot kosong
             console.error("Data tidak ditemukan");
@@ -685,26 +792,38 @@ let groupUser = "";
         // Menangani kesalahan jika ada
         console.error("Error:", error);
     });
+    */
 
-    let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
-    $('#namaKelompokRoomChat').text("Kelompok " + groupUser)
+   
 
-    function tambahAnggotaGroupBadge(nama, konfirmasi){
-        // Membuat elemen span baru
-        var newSpan = document.createElement("span");
-        newSpan.className = `me-1 badge text-bg-${konfirmasi == true? "success" : "danger"}`; // Menetapkan kelas CSS
+    function tambahAnggotaGroupBadge(kelompok){
+      
+      let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
+      $('#namaKelompokRoomChat').text("Kelompok " + kelompok)
+      // Mendapatkan array dari semua keys (nama properti) dalam objek
+      const keys = Object.keys(anggota_kelompok[kelompok]);
 
-        // Membuat teks yang akan ditampilkan di dalam span
-        var newText = document.createTextNode(`${nama===nm? "Anda" : nama}`);
+      // Iterasi melalui array keys dan akses nilai dari setiap properti
+      keys.forEach(key => {
+        const user = anggota_kelompok[kelompok][key];
 
-        // Menambahkan teks ke dalam elemen span
-        newSpan.appendChild(newText);
+         // Membuat elemen span baru
+         var newSpan = document.createElement("span");
+         newSpan.className = `me-1 badge text-bg-${user.konfirmasi == true? "success" : "danger"}`; // Menetapkan kelas CSS
+ 
+         // Membuat teks yang akan ditampilkan di dalam span
+         var newText = document.createTextNode(user.nama);
+ 
+         // Menambahkan teks ke dalam elemen span
+         newSpan.appendChild(newText);
+ 
+         // Menambahkan elemen span ke dalam elemen anggotKelompokChat
+         anggotKelompokChat.appendChild(newSpan);
+      });
 
-        // Menambahkan elemen span ke dalam elemen anggotKelompokChat
-        anggotKelompokChat.appendChild(newSpan);
+       
     }
 
-    
     
 
     let chatPopup = document.getElementById('chatPopup');
@@ -719,12 +838,12 @@ let groupUser = "";
         function createBubbleMsg(sender, message, time){
               var bubble = document.createElement('div');
               bubble.textContent = message;
-        
               if (sender === username) {
                 var bubbleClass = 'bubble-me';
                 bubble.style.float = 'right';
                 bubble.style.backgroundColor = '#AAD8D3';
                 bubble.style.paddingTop = '10px'; 
+                bubble.style.paddingRight = '10px'; 
                 bubble.style.minWidth = '50px';
                 
               } else {
@@ -733,7 +852,10 @@ let groupUser = "";
                 bubble.style.paddingTop = '30px'; 
     
                 var senderSpan = document.createElement('span');
-                senderSpan.textContent = anggota_kelompok[sender];
+               // let namaSender = sender.toString()
+                //console.log(namaSender)
+                let namaSender = anggota_kelompok[chat_aktif][sender].nama
+                senderSpan.textContent = namaSender
                 senderSpan.style.fontSize = '0.8em';
                 senderSpan.style.position = 'absolute';
                 senderSpan.style.top = '10px'; 
@@ -744,7 +866,7 @@ let groupUser = "";
     
                 bubble.appendChild(senderSpan);
 
-                bubble.style.minWidth = anggota_kelompok[sender].length * 0.8 + 'em'; // Mengatur lebar minimum bubble
+                bubble.style.minWidth = namaSender.length * 0.8 + 'em'; // Mengatur lebar minimum bubble
               }
         
               bubble.style.color = '#fff';
@@ -807,23 +929,22 @@ let groupUser = "";
             return timestamp
         }
         
-        let sendButton = document.getElementById('sendButton')
-        sendButton.addEventListener('click', function(){ 
-            sendMessage();
-        });
 
-        function sendMessage() {
-            const message = document.getElementById('messageInput').value.trim();
-            const currentTime = new Date();
-            const options = { hour: '2-digit', minute: '2-digit', hour12: false };
-            const formatter = new Intl.DateTimeFormat('id', options);
-            const formattedTime = formatter.format(currentTime);
+        
+        
+
+        function sendMessage(kelompok) {
+          const message = document.getElementById('messageInput').value.trim();
+          const currentTime = new Date();
+          const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+          const formatter = new Intl.DateTimeFormat('id', options);
+          const formattedTime = formatter.format(currentTime);
         
             if (message !== '') {
              const chatMessages = document.getElementById('chatMessages');
     
-              set(ref(db, 'dataKelompok/'+ groupUser + '/chatGroup/'+getTimeStamp()), {
-                usnPengirim : nisnUser,
+              set(ref(db, 'dataKelompok/'+ kelompok + '/chatGroup/'+getTimeStamp()), {
+                usnPengirim : username,
                 pesan : message,
                 pada  : formattedTime
               });
@@ -837,33 +958,6 @@ let groupUser = "";
             }
         }
 
-        console.log("isConfirmUser : " + isConfirmUser)
-
-
-        function createTooltip(item, pesan){
-            item.addEventListener('mouseover', function() {
-                // Buat elemen tooltip
-                const tooltip = document.createElement('div');
-                tooltip.textContent = pesan;
-            
-               // Gaya untuk tooltip
-                tooltip.style.position = 'absolute';
-                tooltip.style.background = '#333';
-                tooltip.style.color = '#fff';
-                tooltip.style.padding = '5px';
-                tooltip.style.borderRadius = '5px';
-                tooltip.style.right = '20px'; // Letakkan di samping kiri tombol
-                tooltip.style.bottom = '-290px'; // Letakkan di atas tombol
-                        
-                // Menambahkan tooltip ke dalam dokumen
-                document.body.appendChild(tooltip);
-            
-                // Menghapus tooltip setelah beberapa detik (opsional)
-                setTimeout(function() {
-                    tooltip.parentNode.removeChild(tooltip);
-                }, 2000);
-            });
-        }
         
 
 
@@ -902,18 +996,23 @@ let groupUser = "";
                 }
             }
         });
+// Variabel untuk menyimpan referensi event listener saat ini
+let currentListener = null;
 
-function loadMessages() {
-    const groupChatRef = ref(db, 'dataKelompok/' + groupUser + '/chatGroup/');
-
-    // Mengurutkan data berdasarkan kunci secara menurun dan membatasi hanya 20 data terakhir
+function loadMessages(kelompok) {
+    const groupChatRef = ref(db, 'dataKelompok/' + kelompok + '/chatGroup/');
     const que = query(groupChatRef, orderByKey());
 
-    // Mendapatkan data dengan query yang sudah dibuat
-    onChildAdded(que, (snapshot) => { // Menggunakan onChildAdded untuk hanya mendapatkan pesan baru
+    // Hapus event listener sebelumnya jika ada
+    if (currentListener) {
+        currentListener(); // Panggil event listener untuk menghapusnya
+    }
+
+    // Tambahkan event listener baru untuk kelompok saat ini
+    currentListener = onChildAdded(que, (snapshot) => {
         const chatData = snapshot.val();
         createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
-       
+        scrollToBottom();
     });
 }
 
@@ -922,11 +1021,14 @@ function scrollToBottom(){
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+/*
 
 // Memuat pesan saat halaman dimuat
 document.addEventListener('DOMContentLoaded', () => {
     loadMessages();
 });
+
+*/
           
     function sortirBadgeAnggotaKelompok(){
             var spans = document.querySelectorAll("#anggota-kelompok-chat span");
@@ -988,6 +1090,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
        
     }
+
 
     // =======================================================================================
   </script>
