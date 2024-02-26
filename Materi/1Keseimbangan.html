@@ -393,6 +393,7 @@
     let tmp = document.querySelector('#tbody1');
     const que = query(ref(db, "dataSiswa/"));
     onValue(que, (snapshot) => {
+        let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
         tmp.innerHTML = "";
         var no = 1;
         const users = snapshot.val();
