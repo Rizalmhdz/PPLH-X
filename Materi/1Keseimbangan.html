@@ -538,7 +538,6 @@ onValue(queA, async (snapshot) => {
                 konfirmasi : true,
                 guru : true,
               };
-            console.log("Nama Guru:", anggota_kelompok[usersGroup][usernameGuru].nama);
         } else {
             // Data tidak ditemukan
             console.log("Data Guru tidak ditemukan.");
@@ -619,13 +618,15 @@ onValue(queA, async (snapshot) => {
                 bubble.style.paddingTop = '30px'; 
                 let namaSender = anggota_kelompok[groupUser][sender].nama;
 
-                if(anggota_kelompok[groupUser][sender].guru){
-                    bubble.style.backgroundColor = '#FFC107';
-                    
-                    namaSender = "Guru " + anggota_kelompok[groupUser][sender].nama;
-                }
+                    if(anggota_kelompok[groupUser][sender].guru){
+                        bubble.style.backgroundColor = '#FFC107';
+                        
+                        namaSender = "Guru " + anggota_kelompok[groupUser][sender].nama;
+                    }
+                
                 var senderSpan = document.createElement('span');
-                senderSpan.textContent = namaSender;
+                    senderSpan.textContent = namaSender;
+                
                 senderSpan.style.fontSize = '0.8em';
                 senderSpan.style.position = 'absolute';
                 senderSpan.style.top = '10px'; 
@@ -636,7 +637,7 @@ onValue(queA, async (snapshot) => {
     
                 bubble.appendChild(senderSpan);
 
-                bubble.style.minWidth = namaSender.length * 0.8 + 'em'; // Mengatur lebar minimum bubble
+                bubble.style.minWidth = namaSender.length * 1 + 'em'; // Mengatur lebar minimum bubble
               }
         
               bubble.style.color = '#fff';
@@ -816,9 +817,18 @@ function loadMessages() {
         currentListener(); // Panggil event listener untuk menghapusnya
     }
 
+    let prevKey = "";
+
     // Tambahkan event listener baru untuk kelompok saat ini
     currentListener = onChildAdded(que, (snapshot) => {
         const chatData = snapshot.val();
+        if(prevKey == ""){
+            showSeparatorWithDate(snapshot.key)
+        } else {
+            let isCreateSeparator = compareDates(prevKey, snapshot.key);
+            (isCreateSeparator)? showSeparatorWithDate(snapshot.key) : "";
+        }
+        prevKey = snapshot.key;
         createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
         scrollToBottom();
     });
@@ -890,9 +900,79 @@ function scrollToBottom(){
        
     }
 
+    // Fungsi untuk mengonversi timestamp ke format Date
+function convertTimestampToDateTime(timestampString) {
+    const year = timestampString.slice(0, 4);
+    const month = timestampString.slice(4, 6) - 1; // Bulan dimulai dari 0 (Januari)
+    const day = timestampString.slice(6, 8);
+    const hour = timestampString.slice(8, 10);
+    const minute = timestampString.slice(10, 12);
+    const second = timestampString.slice(12, 14);
+    const millisecond = timestampString.slice(14);
 
+    return new Date(year, month, day, hour, minute, second, millisecond);
+}
 
-    // =======================================================================================
+// Fungsi untuk menampilkan pemisah dengan keterangan hari dan tanggal dari timestamp dalam format `yyyymmddhhmmmsmsm`
+function showSeparatorWithDate(timestampString) {
+    const timestamp = convertTimestampToDateTime(timestampString); // Mengonversi timestamp ke format Date
+    const currentDate = new Date(); // Timestamp hari ini
+
+    const separator = document.createElement('hr'); // Membuat elemen garis pembatas
+    separator.style.border = 'none'; // Menghilangkan border dari garis pembatas
+    separator.style.borderTop = '2px solid #ccc'; // Menambahkan border di bagian atas garis pembatas
+    separator.style.margin = '10px 0'; 
+    separator.style.marginBottom = '10px';
+    separator.style.clear = 'both';
+    separator.style.overflow = 'hidden';
+    separator.style.position = 'relative'; 
+
+    // Membuat elemen untuk menampilkan keterangan hari dan tanggal
+    const dateInfo = document.createElement('div');
+    let today = currentDate.getDate();
+    let dayFromTimestamp = timestamp.getDate();
+
+    if (today == dayFromTimestamp) {
+        // Jika timestamp hari ini
+        dateInfo.textContent = 'Hari ini';
+    } 
+    else if (today - dayFromTimestamp == 1) {
+        // Jika timestamp kemarin
+        dateInfo.textContent = 'Kemarin';
+    } else if (today - dayFromTimestamp <= 7 ) {
+        // Jika masih dalam minggu yang sama dengan hari ini
+        const options = { weekday: 'long' };
+        dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
+    } else {
+        // Jika berbeda minggu dengan hari ini
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
+    }
+
+    dateInfo.style.textAlign = 'center'; // Pusatkan teks
+
+    // Menambahkan elemen keterangan hari dan tanggal ke dalam elemen garis pembatas
+    separator.appendChild(dateInfo);
+
+    // Menambahkan garis pembatas beserta keterangan hari dan tanggal ke dalam body
+    let chatMessages = document.getElementById("chatMessages")
+   chatMessages.appendChild(separator);
+}
+
+// Fungsi untuk membandingkan dua tanggal berdasarkan
+function compareDates(timestampString1, timestampString2) {
+    // Mengambil bagian `yyyymmdd` dari string timestamp
+    const date1 = timestampString1.slice(0, 8);
+    const date2 = timestampString2.slice(0, 8);
+
+    if (date1 === date2) {
+        return 0; // Jika tanggal sama
+    } else if (date1 < date2) {
+        return 1; // Jika tanggal pertama lebih kecil dari tanggal kedua
+    } 
+}
+
+// =======================================================================================
       </script>
 
     <script>
