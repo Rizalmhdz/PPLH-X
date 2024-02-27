@@ -182,7 +182,7 @@
                    </tr>
                    </table>
                    <br>
-                   <center><button class="button-utama" id="cekJawaban2"><p>Cek Jawaban</p></button></center>
+                   <center><button class="button-utama" id="cekJawaban2"><p>Kirim Jawaban</p></button></center>
                    <br>
                              
                    
@@ -228,11 +228,21 @@
          <td><center><div class="box1" id="isian4" style="padding: 5px; width: 200px;"></div></center></td>
         </tr>
         </table>
-        <center><button class="button-utama" id="cekJawaban3"><p>Cek Jawaban</p></button></center>           
+        <center><button class="button-utama" id="cekJawaban3"><p>Kirim Jawaban</p></button></center>           
         </ol>
         </div>
         <br>
-        <center><button onclick="return printArea('area')">Cetak Jawaban</button></center>
+        <center>
+                <button class="btn btn-warning mb-4" onclick="return printArea('area')">Cetak Hasil Kesimpulan</button>
+                <br>
+                <input type="file" class="mb-4" id="pdfFile" accept=".pdf">
+                <button class="btn btn-primary" type="button" id="uploadButton">Unggah</button>
+                <div class="mt-3" id="progressBar" style="display: none;">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+        </center>
         </div>
         </div>
         
@@ -342,6 +352,7 @@
             #sendButton:hover{
                 background-color: #2F323A; 
             }
+            
           </style>
              <!-- Floating Button -->
   <!-- Floating Button -->
@@ -396,7 +407,8 @@
         if(cekInput1('check1') && cekInput1('check2') && cekInput1('check3') && cekInput1('check4')){
             let ketJawaban = document.querySelectorAll('.jawaban')
             ketJawaban.forEach((elemen, indeks) => {
-                elemen.innerHTML = cekJawaban(jawaban1[indeks][0], jawaban1[indeks][1], jawaban1[indeks][2])
+                elemen.style.textAlign = 'center'; 
+                elemen.innerHTML = cekJawaban1(jawaban1[indeks][0], jawaban1[indeks][1], jawaban1[indeks][2])
             });
             
         } else {
@@ -422,22 +434,70 @@
         return isChecked
     }
 
-    function cekJawaban(namaInput, check1, check2) {
+    function cekJawaban1(namaInput, check1, check2) {
         // Dapatkan semua elemen input dengan atribut name yang sesuai
         const inputs = document.querySelectorAll('input[name="' + namaInput + '"]');
-        return (inputs[0].checked === check1 && inputs[1].checked === check2)? "Benar" : "Salah"
+        return (inputs[0].checked === check1 && inputs[1].checked === check2)? "<span class='badge bg-success'>Benar</span>" : 
+        "<span class='badge bg-danger'>Salah</span>";
     }
     
 //===========================================================================================================
 
 // ============================================ cek jawaban Ke 2 ============================================
+const cekBtn2 = document.getElementById('cekJawaban3');
+const boxsInput = document.querySelectorAll('.box1');
+const jawaban2 = [
+    "Reboisasi",
+    "Hutan Mangrove",
+    "Bank Sampah",
+    "Melestarikan Vegetasi"
+]
+
+cekBtn2.addEventListener('click', ()=>{
+    boxsInput.forEach((elemen, indeks) => {
+        elemen.style.fontWeight = 'bold'
+        elemen.style.backgroundColor = (elemen.innerHTML == jawaban2[indeks])? 'green' : 'red';
+    })
+})
+
+boxsInput.forEach(boxInput => {
+    boxInput.addEventListener('dragover', function(event) {
+        // Mencegah default behavior dari event dragover
+        event.preventDefault();
+    });
+
+    boxInput.addEventListener('drop', function(event) {
+        // Mencegah default behavior dari event drop
+         event.preventDefault();
+
+    // Ambil data HTML dari event drag
+    
+    boxInput.style.fontWeight = 'bold'
+    boxInput.style.backgroundColor = '#ffffff'
+    const draggedHTML = event.dataTransfer.getData('text/html');
+
+    // Set nilai input teks dengan konten HTML yang di-drag
+    this.innerHTML = draggedHTML;
+    });
+});
+
+// Ambil semua elemen dengan kelas 'task'
+const tasks = document.querySelectorAll('.task');
+
+// Tambahkan event listener untuk setiap elemen dengan kelas 'task'
+tasks.forEach(task => {
+    task.addEventListener('dragstart', function(event) {
+        // Menyimpan konten HTML dari elemen yang di-drag ke dalam objek transfer data
+        event.dataTransfer.setData('text/html', this.innerHTML);
+    });
+});
 
 
 
 //============================================================================================================
     
     //---------project setting firebase-----------
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { initializeApp, getApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     
     const firebaseConfig = {
         apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
@@ -452,8 +512,8 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
 
-    import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, onChildAdded, equalTo, update, orderByKey, limitToLast } 
-    from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+    import { getDatabase, ref, push, child, onValue, get, set, query, remove, orderByChild, onChildAdded, equalTo, update, orderByKey, limitToLast } 
+    from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     
     const db = getDatabase();
 
@@ -807,34 +867,34 @@ console.log(anggota_kelompok[groupUser])
 let currentListener = null;
 
 function loadMessages() {
-const groupChatRef = ref(db, 'dataKelompok/' + groupUser + '/chatGroup/');
-const que = query(groupChatRef, orderByKey());
+    const groupChatRef = ref(db, 'dataKelompok/' + groupUser + '/chatGroup/');
+    const que = query(groupChatRef, orderByKey());
 
-// Hapus event listener sebelumnya jika ada
-if (currentListener) {
-    currentListener(); // Panggil event listener untuk menghapusnya
-}
-
-let prevKey = "";
-
-// Tambahkan event listener baru untuk kelompok saat ini
-currentListener = onChildAdded(que, (snapshot) => {
-    const chatData = snapshot.val();
-    if(prevKey == ""){
-        showSeparatorWithDate(snapshot.key)
-    } else {
-        let isCreateSeparator = compareDates(prevKey, snapshot.key);
-        (isCreateSeparator)? showSeparatorWithDate(snapshot.key) : "";
+    // Hapus event listener sebelumnya jika ada
+    if (currentListener) {
+        currentListener(); // Panggil event listener untuk menghapusnya
     }
-    prevKey = snapshot.key;
-    createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
-    scrollToBottom();
+
+    let prevKey = "";
+
+    // Tambahkan event listener baru untuk kelompok saat ini
+    currentListener = onChildAdded(que, (snapshot) => {
+        const chatData = snapshot.val();
+        if(prevKey == ""){
+            showSeparatorWithDate(snapshot.key)
+        } else {
+            let isCreateSeparator = compareDates(prevKey, snapshot.key);
+            (isCreateSeparator)? showSeparatorWithDate(snapshot.key) : "";
+        }
+        prevKey = snapshot.key;
+        createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
+        scrollToBottom();
 });
 }
 
 function scrollToBottom(){
-const chatMessages = document.getElementById('chatMessages');
-chatMessages.scrollTop = chatMessages.scrollHeight;
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
 function sortirBadgeAnggotaKelompok(){
@@ -900,75 +960,132 @@ function sortirBadgeAnggotaKelompok(){
 
 // Fungsi untuk mengonversi timestamp ke format Date
 function convertTimestampToDateTime(timestampString) {
-const year = timestampString.slice(0, 4);
-const month = timestampString.slice(4, 6) - 1; // Bulan dimulai dari 0 (Januari)
-const day = timestampString.slice(6, 8);
-const hour = timestampString.slice(8, 10);
-const minute = timestampString.slice(10, 12);
-const second = timestampString.slice(12, 14);
-const millisecond = timestampString.slice(14);
+    const year = timestampString.slice(0, 4);
+    const month = timestampString.slice(4, 6) - 1; // Bulan dimulai dari 0 (Januari)
+    const day = timestampString.slice(6, 8);
+    const hour = timestampString.slice(8, 10);
+    const minute = timestampString.slice(10, 12);
+    const second = timestampString.slice(12, 14);
+    const millisecond = timestampString.slice(14);
 
-return new Date(year, month, day, hour, minute, second, millisecond);
+    return new Date(year, month, day, hour, minute, second, millisecond);
 }
 
 // Fungsi untuk menampilkan pemisah dengan keterangan hari dan tanggal dari timestamp dalam format `yyyymmddhhmmmsmsm`
 function showSeparatorWithDate(timestampString) {
-const timestamp = convertTimestampToDateTime(timestampString); // Mengonversi timestamp ke format Date
-const currentDate = new Date(); // Timestamp hari ini
+    const timestamp = convertTimestampToDateTime(timestampString); // Mengonversi timestamp ke format Date
+    const currentDate = new Date(); // Timestamp hari ini
 
-const separator = document.createElement('hr'); // Membuat elemen garis pembatas
-separator.style.border = 'none'; // Menghilangkan border dari garis pembatas
-separator.style.borderTop = '2px solid #ccc'; // Menambahkan border di bagian atas garis pembatas
-separator.style.margin = '10px 0'; 
-separator.style.marginBottom = '10px';
-separator.style.clear = 'both';
-separator.style.overflow = 'hidden';
-separator.style.position = 'relative'; 
+    const separator = document.createElement('hr'); // Membuat elemen garis pembatas
+    separator.style.border = 'none'; // Menghilangkan border dari garis pembatas
+    separator.style.borderTop = '2px solid #ccc'; // Menambahkan border di bagian atas garis pembatas
+    separator.style.margin = '10px 0'; 
+    separator.style.marginBottom = '10px';
+    separator.style.clear = 'both';
+    separator.style.overflow = 'hidden';
+    separator.style.position = 'relative'; 
 
-// Membuat elemen untuk menampilkan keterangan hari dan tanggal
-const dateInfo = document.createElement('div');
-let today = currentDate.getDate();
-let dayFromTimestamp = timestamp.getDate();
+    // Membuat elemen untuk menampilkan keterangan hari dan tanggal
+    const dateInfo = document.createElement('div');
+    let today = currentDate.getDate();
+    let dayFromTimestamp = timestamp.getDate();
 
-if (today == dayFromTimestamp) {
-    // Jika timestamp hari ini
-    dateInfo.textContent = 'Hari ini';
-} 
-else if (today - dayFromTimestamp == 1) {
-    // Jika timestamp kemarin
-    dateInfo.textContent = 'Kemarin';
-} else if (today - dayFromTimestamp <= 7 ) {
-    // Jika masih dalam minggu yang sama dengan hari ini
-    const options = { weekday: 'long' };
-    dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
-} else {
-    // Jika berbeda minggu dengan hari ini
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
-}
+    if (today == dayFromTimestamp) {
+        // Jika timestamp hari ini
+        dateInfo.textContent = 'Hari ini';
+    } 
+    else if (today - dayFromTimestamp == 1) {
+        // Jika timestamp kemarin
+        dateInfo.textContent = 'Kemarin';
+    } else if (today - dayFromTimestamp <= 7 ) {
+        // Jika masih dalam minggu yang sama dengan hari ini
+        const options = { weekday: 'long' };
+        dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
+    } else {
+        // Jika berbeda minggu dengan hari ini
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
+    }
 
-dateInfo.style.textAlign = 'center'; // Pusatkan teks
+    dateInfo.style.textAlign = 'center'; // Pusatkan teks
 
-// Menambahkan elemen keterangan hari dan tanggal ke dalam elemen garis pembatas
-separator.appendChild(dateInfo);
+    // Menambahkan elemen keterangan hari dan tanggal ke dalam elemen garis pembatas
+    separator.appendChild(dateInfo);
 
-// Menambahkan garis pembatas beserta keterangan hari dan tanggal ke dalam body
-let chatMessages = document.getElementById("chatMessages")
-chatMessages.appendChild(separator);
+    // Menambahkan garis pembatas beserta keterangan hari dan tanggal ke dalam body
+    let chatMessages = document.getElementById("chatMessages")
+    chatMessages.appendChild(separator);
 }
 
 // Fungsi untuk membandingkan dua tanggal berdasarkan
 function compareDates(timestampString1, timestampString2) {
-// Mengambil bagian `yyyymmdd` dari string timestamp
-const date1 = timestampString1.slice(0, 8);
-const date2 = timestampString2.slice(0, 8);
+    // Mengambil bagian `yyyymmdd` dari string timestamp
+    const date1 = timestampString1.slice(0, 8);
+    const date2 = timestampString2.slice(0, 8);
 
-if (date1 === date2) {
-    return 0; // Jika tanggal sama
-} else if (date1 < date2) {
-    return 1; // Jika tanggal pertama lebih kecil dari tanggal kedua
-} 
+    if (date1 === date2) {
+        return 0; // Jika tanggal sama
+    } else if (date1 < date2) {
+        return 1; // Jika tanggal pertama lebih kecil dari tanggal kedua
+    } 
 }
+  //===============================================================================================================================
 
+
+    import {getStorage, ref as refStorage, uploadBytesResumable, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+   // Initialize Firebase
+    const storage = getStorage(app);
+
+    // Upload file function
+    let uploadBtn = document.getElementById('uploadButton')
+    uploadBtn.addEventListener('click', ()=>{
+        const file = document.getElementById('pdfFile').files[0];
+        const storageRef = refStorage(storage, 'fileSiswa/' + nisnUser + '/' + file.name);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                document.getElementById('progressBar').style.display = 'block';
+                document.querySelector('.progress-bar').style.width = percentage + '%';
+            },
+            (error) => {
+                console.error('Upload error:', error);
+            },
+            () => {
+                uploadBtn.disabled = true;
+                console.log('Upload complete');
+                document.getElementById('progressBar').style.display = 'none';
+                getDownloadURL(storageRef)
+                .then((url) => {
+                    saveDownloadURL(file.name, url);
+                    alert('Upload completed successfully!');
+                })
+                .catch((error) => {
+                    console.error('Error getting download URL:', error);
+                });
+                
+            }
+        );
+    });
+
+ // Function to save download URL to Firebase Realtime Database
+    function saveDownloadURL(namaFile, downloadURL) {
+        const database = getDatabase(app);
+        const downloadURLRef = ref(database, 'dataSiswa/' + nisnUser + '/file_kelompok/materi1/' + getTimeStamp());
+        
+        set(downloadURLRef, {
+            nama_file: namaFile,
+            url: downloadURL,
+        })
+        .then(() => {
+            console.log('Download URL saved to Firebase Realtime Database');
+        })
+        .catch((error) => {
+            console.error('Error saving download URL to Firebase Realtime Database:', error);
+        });
+    }
+    
 </script>
 </html>
