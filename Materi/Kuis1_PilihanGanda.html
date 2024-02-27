@@ -312,6 +312,7 @@
         let correctAnswer = sessionStorage.getItem('correct');
 	      let wrongAnswer = sessionStorage.getItem('wrong');
 	      let namaUser = sessionStorage.getItem('nama');
+
 	      let questionLength = sessionStorage.getItem('questionLength');
 	      let newScore = document.querySelector('#new-score');
         let wrongCorrect = document.querySelector('#wrong-correct');
@@ -621,6 +622,7 @@
           cancelButtonText: 'Batal',
         }).then((result) => {
           if (result.value) {
+            sessionStorage.setItem('timeLeftKuis1', showTime.innerHTML);
             results();
             UpdateData();
 		      	document.getElementById('quis_window').style.display="none"
@@ -639,9 +641,14 @@
 	  	// getUsername();
       let currentUser = sessionStorage.getItem('nisn');
       let currentKuis1 = sessionStorage.getItem('kuis1');
+      let timeLeftKuis1 = sessionStorage.getItem('timeLeftKuis1');
 	  	
 	  		update(ref(db, "dataSiswa/"+ currentUser),{
-	      	kuis1 : currentKuis1
+	      	kuis1 : {
+            scores : currentKuis1,
+            time_left : timeLeftKuis1
+
+          }
 	    	})
 	    	.then(()=>{
 	      	alert("Nilai kuis berhasil diupdate.");

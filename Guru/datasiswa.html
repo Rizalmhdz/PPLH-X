@@ -221,6 +221,10 @@
         console.log(tambahNisn);
 
         const dbRef = ref(db);
+        let dataNilai = {
+          scores : 0,
+          time_left : "00:00"
+        }
 
 
           get(child(dbRef, "dataSiswa/" + tambahNisn)).then((snapshot)=>{
@@ -236,12 +240,12 @@
                 kelompok: tambahKelompok,
                 password: tambahPassword,
                 konfirmasi: false,
-                kuis1 : 0,
-                kuis2 : 0,
-                kuis3 : 0,
-                kuis4 : 0,
-                kuis5 : 0,
-                kuis6 : 0,
+                kuis1 : dataNilai,
+                kuis2 : dataNilai,
+                kuis3 : dataNilai,
+                kuis4 : dataNilai,
+                kuis5 : dataNilai,
+                kuis6 : dataNilai,
                 Evaluasi : 0
 
 
