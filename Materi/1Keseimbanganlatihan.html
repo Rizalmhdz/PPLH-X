@@ -143,30 +143,30 @@
                     <tr id="satu">
                     <td>1.</td>
                     <td>Tanah Longsor</td>
-                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check" onclick="only(this)" value="benar"></td>
-                    <td><input type="checkbox" class="ceklis" id="vehicle2" name="check" onclick="only(this)" value="salah"></td>
+                    <td><input type="checkbox" class="ceklis" id="alam1" name="check1" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="manusia1" name="check1"  value="salah"></td>
                     <td>
-                        <p id="jawaban"></p>
+                        <p class="jawaban"></p>
                       </td>
                     </tr>
 
                     <tr id="dua">
                     <td>2.</td>
                     <td>Banjir</td>
-                    <td><input type="checkbox" class="ceklis" id="vehicle1" onclick="only2(this)" name="check2" value="benar"></td>
-                    <td><input type="checkbox" class="ceklis" id="vehicle2" onclick="only2(this)" name="check2" value="salah"></td>
+                    <td><input type="checkbox" class="ceklis" id="alam2" name="check2" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="manusia2" name="check2" value="salah"></td>
                     <td>
-                        <p id="jawaban"></p>
+                        <p class="jawaban"></p>
                     </td>
                     
                    </tr>
                    <tr id="tiga">
                     <td>3.</td>
                     <td>Sampah di sungai</td>
-                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check3" onclick="only3(this)" value="salah"></td>
-                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check3" onclick="only3(this)" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="alam3" name="check3" value="salah"></td>
+                        <td><input type="checkbox" class="ceklis" id="manusia3" name="check3" value="benar"></td>
                         <td>
-                            <p id="jawaban"></p>
+                            <p class="jawaban"></p>
                         </td>
 
                     
@@ -174,10 +174,10 @@
                    <tr id="empat">
                     <td>4.</td>
                     <td>Kebakaran hutan</td>
-                    <td><input type="checkbox" class="ceklis" id="vehicle1" name="check4" onclick="only4(this)" value="salah"></td>
-                        <td><input type="checkbox" class="ceklis" id="vehicle2" name="check4" onclick="only4(this)" value="benar"></td>
+                    <td><input type="checkbox" class="ceklis" id="alam4" name="check4" value="salah"></td>
+                        <td><input type="checkbox" class="ceklis" id="manusia4" name="check4" value="benar"></td>
                         <td>
-                            <p id="jawaban"></p>
+                            <p class="jawaban"></p>
                         </td>
                    </tr>
                    </table>
@@ -384,6 +384,58 @@
     <!-- JAVASCRIPT AREA END -->
 </body>
 <script type="module">
+// ==========================================================  cek jawaban yang Pertama
+    let cekBtn1 = document.getElementById('cekJawaban2');
+    cekBtn1.addEventListener('click', () => {
+        let jawaban1 = [
+        ['check1', true, false],
+        ['check2', true, false],
+        ['check3', false, true],
+        ['check4', false, true],
+        ]
+        if(cekInput1('check1') && cekInput1('check2') && cekInput1('check3') && cekInput1('check4')){
+            let ketJawaban = document.querySelectorAll('.jawaban')
+            ketJawaban.forEach((elemen, indeks) => {
+                elemen.innerHTML = cekJawaban(jawaban1[indeks][0], jawaban1[indeks][1], jawaban1[indeks][2])
+            });
+            
+        } else {
+            console.log('hadeh')
+        }
+
+    })
+
+    function cekInput1(nameinput){
+        // Dapatkan semua elemen checkbox dengan kelas 'ceklis'
+        const checkboxes = document.querySelectorAll(`input[name="${nameinput}"]`);
+
+        let isChecked = false;
+
+        // Iterasi melalui setiap elemen checkbox
+        checkboxes.forEach((checkbox) => {
+            // Periksa apakah checkbox tersebut dicentang
+            if (checkbox.checked) {
+                isChecked = true;
+            }
+        });
+
+        return isChecked
+    }
+
+    function cekJawaban(namaInput, check1, check2) {
+        // Dapatkan semua elemen input dengan atribut name yang sesuai
+        const inputs = document.querySelectorAll('input[name="' + namaInput + '"]');
+        return (inputs[0].checked === check1 && inputs[1].checked === check2)? "Benar" : "Salah"
+    }
+    
+//===========================================================================================================
+
+// ============================================ cek jawaban Ke 2 ============================================
+
+
+
+//============================================================================================================
+    
     //---------project setting firebase-----------
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
     
