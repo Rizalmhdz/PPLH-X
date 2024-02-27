@@ -1,281 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPLH</title>
-    <link rel="stylesheet" href="../css/stylekikd.css">
-    <link rel="stylesheet" href="../fontawesome/fontawesome/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- ADDITIONAL JQUERY -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="UTF-8"></script>
-    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.min.js"></script>
-</head>
+//---------project setting firebase-----------
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
 
-<style>
-    td.upper_line { border-top:solid 1px black; }
-    table.fraction { text-align: center; vertical-align: middle;
-        margin-top:0.5em; margin-bottom:0.5em; line-height: 2em; }
-    
-    img{
-        border: 1px solid #000000;
-        margin: 10px;
-    }
-</style>
+const firebaseConfig = {
+    apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
+    authDomain: "pplh-70ccb.firebaseapp.com",
+    databaseURL: "https://pplh-70ccb-default-rtdb.firebaseio.com",
+    projectId: "pplh-70ccb",
+    storageBucket: "pplh-70ccb.appspot.com",
+    messagingSenderId: "823611849079",
+    appId: "1:823611849079:web:a0f8c81197a46a2e1dc972"
+};
 
-<body>
-    <!-- HEADER AREA START-->
-    <input type="checkbox" id="check">
-    <header>
-        <label for="check">
-            <i class="fas fa-bars" id="sidebar_btn"></i>
-        </label>
-        <div class="left_area">
-            <h3>PPLH</h3>
-        </div>
-        <div class="right_area">
-            <a href="menu.html" class="logout_btn">
-                <i class="fas fa-home"></i>
-            </a>
-        </div>
-        <div class="progress-container">
-            <div class="progress-bar" id="myBar"></div>
-        </div> 
-    </header>
-    <!-- HEADER AREA END tulis tahap-->
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-    <!-- SIDEBAR START -->
-    <nav class="sidebar">
-        <div class="profile_info">
-            <h3>Materi</h3>
-            <hr style="width: 90%; color: #fff; margin: 5px 0 5px 0;">
-        </div>
-        <ul>
-            <li><a href="pengantar.html" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Pendahuluan</span> </a></li>
-            <li><a href="1Keseimbangan.html" class="menu-btn"><span class="numbering">1.</span><span class="numbering_text">Keseimbangan dan Perubahan Lingkungan Hidup</span></a></li>
-            <li><a href="#" class="menu-btn"><span class="numbering">2.</span><span class="numbering_text">Pencemaran Lingkungan Hidup<i class="fas fa-caret-down"></i></span></a>
-                <ul class="menu-show">
-                    <li><a href="2.1udara.html"><span class="numbering">2.1</span><span class="numbering_text">Pencemaran Udara</span></a></li>
-                    <li><a href="2.2Air.html"><span class="numbering">2.2</span><span class="numbering_text">Pencemaran Air</span></a></li>
-                    <li><a href="2.3tanah.html"><span class="numbering">2.3</span><span class="numbering_text">Pencemaran Tanah</span></a></li>
-                    <li><a href="2.4suara.html"><span class="numbering">2.4</span><span class="numbering_text">Pencemaran Suara</span></a></li>
-                 </ul>
-            </li>
-            <li><a href="3akumulasi.html" class="menu-btn"><span class="numbering">3.</span><span class="numbering_text">Akumulasi Bahan Pencemar dalam Rantai Makanan</span></a>
-            <li><a href="#" class="menu-btn"><span class="numbering">4.</span><span class="numbering_text">Penanganan Limbah<i class="fas fa-caret-down"></i></span></a>
-                <ul class="menu-show">
-                    <li><a href="4.1cair.html"><span class="numbering">4.1</span><span class="numbering_text">Penanganan Limbah Cair</span></a></li>
-                    <li><a href="#"><span class="numbering">4.2</span><span class="numbering_text">Penanganan Limbah Padat</span></a></li>
-                    <li><a href="#"><span class="numbering">4.3</span><span class="numbering_text">Penanganan Limbah Gas</span></a></li>
-                    <li><a href="#"><span class="numbering">4.4</span><span class="numbering_text">Penanganan Limbah Bahan Berbahaya dan Beracun (B3)</span></a></li>
-                 </ul>
-            <li><a href="5dinamika.html" class="menu-btn"><span class="numbering">5.</span><span class="numbering_text">Dinamika Komunitas, Adaptasi dan Mitigasi terhadap Perubahan Lingkungan<i class="fas fa-caret-down"></i></span></a>
-                <ul class="menu-show">
-                    <li><a href="#"><span class="numbering">5.1</span><span class="numbering_text">Dinamika Komunitas</span></a></li>
-                    <li><a href="#"><span class="numbering">5.2</span><span class="numbering_text">Adaptasi dan Mitigasi terhadap Perubahan Lingkungan</span></a></li>
-                </ul>
-            <li><a href="#" class="menu-btn"><span class="numbering"></span><span class="numbering_text">Evaluasi</span></a> </li>
-        </ul>
-    </nav>
-    <!-- SIDEBAR END -->
+import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, onChildAdded, equalTo, update, orderByKey, limitToLast } 
+from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-    <!-- CONTENT AREA START-->
-    <div class="content">
-        <div class="card-header-bab"><center>1. Keseimbangan dan Perubahan Lingkungan Hidup</center></div>
-        <div class="card-header-2">Langkah 4: Ayo Belajar Bersama!</div>
-        <div class="content-card">
-            <div class ="baris">
-                <p style="text-align: justify; text-indent: 0.5in;"> 
-                    Saat ini, di sejumlah wilayah terutama di perkotaan dan wilayah industri, penduduk kesulitan mendapatkan air dalam jumlah yang cukup untuk menunjang kehidupannya sehari-hari. 
-                    Mengapa penduduk kesulitan mendapatkan air bersih? Hal ini disebabkan oleh adanya pencemaran pada sumber-sumber air. 
-                    Untuk itu, kita harus menjaga keseimbangan lingkungan di sekitar kita. 
-                    Bagaimana keadaan lingkungan dikatakan seimbang? Serta apa yang menyebabkan terjadinya kerusakan keseimbangan lingkungan? 
-                    Pada kegiatan pembelajaran ini, kita akan mempelajari tentang keseimbangan dan perubahan lingkungan.
-                </p>
-                <p style="text-align: justify; text-indent: 0.5in;"> 
-                    Menurut UU No. 23 Tahun 1997, lingkungan hidup adalah kesatuan ruang dengan semua benda, daya, keadaan, dan makhluk hidup, termasuk manusia dan perilakunya, yang memengaruhi kelangsungan peri kehidupan dan kesejahteraan manusia beserta makhluk hidup lainnya. 
-                    Keseimbangan lingkungan adalah kemampuan lingkungan untuk mengatasi tekanan dari alam maupun aktivitas manusia dalam menjaga kestabilan kehidupannya. Keseimbangan lingkungan merupakan keseimbangan yang dinamis, yaitu keseimbangan yang dapat mengalami perubahan, tetapi perubahan ini bersifat menjaga keseimbangan komponen-komponennya dan tidak menghilangkan suatu komponen tertentu. 
-                    Kriteria lingkungan dikatakan seimbang (equilibrium) adalah sebagai berikut. 
-                    <ol>
-                        <li>Terdapat pola-pola interaksi (arus energi, daur materi, rantai makanan/jaring-jaring makanan, piramida ekologi, daur biogeokimia, dan produktivitas) yang berlangsung secara proporsional. </li>
-                        <li>Lingkungan homeostasis, yaitu mampu mempertahankan terhadap gangguan alam baik gangguan secara alami maupun buatan. </li>
-                        <li>Pertumbuhan dan perkembangan organisme berlangsung secara alami sehingga tidak ada organisme yang mendominasi terhadap organisme lainnya. </li>
-                        <li>Memiliki daya dukung lingkungan, yaitu kemampuan lingkungan hidup untuk mendukung peri kehidupan manusia dan makhluk hidup lainnya. </li>
-                    </ol></p>
-                <p style="text-align: justify; text-indent: 0.5in;"> 
-                Keseimbangan lingkungan dapat terganggu jika terjadi perubahan lingkungan berupa pengurangan fungsi dari komponen atau hilangnya sebagian komponen yang dapat menyebabkan putusnya mata rantai dalam ekosistem. Faktor penyebab perubahan lingkungan dapat dibedakan menjadi dua macam, yaitu faktor alam dan faktor manusia.
-                <ul>   
-                <li>Faktor alam, antara lain gempa bumi, gunung meletus, gelombang tsunami, tanah longsor, banjir, angin topan, dan kemarau panjang. </li>
-                <li>Faktor manusia, antara lain pembakaran dan penebangan hutan, pembangunan industri dan pemukiman, penambangan secara liar, sistem pertanian monokultur, dan pencemaran lingkungan (misalnya, akibat penggunaan pestisida dan pupuk kimia yang berlebihan).</li>
-                </ul>    
-                </p>
-            </div>
-            </div> 
+const db = getDatabase();
 
-        <div class="footer-nav">
-            <a href="#" class="footer-number">Sebelumnya</a>
-            <a href="#" class="footer-number">1</a>
-            <a href="#" class="footer-number">2</a>
-            <a href="#" class="footer-number">3</a>
-            <a href="1Keseimbanganlatihan.html" class="footer-number">Selanjutnya</a>
-        </div>
-        <style>
-            .floating-button {
-              position: fixed;
-              bottom: 20px;
-              right: 20px;
-              z-index: 1000; /* untuk memastikan tombol muncul di atas konten lain */
-            }
-        
-            .chat-room {
-                z-index: 1000;
-              width: 400px;
-              height: 500px;
-              position: fixed;
-              bottom: 20px;
-              right: 20px;
-              background-color: #fff;
-              border: 1px solid #424242;
-              border-radius: 5px;
-            }
-        
-            .chat-header {
-              background-color: #AAD8D3;
-              color: #fff;
-              padding: 10px;
-              border-top-left-radius: 5px;
-              border-top-right-radius: 5px;
-            }
-        
-            .chat-body {
-              overflow-y: auto;
-              padding: 10px;
-              height: calc(100% - 140px);
-            }
-        
-            .chat-footer {
-                margin-bottom: 0;
-              padding: 10px;
-              border-top: 1px solid #ccc;
-              display: flex; /* Mengatur elemen dalam satu baris */
-              align-items: center; /* Menyelaraskan elemen secara vertikal */
-            }
-        
-            .bubble {
-              max-width: 70%;
-              margin-bottom: 10px;
-              clear: both;
-              overflow: hidden;
-              padding: 10px;
-              border-radius: 10px;
-              word-wrap: break-word;
-            }
-        
-            .bubble.me {
-              float: right;
-              background-color: #007bff;
-              color: #fff;
-            }
-        
-            .bubble.other {
-              float: left;
-              background-color: #28a745;
-              color: #fff;
-            }
-        
-            .chat-time {
-              font-size: 0.8em;
-              float: right;
-            }
-            .close-btn {
-                margin-top: -30px;
-                float: right;
-            }
-
-            /* Style untuk elemen input teks */
-            #messageInput {
-                width: calc(100% - 60px); 
-                border: 2px solid #AAD8D3; 
-                border-radius: 5px; 
-                margin-right: 10px; 
-                box-sizing: border-box; 
-            }
-
-            /* Style untuk tombol kirim */
-            #sendButton {
-                width: 40px; 
-                height: 40px; 
-                background-color: #AAD8D3; 
-                border: none; 
-                border-radius: 100%; 
-                color: #fff;
-                font-size: 1.2em; 
-                cursor: pointer;
-            }
-            #sendButton:hover{
-                background-color: #2F323A; 
-            }
-          </style>
-             <!-- Floating Button -->
-  <!-- Floating Button -->
-  <button id="floatingButton" class="btn btn-primary floating-button">Chat</button>
-
-  <!-- Popup untuk room chat -->
-  <div id="chatPopup" class="chat-room" style="display: none;">
-    <div class="chat-header">
-      <h4 class="mt-2 ms-2" id="namaKelompokRoomChat">Nama Kelompok</h4>
-        <button type="button" class="btn-close close-btn" id="closeChat" aria-label="Close"></button>
-        <div class="ms-2" id="anggota-kelompok-chat">
-            
-        </div>
-    </div>
-    <div class="chat-body" id="chatMessages"></div>
-    <div class="chat-footer">
-      <input type="text" class="form-control" id="messageInput" placeholder="Ketik pesan...">
-      <button type="button" class="btn btn-block" id="sendButton""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
-        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
-      </svg></button>
-    </div>
-  </div>
-    </div>
-    <!--CONTENT AREA END -->
-    
-    <!-- JAVASCRIPT AREA START-->
-    <script src="js/dropdownkonten.js"></script>
-    <!-- JAVASCRIPT AREA END -->
-
-
-<script type="module">
-        //---------project setting firebase-----------
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-        
-        const firebaseConfig = {
-            apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
-            authDomain: "pplh-70ccb.firebaseapp.com",
-            databaseURL: "https://pplh-70ccb-default-rtdb.firebaseio.com",
-            projectId: "pplh-70ccb",
-            storageBucket: "pplh-70ccb.appspot.com",
-            messagingSenderId: "823611849079",
-            appId: "1:823611849079:web:a0f8c81197a46a2e1dc972"
-        };
-  
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-  
-        import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, onChildAdded, equalTo, update, orderByKey, limitToLast } 
-        from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
-        
-        const db = getDatabase();
-
-        let nm = sessionStorage.getItem('nama');
-        let nisnUser = sessionStorage.getItem('nisn');
-        let groupUser = sessionStorage.getItem('kelompok');
-        let isConfirmUser = sessionStorage.getItem('konfirmasi');
-        let floatingBtn = document.getElementById("floatingButton");
+let nm = sessionStorage.getItem('nama');
+let nisnUser = sessionStorage.getItem('nisn');
+let groupUser = sessionStorage.getItem('kelompok');
+let isConfirmUser = sessionStorage.getItem('konfirmasi');
+let floatingBtn = document.getElementById("floatingButton");
         
 // ================================= CHAT KELOMPOK ========================================
 
@@ -783,8 +532,3 @@ function compareDates(timestampString1, timestampString2) {
         return 1; // Jika tanggal pertama lebih kecil dari tanggal kedua
     } 
 }
-
-    </script>
-</body>
-
-</html>
