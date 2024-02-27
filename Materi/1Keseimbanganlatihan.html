@@ -182,7 +182,7 @@
                    </tr>
                    </table>
                    <br>
-                   <center><button class="button-utama" id="cekJawaban2"><p>Kirim Jawaban</p></button></center>
+                   <!-- <center><button class="button-utama" id="cekJawaban2"><p>Kirim Jawaban</p></button></center> -->
                    <br>
                              
                    
@@ -233,20 +233,71 @@
         </div>
         <br>
         <center>
-                <button class="btn btn-warning mb-4" onclick="return printArea('area')">Cetak Hasil Kesimpulan</button>
+                <div class="container mt-4 mb-4" id="papanScores" style="display: none;">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Hasil Skor</h5>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-text">Skor: <span id="scores">100</span></h5>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </center>
+            </div>
+
+            <div class="card-header-2" id="menu-btn">Hasil Kegiatan Kelompok <i class="fas fa-caret-down"></i></div>
+            <div class= "content-card">
+                <div class="container mt-3">
+                    <!-- <h2 class="text-center mb-4">Tabel Kegiatan</h2> -->
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Kelompok</th>
+                            <th>Anggota</th>
+                            <th>Lembar Kegiatan</th>
+                          </tr>
+                        </thead>
+                        <tbody id="bodyTable"></tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+            </div>
+            
+            <div class="card-header-2" id="menu-btn">Kesimpulan <i class="fas fa-caret-down"></i></div>
+            <div class= "content-card">
+            </div>
+
+            <div class="card-header-2" id="menu-btn">Upload <i class="fas fa-caret-down"></i></div>
+            <div class= "content-card">
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 text-center">
+                            <h5>Silahkan Cetak hasil Kerjamu, kemudian Upload File Kerjamu dengan Tombol dibawah!</h5>
+                        </div>
+                    </div>
+                </div>
+                <center>
+                <button class="btn btn-warning mb-4 mt-4" onclick="return printArea('area')">Cetak Hasil Kesimpulan</button>
                 <br>
                 <input type="file" class="mb-4" id="pdfFile" accept=".pdf">
-                <button class="btn btn-primary" type="button" id="uploadButton">Unggah</button>
+                <button class="btn btn-primary" type="button" id="uploadButton">Upload</button>
                 <div class="mt-3" id="progressBar" style="display: none;">
                     <div class="progress">
                       <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
-        </center>
+                </center>
+            </div>
+
         </div>
-        </div>
-        
-        
         <div class="footer-nav">
             <a href="#" class="footer-number">Sebelumnya</a>
             <a href="#" class="footer-number">1</a>
@@ -396,25 +447,72 @@
 </body>
 <script type="module">
 // ==========================================================  cek jawaban yang Pertama
-    let cekBtn1 = document.getElementById('cekJawaban2');
-    cekBtn1.addEventListener('click', () => {
-        let jawaban1 = [
-        ['check1', true, false],
-        ['check2', true, false],
-        ['check3', false, true],
-        ['check4', false, true],
-        ]
-        if(cekInput1('check1') && cekInput1('check2') && cekInput1('check3') && cekInput1('check4')){
-            let ketJawaban = document.querySelectorAll('.jawaban')
-            ketJawaban.forEach((elemen, indeks) => {
-                elemen.style.textAlign = 'center'; 
-                elemen.innerHTML = cekJawaban1(jawaban1[indeks][0], jawaban1[indeks][1], jawaban1[indeks][2])
-            });
-            
-        } else {
-            console.log('hadeh')
-        }
 
+    let adaNilai = false;
+    let adaFile = false;
+
+    let benar = 0;
+    let salah = 0;
+    const totalSoal = 8;
+
+    let papanScores = document.getElementById('papanScores');
+
+    const cekBtn = document.getElementById('cekJawaban3');
+    cekBtn.addEventListener('click', ()=>{
+        if(adaNilai){
+            alert('Nilai Anda Sudah terinput untuk Latihan ini! Harap Lapor Guru Jika ada kendala')
+        } else {
+            let jawaban1 = [
+                ['check1', true, false],
+                ['check2', true, false],
+                ['check3', false, true],
+                ['check4', false, true],
+            ]
+            let input2 = [];
+            boxsInput.forEach((elemen, indeks) => {
+                input2[indeks] = elemen.innerHTML;
+            })
+
+            if(cekInput1('check1') && cekInput1('check2') && cekInput1('check3') && cekInput1('check4')
+                && input2[0] !== "" && input2[1] !== "" && input2[2] !== "" && input2[3] !== ""){
+
+                let ketJawaban = document.querySelectorAll('.jawaban')
+                ketJawaban.forEach((elemen, indeks) => {
+                    elemen.style.textAlign = 'center'; 
+                    elemen.innerHTML = cekJawaban1(jawaban1[indeks][0], jawaban1[indeks][1], jawaban1[indeks][2])
+                });
+                
+                boxsInput.forEach((elemen, indeks) => {
+                    elemen.style.fontWeight = 'bold'
+                    elemen.style.color = (elemen.innerHTML == jawaban2[indeks])? 'green' : 'red';
+                    (elemen.innerHTML == jawaban2[indeks])? benar++ : salah++;
+                })
+
+                if(benar+salah == totalSoal){
+                    let nilai = (benar/totalSoal)*100;
+                    let scores = document.getElementById('scores');
+                    scores.innerText = nilai
+                    papanScores.style.display = 'block'
+
+                    const uploadNilai = ref(db, 'dataSiswa/' + nisnUser + '/kerja_kelompok/materi1/');
+                    set(uploadNilai, {
+                        nilai: nilai
+                    })
+                    .then(() => {
+                        alert('Nilai Anda Berhasil Dimasukkan Ke database')
+                    })
+                    .catch((error) => {
+                        alert('Error saving to Firebase Realtime Database:', error);
+                    });
+                } else {
+                    alert('JUMLAH SOAL TIDAK SESUAI! HARAP LAPOR GURU!')
+                }
+                
+            } else {
+                alert('ADA SOAL YANG BELUM TERJAWAB, HARAP JAWAB SEMUA SOAL!')
+            }
+
+        }
     })
 
     function cekInput1(nameinput){
@@ -437,6 +535,7 @@
     function cekJawaban1(namaInput, check1, check2) {
         // Dapatkan semua elemen input dengan atribut name yang sesuai
         const inputs = document.querySelectorAll('input[name="' + namaInput + '"]');
+        (inputs[0].checked === check1 && inputs[1].checked === check2)? benar++ : salah++;
         return (inputs[0].checked === check1 && inputs[1].checked === check2)? "<span class='badge bg-success'>Benar</span>" : 
         "<span class='badge bg-danger'>Salah</span>";
     }
@@ -444,7 +543,7 @@
 //===========================================================================================================
 
 // ============================================ cek jawaban Ke 2 ============================================
-const cekBtn2 = document.getElementById('cekJawaban3');
+
 const boxsInput = document.querySelectorAll('.box1');
 const jawaban2 = [
     "Reboisasi",
@@ -452,13 +551,6 @@ const jawaban2 = [
     "Bank Sampah",
     "Melestarikan Vegetasi"
 ]
-
-cekBtn2.addEventListener('click', ()=>{
-    boxsInput.forEach((elemen, indeks) => {
-        elemen.style.fontWeight = 'bold'
-        elemen.style.backgroundColor = (elemen.innerHTML == jawaban2[indeks])? 'green' : 'red';
-    })
-})
 
 boxsInput.forEach(boxInput => {
     boxInput.addEventListener('dragover', function(event) {
@@ -492,8 +584,6 @@ tasks.forEach(task => {
     });
 });
 
-
-
 //============================================================================================================
     
     //---------project setting firebase-----------
@@ -522,6 +612,46 @@ tasks.forEach(task => {
     let groupUser = sessionStorage.getItem('kelompok');
     let isConfirmUser = sessionStorage.getItem('konfirmasi');
     let floatingBtn = document.getElementById("floatingButton");
+
+// ============================================= CEK HASIL DARI FIREBASE ====================================
+
+const pathRefNilai = ref(db, 'dataSiswa/' + nisnUser + '/kerja_kelompok/materi1/nilai');
+const pathRefFile = ref(db, 'dataSiswa/' + nisnUser + '/kerja_kelompok/materi1/files');
+
+        
+// Gunakan fungsi get() untuk memeriksa keberadaan record pada path tersebut
+get(pathRefNilai)
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+        adaNilai =  true;
+        let nilai = snapshot.val()
+        let scores = document.getElementById('scores');
+        scores.innerText = nilai
+        papanScores.style.display = 'block'
+      console.log("Record Nilai ditemukan pada path:", pathRefNilai);
+    } else {
+      console.log("Tidak ada record pada path:", pathRefNilai);
+    }
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+// Gunakan fungsi get() untuk memeriksa keberadaan record pada path tersebut
+get(pathRefFile)
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+        adaFile =  true;
+        uploadBtn.disabled = true;
+      console.log("Record File ditemukan pada path:", pathRefFile);
+    } else {
+      console.log("Tidak ada record pada path:", pathRefFile);
+    }
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
     
 // ================================= CHAT KELOMPOK ========================================
 
@@ -1072,8 +1202,8 @@ function compareDates(timestampString1, timestampString2) {
 
  // Function to save download URL to Firebase Realtime Database
     function saveDownloadURL(namaFile, downloadURL) {
-        const database = getDatabase(app);
-        const downloadURLRef = ref(database, 'dataSiswa/' + nisnUser + '/file_kelompok/materi1/' + getTimeStamp());
+      //  const database = getDatabase(app);
+        const downloadURLRef = ref(db, 'dataSiswa/' + nisnUser + '/kerja_kelompok/materi1/files' + getTimeStamp());
         
         set(downloadURLRef, {
             nama_file: namaFile,
@@ -1086,6 +1216,5 @@ function compareDates(timestampString1, timestampString2) {
             console.error('Error saving download URL to Firebase Realtime Database:', error);
         });
     }
-    
 </script>
 </html>
