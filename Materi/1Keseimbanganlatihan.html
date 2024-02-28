@@ -257,7 +257,7 @@
                     <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>
-                          <tr>
+                          <tr class="text-center">
                             <th>No</th>
                             <th>Kelompok</th>
                             <th>Anggota</th>
@@ -273,6 +273,20 @@
             
             <div class="card-header-2" id="menu-btn">Kesimpulan <i class="fas fa-caret-down"></i></div>
             <div class= "content-card">
+                <h5 class="text-center mt-4 mb-4">Silakan Menyimpulkan Di Bawah Ini!</h5>
+                <div class="container">
+                    <!-- Textarea dengan class "form-control" dari Bootstrap -->
+                    <textarea id="autoExpandTextarea" class="form-control" placeholder="Ketik di sini..."></textarea>
+                    <div id="displayContent" class="container mt-3">
+                        <h5>Kesimpulan : <p id="savedContent"></p></h5>
+                    </div>
+                </div>
+                <div class="container mt-2 d-flex justify-content-center">
+                    <button id="saveKesimpulan" class="btn btn-success">Simpan</button>
+                    <button id="editKesimpulan" class="btn btn-primary">Edit</button>
+                </div>
+                     
+                </div>
             </div>
 
             <div class="card-header-2" id="menu-btn">Upload <i class="fas fa-caret-down"></i></div>
@@ -285,7 +299,7 @@
                     </div>
                 </div>
                 <center>
-                <button class="btn btn-warning mb-4 mt-4" onclick="return printArea('area')">Cetak Hasil Kesimpulan</button>
+                <button class="btn btn-warning mb-4 mt-4" id="cetakBtn">Cetak Hasil Kesimpulan</button>
                 <br>
                 <input type="file" class="mb-4" id="pdfFile" accept=".pdf">
                 <button class="btn btn-success" type="button" id="uploadButton">Upload</button>
@@ -303,7 +317,7 @@
             <a href="#" class="footer-number">1</a>
             <a href="#" class="footer-number">2</a>
             <a href="#" class="footer-number">3</a>
-            <a href="Kuis1_PilihanGanda.html" class="footer-number">Selanjutnya</a>
+            <a href="Kuis1_PilihanGanda.html" id="nextLink" class="footer-number">Selanjutnya</a>
         </div>
         </div>
 
@@ -402,6 +416,14 @@
             }
             #sendButton:hover{
                 background-color: #2F323A; 
+            }
+
+            /* Style agar textarea tetap rapi */
+            textarea {
+                width: 100%;
+                min-height: 100px; /* Tentukan tinggi minimum textarea */
+                resize: none; /* Biarkan textarea tidak dapat diubah ukurannya oleh pengguna */
+                overflow: hidden; /* Sembunyikan overflow */
             }
             
           </style>
@@ -584,6 +606,20 @@ tasks.forEach(task => {
     });
 });
 
+// ====================================== CEGAH BTN SELANJUTNYA JIKA BELUM ADA NILAI DAN UPLOAD FILE ====================
+
+// Fungsi untuk menangani klik pada tautan
+document.getElementById("nextLink").addEventListener("click", function(event) {
+    if (!adaFile || !adaNilai) {
+        // Mencegah perilaku bawaan dari tautan
+        event.preventDefault();
+        
+        // Menampilkan pesan peringatan
+        alert("Upload Hasil Kerja Kelompok Terlebih dahulu.");
+    }
+});
+
+
 //============================================================================================================
     
     //---------project setting firebase-----------
@@ -652,7 +688,43 @@ get(pathRefFile)
     console.error("Error:", error);
   });
 
+// ====================================== KESIMPULAN =================================
+// Fungsi untuk memperluas textarea
+function autoExpandTextarea() {
+    const textarea = document.getElementById("autoExpandTextarea");
+    textarea.style.height = ""; // Menghapus tinggi yang diset sebelumnya agar ukurannya dinamis
+    textarea.style.height = `${textarea.scrollHeight}px`; // Set tinggi textarea sesuai dengan ketinggian kontennya
+  }
+  
+
+  let textareaKesimpulan = document.getElementById("autoExpandTextarea");
+  let saveKesimpulanBtn = document.getElementById("saveKesimpulan");
+  let editKesimpulanBtn = document.getElementById("editKesimpulan");
+  let displayKesimpulan = document.getElementById("displayContent");
+  // Event listener untuk memanggil fungsi autoExpandTextarea saat teks berubah
+  textareaKesimpulan.addEventListener("input", autoExpandTextarea);
+
+  editKesimpulanBtn.style.display = "none"; 
+  displayKesimpulan.style.display = "none"; 
+
+  // Fungsi untuk menyimpan konten textarea
+    saveKesimpulanBtn.addEventListener('click', () => {
+        const savedContent = document.getElementById("savedContent");
+        
+        savedContent.innerHTML = textareaKesimpulan.value; // Menyimpan konten dari textarea ke div
+        textareaKesimpulan.style.display = "none"; // Sembunyikan textarea
+        saveKesimpulanBtn.style.display = "none"; // Sembunyikan tombol Simpan
+        editKesimpulanBtn.style.display = "block"; // Tampilkan tombol Edit
+        displayKesimpulan.style.display = "block"; // Tampilkan div yang menampilkan konten
+    })
     
+    // Fungsi untuk mengedit konten textarea
+    editKesimpulanBtn.addEventListener('click', () => {
+        textareaKesimpulan.style.display = "block"; // Tampilkan textarea
+        saveKesimpulanBtn.style.display = "block"; // Tampilkan tombol Simpan
+        editKesimpulanBtn.style.display = "none"; // Sembunyikan tombol Edit
+        displayKesimpulan.style.display = "none"; // Sembunyikan div yang menampilkan konten
+    })
 // ================================= CHAT KELOMPOK ========================================
 
 let anggota_kelompok = {}
@@ -706,13 +778,14 @@ onValue(que, (snapshot) => {
                     <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
 
             try{
-                let file = user.kerja_kelompok.materi1.nilai
-                let nilai = materi1.materi1.val()
-                listFile += `<a href="#">Lembar Kegiatan ${nilai.nilai}</a><br>`
+                let namaFile = user.kerja_kelompok.materi1.files.nama_file
+                let urlFile = user.kerja_kelompok.materi1.files.url
+
+                listFile += `<a href="${urlFile}">${namaFile}</a><br>`
 
             } catch(e){
-                console.error(e)
-                listFile += `<a href="#">Lembar Kegiatan B</a><br>`
+                //console.error(e)
+                listFile += `<t class="mb-5" >File Not Found !</t><br>`
             }
             
         });
@@ -1251,7 +1324,7 @@ function compareDates(timestampString1, timestampString2) {
  // Function to save download URL to Firebase Realtime Database
     function saveDownloadURL(namaFile, downloadURL) {
       //  const database = getDatabase(app);
-        const downloadURLRef = ref(db, 'dataSiswa/' + nisnUser + '/kerja_kelompok/materi1/files' + getTimeStamp());
+        const downloadURLRef = ref(db, 'dataSiswa/' + nisnUser + '/kerja_kelompok/materi1/files/');
         
         set(downloadURLRef, {
             nama_file: namaFile,
@@ -1264,5 +1337,14 @@ function compareDates(timestampString1, timestampString2) {
             console.error('Error saving download URL to Firebase Realtime Database:', error);
         });
     }
+
+// ================================ PRINT HANDLER =============================
+let cetakBtn = document.getElementById("cetakBtn")
+
+cetakBtn.addEventListener('click', () => {
+   // printArea('area');
+    
+    window.print();
+});
 </script>
 </html>
