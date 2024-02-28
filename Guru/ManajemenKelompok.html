@@ -501,7 +501,7 @@
                                           for (const key in guru) {
                                             const option = document.createElement('option');
                                             option.value = key;
-                                            option.text = guru[key]; 
+                                            option.text = guru[key].nama; 
                                              // Tambahkan kondisi untuk menandai opsi tertentu sebagai terpilih
                                             if (key === value.pengawas) {
                                               option.selected = true;
@@ -526,49 +526,54 @@
                                 let chatButtons = document.querySelectorAll(".chat");
                                 chatButtons.forEach((chatButton) => {
                                   const extractedIdKelompok = chatButton.id.replace('chat-', '');
-                                  
-                                  if(!guru[username].kelompok.includes(extractedIdKelompok)){
-                                    chatButton.disabled = true;
-                                  } else {
-                                      chatButton.addEventListener('click', ()=> {
-                                        if(!anggota_kelompok[extractedIdKelompok]){
-                                          anggota_kelompok[extractedIdKelompok]= {};
-                                            anggota_kelompok[extractedIdKelompok][username]= {};
-                                        }
-                                          anggota_kelompok[extractedIdKelompok][username]= {
-                                            nama: nm,
-                                            konfirmasi: true
-                                        }
-                                        console.log(anggota_kelompok[extractedIdKelompok][username].nama)
-                                        
-                                        let chatBody = document.getElementById('chatMessages');
-                                        let anggota_badge = document.getElementById('anggota-kelompok-chat');
-                                        if(extractedIdKelompok in anggota_kelompok){
-                                          if(chat_aktif === extractedIdKelompok){
-
-                                          } else {
-                                            chatBody.innerHTML = "";
-                                            anggota_badge.innerHTML = ""
-                                            
-                                            chat_aktif = extractedIdKelompok;
-                                            loadMessages(extractedIdKelompok);
-                                            tambahAnggotaGroupBadge(extractedIdKelompok)
-                                            sortirBadgeAnggotaKelompok();
-                                            
+                                  try{
+                                    if(!guru[username].kelompok.includes(extractedIdKelompok)){
+                                      chatButton.disabled = true;
+                                    } else {
+                                        chatButton.addEventListener('click', ()=> {
+                                          if(!anggota_kelompok[extractedIdKelompok]){
+                                            anggota_kelompok[extractedIdKelompok]= {};
+                                              anggota_kelompok[extractedIdKelompok][username]= {};
                                           }
+                                            anggota_kelompok[extractedIdKelompok][username]= {
+                                              nama: nm,
+                                              konfirmasi: true
+                                          }
+                                          console.log(anggota_kelompok[extractedIdKelompok][username].nama)
                                           
-                                          document.getElementById('chatPopup').style.display = 'block';
-                                        } else {
-                                          createTooltip(chatButton, "Tidak ada anggota kelompok, Harap tambahkan terlebih dahulu!");
-    
-                                        }
+                                          let chatBody = document.getElementById('chatMessages');
+                                          let anggota_badge = document.getElementById('anggota-kelompok-chat');
+                                          if(extractedIdKelompok in anggota_kelompok){
+                                            if(chat_aktif === extractedIdKelompok){
+  
+                                            } else {
+                                              chatBody.innerHTML = "";
+                                              anggota_badge.innerHTML = ""
+                                              
+                                              chat_aktif = extractedIdKelompok;
+                                              loadMessages(extractedIdKelompok);
+                                              tambahAnggotaGroupBadge(extractedIdKelompok)
+                                              sortirBadgeAnggotaKelompok();
+                                              
+                                            }
+                                            
+                                            document.getElementById('chatPopup').style.display = 'block';
+                                          } else {
+                                            createTooltip(chatButton, "Tidak ada anggota kelompok, Harap tambahkan terlebih dahulu!");
+      
+                                          }
+  
+                                          
+                                            
+                                          scrollToBottom();
+                                        })
+                                      
+                                    }
 
-                                        
-                                          
-                                        scrollToBottom();
-                                      })
-                                    
+                                  } catch(e) {
+                                      console.error("Error : " + e)
                                   }
+                                  
                                   
                                 });
                                 //////////////////////////////////////////////////////////
@@ -792,7 +797,9 @@
         // Menangani kesalahan jika ada
         console.error("Error:", error);
     });
-    */
+
+
+   
 
    
 
@@ -822,6 +829,44 @@
       });
 
        
+    } */
+
+    function tambahAnggotaGroupBadge(kelompok){
+  
+      let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
+      anggotKelompokChat.innerHTML = "";
+      $('#namaKelompokRoomChat').text("Kelompok " + kelompok)
+      // Mendapatkan array dari semua keys (nama properti) dalam objek
+      const keys = Object.keys(anggota_kelompok[kelompok]);
+  
+      // Iterasi melalui array keys dan akses nilai dari setiap properti
+      keys.forEach(key => {
+        const user = anggota_kelompok[kelompok][key];
+  
+         // Membuat elemen span baru
+         var newSpan = document.createElement("span");
+         let badgeColor = "";
+         let nama = ""
+         if(key === username){
+          badgeColor = "warning";
+          nama = "Anda";
+         } else {
+          badgeColor = (user.konfirmasi == true)? "success" : "danger";
+          nama = user.nama===nm? "Anda" : user.nama;
+         }
+         newSpan.className = `me-1 badge text-bg-${badgeColor}`; // Menetapkan kelas CSS
+  
+         // Membuat teks yang akan ditampilkan di dalam span
+         var newText = document.createTextNode(`${nama}`);
+  
+         // Menambahkan teks ke dalam elemen span
+         newSpan.appendChild(newText);
+  
+         // Menambahkan elemen span ke dalam elemen anggotKelompokChat
+         anggotKelompokChat.appendChild(newSpan);
+      });
+  
+       
     }
 
     
@@ -839,7 +884,7 @@
           var bubble = document.createElement('div');
           bubble.textContent = message;
     
-          if (sender === nisnUser) {
+          if (sender === username) {
             var bubbleClass = 'bubble-me';
             bubble.style.float = 'right';
             bubble.style.backgroundColor = '#AAD8D3';
@@ -851,12 +896,12 @@
             bubble.style.float = 'left';
             bubble.style.backgroundColor = '#2F323A';
             bubble.style.paddingTop = '30px'; 
-            let namaSender = anggota_kelompok[groupUser][sender].nama;
+            let namaSender = anggota_kelompok[chat_aktif][sender].nama;
 
-                if(anggota_kelompok[groupUser][sender].guru){
+                if(anggota_kelompok[chat_aktif][sender].guru){
                     bubble.style.backgroundColor = '#FFC107';
                     
-                    namaSender = "Guru " + anggota_kelompok[groupUser][sender].nama;
+                    namaSender = "Guru " + anggota_kelompok[chat_aktif][sender].nama;
                 }
             
             var senderSpan = document.createElement('span');

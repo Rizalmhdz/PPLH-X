@@ -288,7 +288,7 @@
                 <button class="btn btn-warning mb-4 mt-4" onclick="return printArea('area')">Cetak Hasil Kesimpulan</button>
                 <br>
                 <input type="file" class="mb-4" id="pdfFile" accept=".pdf">
-                <button class="btn btn-primary" type="button" id="uploadButton">Upload</button>
+                <button class="btn btn-success" type="button" id="uploadButton">Upload</button>
                 <div class="mt-3" id="progressBar" style="display: none;">
                     <div class="progress">
                       <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -657,9 +657,11 @@ get(pathRefFile)
 
 let anggota_kelompok = {}
 
-let tmp = document.querySelector('#tbody1');
+let tmp = document.getElementById('bodyTable')
 const que = query(ref(db, "dataSiswa/"));
 onValue(que, (snapshot) => {
+    tmp.innerHTML = "";
+    var no = 1;
     const users = snapshot.val();
 
     // Objek untuk menyimpan data pengguna yang dikelompokkan berdasarkan kelompok
@@ -680,7 +682,12 @@ onValue(que, (snapshot) => {
     // Membuat baris tabel untuk setiap kelompok
     sortedGroups.forEach(kelompok => {
         const usersInGroup = groupedUsers[kelompok];
+        let list = "";
+        
+        let listFile = "";
         usersInGroup.forEach(user => {
+            
+
             if(user.kelompok == groupUser){ 
                 if(!anggota_kelompok[user.kelompok]){ 
                     anggota_kelompok[user.kelompok] = {};
@@ -694,10 +701,51 @@ onValue(que, (snapshot) => {
                   guru : false,
                 };
             };
+
+            list += `<input class="form-check-input ms-2 mb-2" type="radio" id="anggotakelompok" name="namaanggota" value="${user.nama}" ${user.nisn === nisnUser ? "checked" : "disabled"}>
+                    <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
+
+            try{
+                let file = user.kerja_kelompok.materi1.nilai
+                let nilai = materi1.materi1.val()
+                listFile += `<a href="#">Lembar Kegiatan ${nilai.nilai}</a><br>`
+
+            } catch(e){
+                console.error(e)
+                listFile += `<a href="#">Lembar Kegiatan B</a><br>`
+            }
             
         });
-    
-});
+
+        let tr = `
+            <tr class="m-1 ms-3">
+                <td class="text-center">${no}</td>
+                <td class="text-center"><label for="namakelompok">${kelompok}</label></td>
+                <td>${list}</td>
+                <td class="text-center">
+                    ${listFile}
+                </td>
+            </tr>
+        `;
+       
+        tmp.innerHTML += tr;
+
+        /*
+        if(isConfirmUser){
+            nextBtn.href = "1Keseimbanganmateri.html";
+            nextBtn.style.pointerEvents = "auto";
+            nextBtn.style.color = "initial";
+        } else {
+            tambahkanEventListener()
+            nextBtn.href = "";
+            // Menetapkan gaya untuk membuat tautan terlihat seperti dinonaktifkan
+            nextBtn.style.pointerEvents = "none";
+            nextBtn.style.color = "gray";
+        }
+
+        */
+        no++;
+    });
 });
 
 
