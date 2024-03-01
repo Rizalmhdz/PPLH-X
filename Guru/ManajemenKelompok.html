@@ -50,6 +50,8 @@
   transition: max-height 0.2s ease-out;
 }
 
+
+
 </style>
 
 <body>
@@ -88,6 +90,43 @@
       </ul>
     </nav>
     <!-- SIDEBAR END -->
+    <div class="modal fade" id="modalHasilKegiatanKelompok" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">HASIL KEGIATAN KELOMPOK</h5>
+            <button type="button" class="btn-close" id="close-modal-kelompok" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container mt-3">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead class="text-center">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Kelompok</th>
+                      <th scope="col">Anggota</th>
+                      <th scope="col">Lembar Kegiatan</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyTable">
+                    <tr class="text-center">
+                      <th scope="row">1</th>
+                      <td>Kelompok A</td>
+                      <td>Anggota 1, Anggota 2, Anggota 3</td>
+                      <td>Lembar Kegiatan 1</td>
+                    </tr>
+                    <!-- Tambahkan baris lainnya di sini -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
 
     <!-- CONTENT AREA START-->
     <div class="content">
@@ -140,7 +179,7 @@
         <!-------------------------------------------------------------Tabel Siswa ----------------------------------------------------------->
         
         <button class="btn align-text-right" data-bs-toggle="modal" data-bs-target="#tambahModal" id="tambah" style="background-color: #AAD8D3; color: #555; margin-right: 9px;">Tambah Kelompok</button>
-                
+        <button class="btn btn-primary" id="tampilkanModal">Lihat Hasil Kegiatan Kelompok</button>
         <div class= "content-card" id="menu-show1">
           <div class="table-responsive-sm container mt-3">
             <table class="table text-center table-bordered" style="border-color: #555;background-color: #fff; color: #555;">
@@ -1221,6 +1260,85 @@ function compareDates(timestampString1, timestampString2) {
       return 1; // Jika tanggal pertama lebih kecil dari tanggal kedua
   } 
 }
+// ============================================= Modal Hasil Kegiatan Kelompok
+
+let btnShowModal = document.getElementById('tampilkanModal')
+let modal = document.getElementById('modalHasilKegiatanKelompok')
+let btnCloseModal = document.getElementById('close-modal-kelompok')
+
+btnShowModal.addEventListener('click', () => {
+    $('#modalHasilKegiatanKelompok').modal('show')
+})
+
+btnCloseModal.addEventListener('click', () => {
+    $('#modalHasilKegiatanKelompok').modal('hide')
+})
+
+// ================================== TABEL HASIL KERJA KELOMPOK 
+
+let tmpKelompok = document.getElementById('bodyTable')
+const queKelompok = query(ref(db, "dataSiswa/"));
+onValue(queKelompok, (snapshot) => {
+  tmpKelompok.innerHTML = "";
+    var no = 1;
+    const users = snapshot.val();
+
+    // Objek untuk menyimpan data pengguna yang dikelompokkan berdasarkan kelompok
+    const groupedUsers = {};
+
+    // Mengelompokkan pengguna berdasarkan kelompok
+    Object.values(users).forEach(user => {
+        const kelompok = user.kelompok;
+        if (!groupedUsers[kelompok]) {
+            groupedUsers[kelompok] = [];
+        }
+        groupedUsers[kelompok].push(user);
+    });
+
+    // Mengurutkan kelompok secara alfabetis
+    const sortedGroups = Object.keys(groupedUsers).sort();
+
+    // Membuat baris tabel untuk setiap kelompok
+    sortedGroups.forEach(kelompok => {
+        const usersInGroup = groupedUsers[kelompok];
+        let list = "";
+        
+        let listFile = "";
+        usersInGroup.forEach(user => {
+            
+
+            list += `<input class="form-check-input ms-2 mb-2" type="radio" id="anggotakelompok" name="namaanggota" value="${user.nama}" disabled>
+                    <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
+
+            try{
+                let namaFile = user.kerja_kelompok.materi1.files.nama_file
+                let urlFile = user.kerja_kelompok.materi1.files.url
+
+                listFile += `<a href="${urlFile}">${namaFile}</a><br>`
+
+            } catch(e){
+                //console.error(e)
+                listFile += `<t class="mb-5" >File Not Found !</t><br>`
+            }
+            
+        });
+
+        let tr = `
+            <tr class="m-1 ms-3">
+                <td class="text-center">${no}</td>
+                <td class="text-center"><label for="namakelompok">${kelompok}</label></td>
+                <td>${list}</td>
+                <td class="text-center">
+                    ${listFile}
+                </td>
+            </tr>
+        `;
+       
+        tmpKelompok.innerHTML += tr;
+        no++;
+    });
+});
+
 
     // =======================================================================================
   </script>
