@@ -93,6 +93,7 @@
     <div class="content">
         <div id="area">
         <div class="card-header-bab"><center>Kegiatan Kelompok CL 1: Keseimbangan dan Perubahan Lingkungan Hidup</center></div>
+        <div class="card-header-bab"><center>Kelompok <span id="kelompok"></span></center></div>
 
             <div class="card-header-2" id="menu-btn">Petunjuk <i class="fas fa-caret-down"></i></div>
             <div class= "content-card">
@@ -184,7 +185,7 @@
                    </table>
                    <br>
                    <!-- <center><button class="button-utama" id="cekJawaban2"><p>Kirim Jawaban</p></button></center> -->
-                   <br>
+                  
                              
                    
                 <!--soal 3-->
@@ -232,18 +233,18 @@
         <center><button class="button-utama" id="cekJawaban3"><p>Kirim Jawaban</p></button></center>           
         </ol>
         </div>
-        <br>
+        <p></p>
         <center>
                 <div class="container mt-4 mb-4" id="papanScores" style="display: none;">
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title">Hasil Skor</h5>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-text">Skor: <span id="scores">100</span></h5>
-                            </div>
+                            
+                                <h5 class="card-title">Hasil Skor <span id="scores"></span></h5>
+                            
+                            <!-- <div class="card-body">
+                                <h5 class="card-text">Skor: <span id="scores"></span></h5>
+                            </div> -->
                             </div>
                         </div>
                     </div>
@@ -555,15 +556,16 @@
                 if(benar+salah == totalSoal){
                     let nilai = (benar/totalSoal)*100;
                     let scores = document.getElementById('scores');
-                    scores.innerText = nilai
-                    papanScores.style.display = 'block'
+                    scores.innerText = nilai;
+                    papanScores.style.display = 'block';
 
                     const uploadNilai = ref(db, 'dataSiswa/' + nisnUser + '/kerja_kelompok/materi1/');
                     set(uploadNilai, {
                         nilai: nilai
                     })
                     .then(() => {
-                        alert('Nilai Anda Berhasil Dimasukkan Ke database')
+                        alert('Nilai Anda Berhasil Dimasukkan Ke database');
+                        adaNilai = true;
                     })
                     .catch((error) => {
                         alert('Error saving to Firebase Realtime Database:', error);
@@ -684,6 +686,11 @@ document.getElementById("nextLink").addEventListener("click", function(event) {
     from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
     
     const db = getDatabase();
+
+    let klm = sessionStorage.getItem('kelompok');
+    let kelompok = document.getElementById('kelompok');
+    
+    kelompok.innerText = klm;
 
     let nm = sessionStorage.getItem('nama');
     let nisnUser = sessionStorage.getItem('nisn');
@@ -1342,6 +1349,7 @@ function compareDates(timestampString1, timestampString2) {
                 .then((url) => {
                     saveDownloadURL(file.name, url);
                     alert('Upload completed successfully!');
+                    adaFile = true;
                 })
                 .catch((error) => {
                     console.error('Error getting download URL:', error);

@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPLH</title>
     <link rel="stylesheet" href="css/datasiswa.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../fontawesome/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -50,6 +52,8 @@
   transition: max-height 0.2s ease-out;
 }
 
+
+
 </style>
 
 <body>
@@ -80,19 +84,56 @@
         </div>
         <ul>
             <li><a href="datasiswa.html" class="menu-btn"><i class="fa-solid fa-user"></i>&ensp;Daftar Siswa</a></li>
-            <li id="active"><a href="#" class="menu-btn" id="hitam"><i class="fa-regular fa-address-book"></i>&ensp;Nilai Aktifitas</a></li>
+            <li id="active"><a href="#" class="menu-btn"><i class="fa-regular fa-address-book"></i>&ensp;Hasil Kegiatan Kelompok</a></li>
             <li><a href="NilaiLatihan.html" class="menu-btn"><i class="fa-solid fa-clipboard-list"></i>&ensp;Nilai Latihan</a></li>
             <li><a href="KuisdanEvaluasi.html" class="menu-btn"><i class="fa-solid fa-square-poll-vertical"></i>&ensp;Nilai Kuis dan Evaluasi</a></li>
-            <li><a href="ManajemenKelompok.html" class="menu-btn"><i class="fa-solid fa-people-group"></i>&ensp;Manajemen Kelompok</a></li>
+            <li><a href="ManajemenKelompok.html" class="menu-btn"><i class="fa-solid fa-people-group"></i></i>&ensp;Manajemen Kelompok</a></li>
             <li><a href="ArsipKelompok.html" class="menu-btn"><i class="fa-solid fa-users"></i>&ensp;Arsip Kelompok</a></li>
       </ul>
     </nav>
     <!-- SIDEBAR END -->
+    <div class="modal fade" id="modalHasilKegiatanKelompok" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">HASIL KEGIATAN KELOMPOK</h5>
+            <button type="button" class="btn-close" id="close-modal-kelompok" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container mt-3">
+              <!-- <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead class="text-center">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Kelompok</th>
+                      <th scope="col">Anggota</th>
+                      <th scope="col">Lembar Kegiatan</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyTable">
+                    <tr class="text-center">
+                      <th scope="row">1</th>
+                      <td>Kelompok A</td>
+                      <td>Anggota 1, Anggota 2, Anggota 3</td>
+                      <td>Lembar Kegiatan 1</td>
+                    </tr>
+                    Tambahkan baris lainnya di sini
+                  </tbody>
+                </table>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
 
     <!-- CONTENT AREA START-->
     <div class="content">
     <!-------------------------------------------------------- Nilai Kuis dan Evaluasi ------------------------------------------------------------------>
-      <div class="card-header"><center>Nilai Kuis dan Evaluasi</center></div>
+      <div class="card-header"><center>Hasil Kegiatan Kelompok</center></div>
         <!-----------------------------------------------Modal Tambah Data Siswa ------------------------------------------------------->
         <!-- <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " >
@@ -138,26 +179,159 @@
         <br>
 
         <!-------------------------------------------------------------Tabel Siswa ----------------------------------------------------------->
+        
+        <!-- <button class="btn align-text-right" data-bs-toggle="modal" data-bs-target="#tambahModal" id="tambah" style="background-color: #AAD8D3; color: #555; margin-right: 9px;">Tambah Kelompok</button> -->
+        <!-- <button class="btn btn-primary" id="tampilkanModal">Lihat Hasil Kegiatan Kelompok</button> -->
         <div class= "content-card" id="menu-show1">
           <div class="table-responsive-sm container mt-3">
-            <table class="table text-center table-bordered" style="border-color: #555;background-color: #fff; color: #555;">
-                <thead class="text-center" style="border-color: #555;background-color: #AAD8D3; color: #555;">
-                    <th>No.</th>
-                    <th>Nama</th>
-                    <th>Kelas</th>
-                    <th>Kuis 1</th>
-                    <th>Kuis 2</th>
-                    <th>Kuis 3</th>
-                    <th>Kuis 4</th>
-                    <th>Kuis 5</th>
-                    <th>Kuis 6</th>
-                    <th>Evaluasi</th>
-                </thead>
-                <tbody id="tbody1"></tbody>
-            </table>
-        </div>
+            <!-- <div class="table-responsive-sm container mt-3">
+              <table class="table text-center table-bordered" style="border-color: #555;background-color: #fff; color: #555;">
+                  <thead class="text-center" style="border-color: #555;background-color: #AAD8D3; color: #555;">
+                      <tr>
+                          <th>No.</th>
+                          <th>Kelompok</th>
+                          <th>Token</th>
+                          <th>Pengawas</th>
+                          <th>Aksi</th>
+                          
+                        </tr>
+                  </thead>
+                  <tbody id="tbody1"></tbody>
+                  
+              </table>
+            </div> -->
+
+            <div class="tabk">
+              <button class="tablinks" onclick="openMenu(event, 'Informasi Media')" id="defaultOpen">Materi 1</button>
+              <button class="tablinks" onclick="openMenu(event, 'Informasi Pengembang')">Materi 2</button>
+              <button class="tablinks" onclick="openMenu(event, 'Daftar Pustaka')">Materi 3</button>
+            </div>
+            
+            <div id="Informasi Media" class="tabcontent">
+              
+              <div class="table-responsive">
+                <table class="table text-center table-bordered" style="border-color: #555;background-color: #fff; color: #555;">
+                  <thead class="text-center" style="border-color: #555;background-color: #AAD8D3; color: #555;">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Kelompok</th>
+                      <th scope="col">Anggota</th>
+                      <th scope="col">Lembar Kegiatan</th>
+                      <th scope="col">Nilai</th>
+                      <th scope="col">Rata-rata</th>
+                      <th scope="col">Penghargaan</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyTable">
+                    <tr class="text-center">
+                      <th scope="row">1</th>
+                      <td>Kelompok A</td>
+                      <td>Anggota 1, Anggota 2, Anggota 3</td>
+                      <td>Lembar Kegiatan 1</td>
+                    </tr>
+                    <!-- Tambahkan baris lainnya di sini -->
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            
+            <div id="Informasi Pengembang" class="tabcontent">
+              
+              <div class="table-responsive">
+                <table class="table text-center table-bordered" style="border-color: #555;background-color: #fff; color: #555;">
+                  <thead class="text-center" style="border-color: #555;background-color: #AAD8D3; color: #555;">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Kelompok</th>
+                      <th scope="col">Anggota</th>
+                      <th scope="col">Lembar Kegiatan</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyTable">
+                    <tr class="text-center">
+                      <th scope="row">1</th>
+                      <td>Kelompok A</td>
+                      <td>Anggota 1, Anggota 2, Anggota 3</td>
+                      <td>Lembar Kegiatan 1</td>
+                    </tr>
+                    <!-- Tambahkan baris lainnya di sini -->
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+    
+            <div id="Daftar Pustaka" class="tabcontent">
+              
+              <div class="table-responsive">
+                <table class="table text-center table-bordered" style="border-color: #555;background-color: #fff; color: #555;">
+                  <thead class="text-center" style="border-color: #555;background-color: #AAD8D3; color: #555;">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Kelompok</th>
+                      <th scope="col">Anggota</th>
+                      <th scope="col">Lembar Kegiatan</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bodyTable">
+                    <tr class="text-center">
+                      <th scope="row">1</th>
+                      <td>Kelompok A</td>
+                      <td>Anggota 1, Anggota 2, Anggota 3</td>
+                      <td>Lembar Kegiatan 1</td>
+                    </tr>
+                    <!-- Tambahkan baris lainnya di sini -->
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
         </div>
 
+            
+          </div>
+        </div>
+
+         <!-- Modal Tambah Kelas -->
+         <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " >
+              <div class="modal-content" style="background-color: white;">
+                <div class="modal-header">
+                  <h5 class="modal-title fw-bold text-dark " id="exampleModalLabel">TAMBAH KELOMPOK</h5>
+                  <button type="button" class="btn-close delete-progress"  aria-label="Close"></button>
+                </div>
+                <div class="modal-body" >
+                  <div class="popup add">
+                    <form action="" style="background-color: white;">
+                      <div class="mb-3">
+                        <label>Kelompok :</label>
+                        <input type="text" class="form-control" id="namaKelas" required>
+                      </div>
+                      <div class="mb-3">
+                        <label>Token :</label>
+                        <input type="text" class="form-control" id="tokenKelas" required
+                      </div>
+                      <div class="mb-3">
+                        <label>Guru Pengawas :</label>
+                        <select class="form-control" id="pengawasKelompok" required>
+                        </select>
+                      </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary delete-progress">Kembali</button>
+                        <button type="submit" class="btn btn-success" id="tambahBtn">Tambah</button>
+                        <button type="button" class="btn btn-warning" id="simpanBtn">Ubah</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+          
+        
         <!--------------------------------------------------------------Footer -------------------------------------------------------------->
         <!-- <div class="footer-nav">
             <a href="#" class="footer-number">Sebelumnya</a>
@@ -167,6 +341,129 @@
             <a href="#" class="footer-number">Selanjutnya</a>
         </div> -->
     </div>
+
+    <style>
+      .floating-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000; /* untuk memastikan tombol muncul di atas konten lain */
+      }
+  
+      .chat-room {
+          z-index: 1000;
+        width: 400px;
+        height: 500px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #fff;
+        border: 1px solid #424242;
+        border-radius: 5px;
+      }
+  
+      .chat-header {
+        background-color: #AAD8D3;
+        color: #fff;
+        padding: 10px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+  
+      .chat-body {
+        overflow-y: auto;
+        padding: 10px;
+        height: calc(100% - 140px);
+      }
+  
+      .chat-footer {
+          margin-bottom: 0;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+        display: flex; /* Mengatur elemen dalam satu baris */
+        align-items: center; /* Menyelaraskan elemen secara vertikal */
+      }
+  
+      .bubble {
+        max-width: 70%;
+        margin-bottom: 10px;
+        clear: both;
+        overflow: hidden;
+        padding: 10px;
+        border-radius: 10px;
+        word-wrap: break-word;
+      }
+  
+      .bubble.me {
+        float: right;
+        background-color: #007bff;
+        color: #fff;
+      }
+  
+      .bubble.other {
+        float: left;
+        background-color: #28a745;
+        color: #fff;
+      }
+  
+      .chat-time {
+        font-size: 0.8em;
+        float: right;
+      }
+      .close-btn {
+          margin-top: -30px;
+          float: right;
+      }
+
+      /* Style untuk elemen input teks */
+      #messageInput {
+          width: calc(100% - 60px); 
+          border: 2px solid #AAD8D3; 
+          border-radius: 5px; 
+          margin-right: 10px; 
+          box-sizing: border-box; 
+      }
+
+      /* Style untuk tombol kirim */
+      #sendButton {
+          width: 40px; 
+          height: 40px; 
+          background-color: #AAD8D3; 
+          border: none; 
+          border-radius: 100%; 
+          color: #fff;
+          font-size: 1.2em; 
+          cursor: pointer;
+      }
+      #sendButton:hover{
+          background-color: #2F323A; 
+      }
+    </style>
+       <!-- Floating Button -->
+<!-- Floating Button -->
+<!-- <button id="floatingButton" class="btn btn-primary floating-button">Chat</button> -->
+
+
+
+<div id="container-chat"></div>
+
+<!-- Popup untuk room chat -->
+<div id="chatPopup" class="chat-room" style="display: none;">
+<div class="chat-header">
+<h4 class="mt-2 ms-2" id="namaKelompokRoomChat">Nama Kelompok</h4>
+  <button type="button" class="btn-close close-btn" id="closeChat" aria-label="Close"></button>
+  <div class="ms-2" id="anggota-kelompok-chat">
+      
+  </div>
+</div>
+<div class="chat-body" id="chatMessages"></div>
+<div class="chat-footer">
+<input type="text" class="form-control" id="messageInput" placeholder="Ketik pesan...">
+<button type="button" class="btn btn-block" id="sendButton"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+  <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+</svg></button>
+</div>
+</div>
     
     <!--CONTENT AREA END -->
     
@@ -189,241 +486,998 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
 
-      import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild } 
+      import { getDatabase, ref, child, onValue, get, set, query, remove, orderByChild, onChildAdded, equalTo, update, orderByKey, limitToLast}
       from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
       
       const db = getDatabase();
-      //------------------------------------------------------------Tambah data------------------------------------------------------------
-    //   let btnTambahData = document.getElementById('submit');
-    //   btnTambahData.addEventListener('click', function(){
-    //     console.log(btnTambahData);
-    //     let tambahNisn = document.getElementById("tambahNisnbox").value;
-    //     let tambahNama = document.getElementById("tambahNamabox").value;
-    //     let tambahKelas = document.getElementById("tambahKelasbox").value;
-    //     let tambahKelompok = document.getElementById("tambahKelompokbox").value;
-    //     let tambahPassword = document.getElementById("tambahPasswordbox").value;
-    //     console.log(tambahNisn);
-
-    //     const dbRef = ref(db);
-
-
-    //       get(child(dbRef, "dataSiswa/" + tambahNisn)).then((snapshot)=>{
-    //         if(snapshot.exists()){
-    //           alert("Akun telah ada!");
-    //         }
-    //         else{
-    //           set(ref(db, "dataSiswa/"+ tambahNisn),
-    //           {
-    //             nisn: tambahNisn,
-    //             nama: tambahNama,
-    //             kelas: tambahKelas,
-    //             kelompok: tambahKelompok,
-    //             password: tambahPassword,
-    //           })
-    //           .then(()=>{
-    //             console.log(tambahNisn);
-    //             alert("Pengguna Berhasil ditambahkan")
-    //           })
-    //           .catch((error)=>{
-    //             alert("error"+error);
-    //           })
-    //         }
-    //       })
-        
-    //   })
-
-      // const dbRef = ref(db);
-      // onValue(usersRef, (snapshot)=>{
-      //   const users = snapshot.val();
-      //   tbody1.innerHTML = "";
-      // });
-
       //-------------------------------------------------------------Menampilkan semua data siswa--------------------------------------------
       //---------------------filling the table-------------
       var stdNo = 0;
-      var tbody = document.getElementById('tbody1');
+      // var tbody = document.getElementById('tbody1');
+      // tbody.innerHTML = "";
+      let kelas = document.getElementById('kelasInp');
+      let nama = document.getElementById('nameInp');
+      let nim = document.getElementById('nimInp');
+      let password = document.getElementById('passInp');
+      let kelasT = document.getElementById("namaKelas");
+      let token = document.getElementById("tokenKelas");
+      let pengawasKelompok = document.getElementById("pengawasKelompok");
 
-      function AddItemToTable(nisn, nama, kelas, kelompok, password){
-          let trow = document.createElement("tr");
-          let td1 = document.createElement('td');
-          let td2 = document.createElement('td');
-          let td3 = document.createElement('td');
-          let td4 = document.createElement('td');
-          let td5 = document.createElement('td');
-          let td6 = document.createElement('td');
-          let td7 = document.createElement('td');
+      
+      let guru = {};
+      // Mendengarkan perubahan pada path 'dataGuru'
+     onValue(ref(db, "dataGuru/"), (snapshot) => {
+         // Mendapatkan nilai dari snapshot (data guru)
+         const data = snapshot.val();
+         for (const key in data) {
+             // Menyimpan username sebagai kunci dan nama sebagai nilai dalam objek guru
+             if (!guru[data[key].username]) {
+              guru[data[key].username] = {}; // Inisialisasi objek jika belum terdefinisi
+            }
+             guru[data[key].username].nama = data[key].name;
+             
+         }
+         
+     });
 
+      let kelasfix = "";
+      let cek11 = 0;
 
-          td1.innerHTML= ++stdNo;
-          td2.innerHTML= nisn;
-          td3.innerHTML= nama;
-          td4.innerHTML= kelas;
-          td5.innerHTML= kelompok;
-          td6.innerHTML= password;
-          td7.innerHTML= `<button type="button" class="delete btn btn-danger">Hapus</button> <button type="button" class="btn btn-primary">Edit</button>`;
+      let anggota_kelompok = {}
+      let chat_aktif = "";
 
+      // let tmp = document.querySelector('#tbody1');
+      // const que = query(ref(db, "dataKelompok/"), orderByChild("nisn"));
+      //                     onValue(que, (snapshot) => {
+      //                           // tmp.innerHTML = "";
+      //                           var no = 1;
+      //                           const users = snapshot;
+      //                           users.forEach(user => {
+      //                             const userVal = user.val();
+      //                            // let pengawas = guru[userVal.pengawas].nama
+      //                              // Pastikan guru[userVal.pengawas] sudah terdefinisi
+      //                             if (!guru[userVal.pengawas]) {
+      //                               guru[userVal.pengawas] = {}; // Inisialisasi objek jika belum terdefinisi
+      //                             }
+      //                              // Pastikan kelompok sudah didefinisikan dan merupakan array
+      //                             if (!Array.isArray(guru[userVal.pengawas].kelompok)) {
+      //                               guru[userVal.pengawas].kelompok = []; // Inisialisasi kelompok sebagai array kosong jika belum terdefinisi
+      //                             }
+      //                              guru[userVal.pengawas].kelompok.push(userVal.kelompok)
 
-          trow.appendChild(td1);
-          trow.appendChild(td2);
-          trow.appendChild(td3);
-          trow.appendChild(td4);
-          trow.appendChild(td5);
-          trow.appendChild(td6);
-          trow.appendChild(td7);
-
-          tbody.appendChild(trow);
-
-          //hapus data
-          let deleteButtons = document.querySelectorAll(".delete");
-                                deleteButtons.forEach((deleteBtn) => {
-                                  deleteBtn.addEventListener("click", () => {
-                                      console.log(deleteButtons);
-                                      Swal.fire({
-                                      title: 'Apa kamu yakin menghapus data?',
-                                      text: '',
-                                      icon: 'question',
-                                      showCancelButton: true,
-                                      confirmButtonColor: '#3085d6',
-                                      cancelButtonColor: '#d33',
-                                      confirmButtonText: 'Iya',
-                                      cancelButtonText: 'Batal',
-                                    }).then((result) => {
-                                      if (result.value) {
-
-                                        const db = getDatabase();
-                                        let userId = deleteBtn.parentElement.parentElement.dataset.id;
-                                        console.log(userId);
-                                        remove(ref(db, "dataSiswa/" + userId));
-                                        
-                                        Swal.fire({
-                                          title: "Selamat!",
-                                          text: "Data berhasil dihapus.",
-                                          icon: "success",
-                                          button: "Lanjutkan",
-                                        });
-                                        
-                                      }
-                                    });
-                                  
-                                  
-                                  });
-                                });
-      }
-
-      // function AddAllItemsToTable(TheStudent){
-      //     stdNo=0;
-      //     tbody.innerHTML="";
-      //     TheStudent.forEach(element => {
-      //         AddItemToTable(element.nisn, element.nama, element.kelas, element.kelompok, element.password);
-      //     });
-      // }
-
-                                
-
-
-      //------------------------ambil semua data--------------
-      // function GetAllDataOnce(){
-      //     const dbRef = ref(db);
-
-      //     get(child(dbRef, "dataSiswa"))
-      //     .then((snapshot)=>{
-      //         var students = [];
-
-      //         snapshot.forEach(childSnapshot =>{
-      //             students.push(childSnapshot.val());
-      //         });
-
-      //         AddAllItemsToTable(students);
-      //     })
-      // }
-      // window.onload = GetAllDataOnce;
-
-      let tmp = document.querySelector('#tbody1');
-      const que = query(ref(db, "dataSiswa/"), orderByChild("nisn"));
-                          onValue(que, (snapshot) => {
-                                console.log(snapshot.val());
-                                tmp.innerHTML = "";
-                                var no = 1;
-                                const users = snapshot;
-                                users.forEach(user => {
-                                  const userVal = user.val();
-                                    let tr = `
-                                        <tr data-id = ${user.key}>
-                                          <td>${no}</td>
-                                          <td>${userVal.nama}</td>
-                                          <td>${userVal.kelas}</td>
-                                          <td>${userVal.kuis1}</td>
-                                          <td>${userVal.kuis2}</td>
-                                          <td>${userVal.kuis3}</td>
-                                          <td>${userVal.kuis4}</td>
-                                          <td>${userVal.kuis5}</td>
-                                          <td>${userVal.kuis6}</td>
-                                          <td>${userVal.Evaluasi}</td>
-
+      //                               let tr = `
+      //                                   <tr data-id = ${user.key}>
+      //                                     <td>${no}</td>
+      //                                     <td>${userVal.kelompok}</td>
+      //                                     <td>${userVal.token}</td>
+      //                                     <td>${guru[userVal.pengawas].nama}</td>
+      //                                     <td>
                                             
-                                        <tr>
-                                        `;
+      //                                       <button class="chat btn btn-primary" id="chat-${userVal.kelompok}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-text" viewBox="0 0 16 16">
+      //                                         <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+      //                                         <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+      //                                       </svg></button>
+      //                                       <button class="edit btn btn-warning" id="edit-${userVal.kelompok}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+      //                                       <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+      //                                     </svg></button>
+      //                                     <button class="delete btn btn-danger" id="delete-${userVal.kelompok}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+      //                                       <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+      //                                       <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+      //                                     </svg></i></button></td>
+                                                                                    
+      //                                   <tr>
+      //                                   `;
                         
-                                  tmp.innerHTML += tr;
-                                  no++;
-                                //////////////////////////////////////////////////////////
+      //                             tmp.innerHTML += tr;
+      //                             no++;
+      //                           //////////////////////////////////////////////////////////
 
-                                //Delete
-                                let deleteButtons = document.querySelectorAll(".delete");
-                                deleteButtons.forEach((deleteBtn) => {
-                                  deleteBtn.addEventListener("click", () => {
+      //                           //Delete
+      //                           let deleteButtons = document.querySelectorAll(".delete");
+      //                           deleteButtons.forEach((deleteBtn) => {
+      //                             deleteBtn.addEventListener("click", () => {
                                   
-                                      Swal.fire({
-                                      title: 'Apa kamu yakin mengapus data?',
-                                      text: '',
-                                      icon: 'question',
-                                      showCancelButton: true,
-                                      confirmButtonColor: '#3085d6',
-                                      cancelButtonColor: '#d33',
-                                      confirmButtonText: 'Iya',
-                                      cancelButtonText: 'Batal',
-                                    }).then((result) => {
-                                      if (result.value) {
+      //                                 Swal.fire({
+      //                                 title: 'Apa kamu yakin mengapus data?',
+      //                                 text: '',
+      //                                 icon: 'question',
+      //                                 showCancelButton: true,
+      //                                 confirmButtonColor: '#3085d6',
+      //                                 cancelButtonColor: '#d33',
+      //                                 confirmButtonText: 'Iya',
+      //                                 cancelButtonText: 'Batal',
+      //                               }).then((result) => {
+      //                                 if (result.value) {
                                         
                                         
-                                        const db = getDatabase();
-                                        let userId = deleteBtn.parentElement.parentElement.dataset.id;
-                                        remove(ref(db, "dataSiswa/" + userId));
+      //                                   const db = getDatabase();
+      //                                   let userId = deleteBtn.parentElement.parentElement.dataset.id;
+      //                                   remove(ref(db, "dataKelompok/" + userId));
                                         
-                                        Swal.fire({
+      //                                   Swal.fire({
+      //                                     title: "Selamat!",
+      //                                     text: "Data berhasil dihapus.",
+      //                                     icon: "success",
+      //                                     button: "Lanjutkan",
+      //                                   });
+                                        
+      //                                 }
+      //                               });
+                                  
+                                  
+      //                             });
+      //                           });
+      //                           //////////////////////////////////////////////////////////
+
+      //                           //edit
+      //                           let editButtons = document.querySelectorAll(".edit");
+      //                           editButtons.forEach((editButton) => {
+      //                             editButton.addEventListener("click", () => {
+      //                               $('#tambahModal').modal('show');
+                                    
+      //                               namaKelompok.value = "";
+      //                               tokenKelompok.value = "";
+      //                               pengawasKelompok.innerHTML = "";
+      //                               simpanBtn.style.display = "block";
+      //                               tambahBtn.style.display = "none";
+      //                               const extractedId = editButton.id.replace('edit-', '');
+
+      //                               // Mendapatkan nilai dari spesifik path
+      //                               get(ref(db, "dataKelompok/" + extractedId)).then((snapshot) => {
+      //                                 if (snapshot.exists()) {
+      //                                     // Jika nilai pada path tersebut ada
+      //                                     const value = snapshot.val();
+      //                                     namaKelompok.value = value.kelompok
+      //                                     tokenKelompok.value = value.token
+      //                                     pengawasKelompok.innerHTML += '<option value = "" disable>---- Pilih Guru Pengawas ----</option>';
+      //                                     const selectElement = pengawasKelompok;
+      //                                     for (const key in guru) {
+      //                                       const option = document.createElement('option');
+      //                                       option.value = key;
+      //                                       option.text = guru[key].nama; 
+      //                                        // Tambahkan kondisi untuk menandai opsi tertentu sebagai terpilih
+      //                                       if (key === value.pengawas) {
+      //                                         option.selected = true;
+      //                                       }// Ubah 'nama' sesuai dengan properti yang Anda inginkan
+      //                                       selectElement.appendChild(option);
+      //                                     }
+                                          
+      //                                     // Lakukan sesuatu dengan nilai
+      //                                 } else {
+      //                                     // Jika nilai pada path tersebut tidak ada
+      //                                     console.log("Nilai pada spesifik path tidak ditemukan.");
+      //                                 }
+      //                               }).catch((error) => {
+      //                                 // Menangani kesalahan jika ada
+      //                                 console.error("Error:", error);
+      //                               });
+      //                               });
+      //                           });
+      //                           //////////////////////////////////////////////////////////
+                                  
+      //                           //chat
+      //                           let chatButtons = document.querySelectorAll(".chat");
+      //                           chatButtons.forEach((chatButton) => {
+      //                             const extractedIdKelompok = chatButton.id.replace('chat-', '');
+      //                             try{
+      //                               if(!guru[username].kelompok.includes(extractedIdKelompok)){
+      //                                 chatButton.disabled = true;
+      //                               } else {
+      //                                   chatButton.addEventListener('click', ()=> {
+      //                                     if(!anggota_kelompok[extractedIdKelompok]){
+      //                                       anggota_kelompok[extractedIdKelompok]= {};
+      //                                         anggota_kelompok[extractedIdKelompok][username]= {};
+      //                                     }
+      //                                       anggota_kelompok[extractedIdKelompok][username]= {
+      //                                         nama: nm,
+      //                                         konfirmasi: true
+      //                                     }
+      //                                     console.log(anggota_kelompok[extractedIdKelompok][username].nama)
+                                          
+      //                                     let chatBody = document.getElementById('chatMessages');
+      //                                     let anggota_badge = document.getElementById('anggota-kelompok-chat');
+      //                                     if(extractedIdKelompok in anggota_kelompok){
+      //                                       if(chat_aktif === extractedIdKelompok){
+  
+      //                                       } else {
+      //                                         chatBody.innerHTML = "";
+      //                                         anggota_badge.innerHTML = ""
+                                              
+      //                                         chat_aktif = extractedIdKelompok;
+      //                                         loadMessages(extractedIdKelompok);
+      //                                         tambahAnggotaGroupBadge(extractedIdKelompok)
+      //                                         sortirBadgeAnggotaKelompok();
+                                              
+      //                                       }
+                                            
+      //                                       document.getElementById('chatPopup').style.display = 'block';
+      //                                     } else {
+      //                                       createTooltip(chatButton, "Tidak ada anggota kelompok, Harap tambahkan terlebih dahulu!");
+      
+      //                                     }
+  
+                                          
+                                            
+      //                                     scrollToBottom();
+      //                                   })
+                                      
+      //                               }
+
+      //                             } catch(e) {
+      //                                 console.error("Error : " + e)
+      //                             }
+                                  
+                                  
+      //                           });
+      //                           //////////////////////////////////////////////////////////
+                                  
+
+      //                           })
+                                
+
+      //                         });
+
+   
+
+                              
+
+
+// ======================================= DAPATKAN GROUP YAN GBERISI SISWA =================================
+
+
+    let sendButton = document.getElementById('sendButton')
+    sendButton.addEventListener('click',  () => {
+      sendMessage(chat_aktif); 
+    })
+
+
+
+    const queA = query(ref(db, "dataSiswa/"));
+    onValue(queA, (snapshot) => {
+      const users = snapshot.val();
+      // Mengelompokkan pengguna berdasarkan kelompok
+      Object.values(users).forEach(user => {
+        if(!anggota_kelompok[user.kelompok]){ 
+            anggota_kelompok[user.kelompok] = {};
+        };
+        if(!anggota_kelompok[user.kelompok][user.nisn]){ 
+            anggota_kelompok[user.kelompok][user.nisn] = {};
+        };
+        anggota_kelompok[user.kelompok][user.nisn] = {
+          nama : user.nama,
+          konfirmasi : user.konfirmasi
+        };
+      });
+    });
+
+    console.log(anggota_kelompok)
+
+  /// ========================================================================================================                   
+
+    // Menambahkan data ke tabel
+    var stdNo = 0;
+                              // var tbody = document.querySelector("tbody1");
+                              // var addUser = document.querySelector("#tambah"),
+                              //   popup = document.querySelector(".popup"),
+                              //   addform = document.querySelector(".add form"),
+                              //   updateform = document.querySelector(".update form");
+
+                        
+                              function writeUserData(kelas, token, pengawasKelompok) {
+                                set(ref(db, "dataKelompok/" + kelas), {
+      
+                                  kelompok: kelas,
+                                  token: token,
+                                  pengawas : pengawasKelompok,
+                                })
+                                  .then(() => {
+                                    Swal.fire({
                                           title: "Selamat!",
-                                          text: "Data berhasil dihapus.",
+                                          text: `Kelompok berhasil ditambahkan`,
                                           icon: "success",
                                           button: "Lanjutkan",
                                         });
-                                        
-                                      }
-                                    });
-                                  
-                                  
+                                    addform.reset();
+                                  $('#tambahModal').modal('hide');
+                                  })
+                                  .catch((errorr) => {
+                                    Swal.fire({
+                                          title: "Maaf!",
+                                          text: `Kelompok gagal ditambahkan`,
+                                          icon: "error",
+                                          button: "Lanjutkan",
+                                        });
                                   });
-                                });
-                                //////////////////////////////////////////////////////////
-                                  
+                              }
 
+                              function updateUserData(kelas, token, pengawasKelompok) {
+                                update(ref(db, "dataKelompok/" + kelas), {
+      
+                                  kelompok: kelas,
+                                  token: token,
+                                  pengawas : pengawasKelompok,
                                 })
+                                  .then(() => {
+                                    Swal.fire({
+                                          title: "Selamat!",
+                                          text: `Kelompok berhasil di update`,
+                                          icon: "success",
+                                          button: "Lanjutkan",
+                                        });
+                                    addform.reset();
+                                  $('#tambahModal').modal('hide');
+                                  })
+                                  .catch((errorr) => {
+                                    Swal.fire({
+                                          title: "Maaf!",
+                                          text: `Kelompok gagal di update.`,
+                                          icon: "error",
+                                          button: "Lanjutkan",
+                                        });
+                                  });
+                              }
+
+                               // Mengambil data siswa dari Firebase
+                              //  let tambahKelompok = document.getElementById("tambah")
+                              //  tambahKelompok.addEventListener("click", () => {
+                              //   pengawasKelompok.innerHTML = '<option value = "" disable>---- Pilih Guru Pengawas ----</option>';
+                              //   const selectElement = pengawasKelompok;
+                              //   for (const key in guru) {
+                              //     const option = document.createElement('option');
+                              //     option.value = key;
+                              //     option.text = guru[key].nama; // Ubah 'nama' sesuai dengan properti yang Anda inginkan
+                              //     selectElement.appendChild(option);
+                              //   }
+                              //  })
+
+                              
+
+                            const exitModal = document.querySelectorAll('.delete-progress');
+
+                            // Loop melalui setiap elemen dan tambahkan event listener
+                            exitModal.forEach(function(tombol) {
+                                tombol.addEventListener('click', function() {
+                                    // Panggil fungsi yang sama saat salah satu tombol diklik
+                                    deleteProgress();
+                                });
+                            });
+
+
+                            let namaKelompok = document.getElementById('namaKelas');
+                            let tokenKelompok = document.getElementById('tokenKelas');
+                            function deleteProgress(){
+                              Swal.fire({
+                                title: 'Ingin menghapus progress saat ini?',
+                                text: '',
+                                icon: 'question',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Iya',
+                                cancelButtonText: 'Batal',
+                              }).then((result) => {
+                                if (result.value) {
+                                  $('#tambahModal').modal('hide');
+                                  namaKelompok.value = "";
+                                  tokenKelompok.value = "";
+                                  pengawasKelompok.innerHTML = "";
+                                  
+                                  Swal.fire({
+                                    title: "Selamat!",
+                                    text: "Progress berhasil dihapus.",
+                                    icon: "success",
+                                    button: "Lanjutkan",
+                                  });
+                                  
+                                }
+                              });
+                            }
+
+                                                          
+                              let simpanBtn = document.getElementById('simpanBtn');
+                              let tambahBtn = document.getElementById('tambahBtn');
+
+                              
+                              simpanBtn.addEventListener("click", (e) => {
+                                    e.preventDefault();
+                                    updateUserData(kelasT.value, token.value, pengawasKelompok.value);
+                              });
+
+
+                              // addUser.addEventListener("click", () => {
+                              //     // document.querySelector(".add").classList.add("active");
+                              //     simpanBtn.style.display = "none";
+                              //     tambahBtn.style.display = "block";
+                              //     addform.addEventListener("submit", (e) => {
+                              //       e.preventDefault();
+                              //       writeUserData(kelasT.value, token.value, pengawasKelompok.value);
+    
+                              //     });
+                              //   });
+
+                                function createTooltip(item, pesan){
+                                  $(document).ready(function(){
+                                    $(item).tooltip({
+                                      title: pesan,
+                                      placement: "top"
+                                    });
+                                  });
+                                }
                                 
 
-                              });
+
+// ================================= CHAT KELOMPOK ========================================
+//function chatKelompok(groupUser){
+
+  /*
+  const queGroup = query(ref(db, "dataKelompok/" + groupUser));
+    onValue(queGroup, (snapshot) => {
+        // Memproses snapshot yang berisi nilai terbaru dari path tersebut
+        if (snapshot.exists()) {
+            // Jika snapshot tidak kosong
+         //   snapshot.forEach((groupSnapshot) => {
+                const group = snapshot.val();
+                if (group.pengawas == username) {
+                    groupUser += group.kelompok;
+                    // Lakukan sesuatu dengan data
+                }
+       //     });
+        } else {
+            // Jika snapshot kosong
+            console.error("Data tidak ditemukan");
+        }
+    }, (error) => {
+        // Menangani kesalahan jika ada
+        console.error("Error:", error);
+    });
+
+
+   
+
+   
+
+    function tambahAnggotaGroupBadge(kelompok){
+      
+      let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
+      $('#namaKelompokRoomChat').text("Kelompok " + kelompok)
+      // Mendapatkan array dari semua keys (nama properti) dalam objek
+      const keys = Object.keys(anggota_kelompok[kelompok]);
+
+      // Iterasi melalui array keys dan akses nilai dari setiap properti
+      keys.forEach(key => {
+        const user = anggota_kelompok[kelompok][key];
+
+         // Membuat elemen span baru
+         var newSpan = document.createElement("span");
+         newSpan.className = `me-1 badge text-bg-${user.konfirmasi == true? "success" : "danger"}`; // Menetapkan kelas CSS
+ 
+         // Membuat teks yang akan ditampilkan di dalam span
+         var newText = document.createTextNode(user.nama);
+ 
+         // Menambahkan teks ke dalam elemen span
+         newSpan.appendChild(newText);
+ 
+         // Menambahkan elemen span ke dalam elemen anggotKelompokChat
+         anggotKelompokChat.appendChild(newSpan);
+      });
+
+       
+    } */
+
+    function tambahAnggotaGroupBadge(kelompok){
+  
+      let anggotKelompokChat = document.getElementById("anggota-kelompok-chat");
+      anggotKelompokChat.innerHTML = "";
+      $('#namaKelompokRoomChat').text("Kelompok " + kelompok)
+      // Mendapatkan array dari semua keys (nama properti) dalam objek
+      const keys = Object.keys(anggota_kelompok[kelompok]);
+  
+      // Iterasi melalui array keys dan akses nilai dari setiap properti
+      keys.forEach(key => {
+        const user = anggota_kelompok[kelompok][key];
+  
+         // Membuat elemen span baru
+         var newSpan = document.createElement("span");
+         let badgeColor = "";
+         let nama = ""
+         if(key === username){
+          badgeColor = "warning";
+          nama = "Anda";
+         } else {
+          badgeColor = (user.konfirmasi == true)? "success" : "danger";
+          nama = user.nama===nm? "Anda" : user.nama;
+         }
+         newSpan.className = `me-1 badge text-bg-${badgeColor}`; // Menetapkan kelas CSS
+  
+         // Membuat teks yang akan ditampilkan di dalam span
+         var newText = document.createTextNode(`${nama}`);
+  
+         // Menambahkan teks ke dalam elemen span
+         newSpan.appendChild(newText);
+  
+         // Menambahkan elemen span ke dalam elemen anggotKelompokChat
+         anggotKelompokChat.appendChild(newSpan);
+      });
+  
+       
+    }
+
+    
+
+    let chatPopup = document.getElementById('chatPopup');
+        
+
+        let closeChat = document.getElementById('closeChat')
+        closeChat.addEventListener('click', function(){
+          chatPopup.style.display = 'none';
+        })
+    
+    
+        function createBubbleMsg(sender, message, time){
+          var bubble = document.createElement('div');
+          bubble.textContent = message;
+    
+          if (sender === username) {
+            var bubbleClass = 'bubble-me';
+            bubble.style.float = 'right';
+            bubble.style.backgroundColor = '#AAD8D3';
+            bubble.style.paddingTop = '10px'; 
+            bubble.style.paddingRight = '10px'; 
+            bubble.style.minWidth = '50px';
+            
+          } else {
+            bubble.style.float = 'left';
+            bubble.style.backgroundColor = '#2F323A';
+            bubble.style.paddingTop = '30px'; 
+            let namaSender = anggota_kelompok[chat_aktif][sender].nama;
+
+                if(anggota_kelompok[chat_aktif][sender].guru){
+                    bubble.style.backgroundColor = '#FFC107';
+                    
+                    namaSender = "Guru " + anggota_kelompok[chat_aktif][sender].nama;
+                }
+            
+            var senderSpan = document.createElement('span');
+                senderSpan.textContent = namaSender;
+            
+            senderSpan.style.fontSize = '0.8em';
+            senderSpan.style.position = 'absolute';
+            senderSpan.style.top = '10px'; 
+            senderSpan.style.left = '10px'; 
+            senderSpan.style.paddingRight = '20px'; 
+            senderSpan.style.fontWeight = 'bold';
+            
+
+            bubble.appendChild(senderSpan);
+
+            bubble.style.minWidth = (namaSender.length * 1 > message.length * 1)? namaSender.length * 1 + 'em' : message.length * 1 + 'em'; // Mengatur lebar minimum bubble
+          }
+    
+          bubble.style.color = '#fff';
+          bubble.style.borderRadius = '10px';
+          bubble.style.maxWidth = '80%';
+          bubble.style.marginBottom = '10px';
+          bubble.style.clear = 'both';
+          bubble.style.overflow = 'hidden';
+          bubble.style.paddingLeft = '10px'; 
+          bubble.style.paddingBottom = '20px'; 
+          bubble.style.wordWrap = 'break-word';
+          bubble.style.position = 'relative'; // Container bubble chat harus dalam posisi relatif
+
+    
+          var timeSpan = document.createElement('span');
+          timeSpan.textContent = time;
+          timeSpan.style.fontSize = '0.6em';
+          timeSpan.style.position = 'absolute';
+          timeSpan.style.bottom = '5px'; 
+          timeSpan.style.right = '5px'; 
+          timeSpan.style.padding = '0 5px'; // Padding kiri-kanan minimum untuk span waktu
+    
+          
+    
+          // Tambahkan timeSpan ke dalam bubble
+          bubble.appendChild(timeSpan);
+          
+          var chatMessages = document.getElementById('chatMessages');
+          chatMessages.appendChild(bubble);
+    }
+
+        function getTimeStamp(){
+            // Mendapatkan tanggal dan waktu saat ini
+            const currentDateTime = new Date();
+    
+            // Mendapatkan tahun
+            const year = currentDateTime.getFullYear();
+    
+            // Mendapatkan bulan (dalam format dua digit)
+            const month = String(currentDateTime.getMonth() + 1).padStart(2, '0');
+    
+            // Mendapatkan tanggal (dalam format dua digit)
+            const date = String(currentDateTime.getDate()).padStart(2, '0');
+    
+            // Mendapatkan jam (dalam format dua digit)
+            const hours = String(currentDateTime.getHours()).padStart(2, '0');
+    
+            // Mendapatkan menit (dalam format dua digit)
+            const minutes = String(currentDateTime.getMinutes()).padStart(2, '0');
+    
+            // Mendapatkan detik (dalam format dua digit)
+            const seconds = String(currentDateTime.getSeconds()).padStart(2, '0');
+    
+            // Mendapatkan milidetik (dalam format tiga digit)
+            const milliseconds = String(currentDateTime.getMilliseconds()).padStart(3, '0');
+    
+            // Gabungkan semua komponen untuk membuat timestamp dalam format yang diinginkan
+            const timestamp = `${year}${month}${date}${hours}${minutes}${seconds}${milliseconds}`;
+    
+            return timestamp
+        }
+        
+
+        
+        
+
+        function sendMessage(kelompok) {
+          const message = document.getElementById('messageInput').value.trim();
+          const currentTime = new Date();
+          const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+          const formatter = new Intl.DateTimeFormat('id', options);
+          const formattedTime = formatter.format(currentTime);
+        
+            if (message !== '') {
+             const chatMessages = document.getElementById('chatMessages');
+    
+              set(ref(db, 'dataKelompok/'+ kelompok + '/chatGroup/'+getTimeStamp()), {
+                usnPengirim : username,
+                pesan : message,
+                pada  : formattedTime
+              });
+    
+            // Auto-scroll ke paling bawah saat ada chat baru
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+            // Kosongkan input teks setelah mengirim
+            document.getElementById('messageInput').value = '';
+        
+            }
+        }
+
+        
+
+
+        document.getElementById('chatMessages').addEventListener('scroll', function() {
+            var floatingButtonDown = document.getElementById('floatingButtonDown');
+        
+            // Jika posisi scroll tidak berada di bagian paling bawah
+            if (this.scrollTop < (this.scrollHeight - this.clientHeight)) {
+                // Munculkan floating button down
+                if (!floatingButtonDown) {
+                    floatingButtonDown = document.createElement('button');
+                    floatingButtonDown.id = 'floatingButtonDown';
+                    floatingButtonDown.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2F323A" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+                    </svg>`;
+                    floatingButtonDown.style.position = 'absolute';
+                    floatingButtonDown.style.bottom = '80px'; 
+                    floatingButtonDown.style.right = '40px';
+                    floatingButtonDown.style.width = '40px'; 
+                    floatingButtonDown.style.height = '40px'; 
+                    floatingButtonDown.style.borderRadius = '50%';
+                    floatingButtonDown.style.border = '2px solid #2F323A'; 
+                    floatingButtonDown.style.backgroundColor = '#fff'; 
+                    floatingButtonDown.style.cursor = 'pointer';
+                    floatingButtonDown.onclick = function() {
+                        var chatMessages = document.getElementById('chatMessages');
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    };
+        
+                    document.getElementById('chatPopup').appendChild(floatingButtonDown);
+                }
+            } else {
+                // Sembunyikan floating button down jika posisi scroll berada di bagian paling bawah
+                if (floatingButtonDown) {
+                    floatingButtonDown.parentNode.removeChild(floatingButtonDown);
+                }
+            }
+        });
+// Variabel untuk menyimpan referensi event listener saat ini
+let currentListener = null;
+
+function loadMessages(kelompok) {
+    const groupChatRef = ref(db, 'dataKelompok/' + kelompok + '/chatGroup/');
+    const que = query(groupChatRef, orderByKey());
+
+    // Hapus event listener sebelumnya jika ada
+    if (currentListener) {
+        currentListener(); // Panggil event listener untuk menghapusnya
+    }
+    let prevKey = "";
+
+    // Tambahkan event listener baru untuk kelompok saat ini
+    currentListener = onChildAdded(que, (snapshot) => {
+        const chatData = snapshot.val();
+        if(prevKey == ""){
+          showSeparatorWithDate(snapshot.key)
+        } else {
+            let isCreateSeparator = compareDates(prevKey, snapshot.key);
+            (isCreateSeparator)? showSeparatorWithDate(snapshot.key) : "";
+        }
+        prevKey = snapshot.key;
+        createBubbleMsg(chatData.usnPengirim, chatData.pesan, chatData.pada);
+        scrollToBottom();
+    });
+}
+
+function scrollToBottom(){
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+/*
+
+// Memuat pesan saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    loadMessages();
+});
+
+*/
+          
+    function sortirBadgeAnggotaKelompok(){
+            var spans = document.querySelectorAll("#anggota-kelompok-chat span");
+    
+            // Membuat array dari nodeList
+            var spansArray = [];
+    
+           // Memasukkan elemen-elemen <span> ke dalam array sementara dan melakukan penggantian nama jika terdiri dari dua kata atau lebih
+            spans.forEach(function(span) {
+                var text = span.textContent.trim();
+                var name = extractName(text);
+                if (name.includes(' ')) {
+                    name = name.split(' ')[1];
+                }
+                span.textContent = name;
+                spansArray.push({ element: span, name: name });
+            });
+    
+            // Fungsi untuk mengekstrak nama dari teks dan mengembalikan kata kedua jika ada
+            function extractName(text) {
+                var words = text.split(' ');
+                if (words.length > 1) {
+                    return words[1];
+                }
+                return text;
+            }
+    
+            // Mengurutkan elemen-elemen <span> yang tersisa berdasarkan teks yang ada di dalamnya
+            spansArray.sort(function(a, b) {
+                var textA = a.name.toLowerCase();
+                var textB = b.name.toLowerCase();
+                return textA.localeCompare(textB);
+            });
+    
+            // Mencari index elemen <span> yang berisi teks "Anda"
+            var indexAnda = -1;
+            spansArray.forEach(function(span, index) {
+                var spanText = span.name.trim();
+                if (spanText === "Anda") {
+                    indexAnda = index;
+                }
+            });
+    
+            // Jika elemen <span> yang berisi teks "Anda" ditemukan
+            if (indexAnda !== -1) {
+                // Memindahkan elemen <span> yang berisi teks "Anda" ke urutan pertama
+                var spanAnda = spansArray.splice(indexAnda, 1)[0];
+                spansArray.unshift(spanAnda);
+            }
+    
+            // Mendapatkan parent dari elemen <span>
+            var parentElement = document.getElementById("anggota-kelompok-chat");
+    
+            // Menghapus semua elemen <span> dari parent
+            parentElement.innerHTML = "";
+    
+            spansArray.forEach(function(span) {
+                parentElement.appendChild(span.element);
+            });
+       
+    }
+
+        // Fungsi untuk mengonversi timestamp ke format Date
+function convertTimestampToDateTime(timestampString) {
+  const year = timestampString.slice(0, 4);
+  const month = timestampString.slice(4, 6) - 1; // Bulan dimulai dari 0 (Januari)
+  const day = timestampString.slice(6, 8);
+  const hour = timestampString.slice(8, 10);
+  const minute = timestampString.slice(10, 12);
+  const second = timestampString.slice(12, 14);
+  const millisecond = timestampString.slice(14);
+
+  return new Date(year, month, day, hour, minute, second, millisecond);
+}
+
+// Fungsi untuk menampilkan pemisah dengan keterangan hari dan tanggal dari timestamp dalam format `yyyymmddhhmmmsmsm`
+function showSeparatorWithDate(timestampString) {
+  const timestamp = convertTimestampToDateTime(timestampString); // Mengonversi timestamp ke format Date
+  const currentDate = new Date(); // Timestamp hari ini
+
+  const separator = document.createElement('hr'); // Membuat elemen garis pembatas
+  separator.style.border = 'none'; // Menghilangkan border dari garis pembatas
+  separator.style.borderTop = '2px solid #ccc'; // Menambahkan border di bagian atas garis pembatas
+  separator.style.margin = '10px 0'; 
+  separator.style.marginBottom = '10px';
+  separator.style.clear = 'both';
+  separator.style.overflow = 'hidden';
+  separator.style.position = 'relative'; 
+
+  // Membuat elemen untuk menampilkan keterangan hari dan tanggal
+  const dateInfo = document.createElement('div');
+  let today = currentDate.getDate();
+  let dayFromTimestamp = timestamp.getDate();
+
+  if (today == dayFromTimestamp) {
+      // Jika timestamp hari ini
+      dateInfo.textContent = 'Hari ini';
+  } 
+  else if (today - dayFromTimestamp == 1) {
+      // Jika timestamp kemarin
+      dateInfo.textContent = 'Kemarin';
+  } else if (today - dayFromTimestamp <= 7 ) {
+      // Jika masih dalam minggu yang sama dengan hari ini
+      const options = { weekday: 'long' };
+      dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
+  } else {
+      // Jika berbeda minggu dengan hari ini
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      dateInfo.textContent = timestamp.toLocaleDateString('id-ID', options);
+  }
+
+  dateInfo.style.textAlign = 'center'; // Pusatkan teks
+
+  // Menambahkan elemen keterangan hari dan tanggal ke dalam elemen garis pembatas
+  separator.appendChild(dateInfo);
+
+  // Menambahkan garis pembatas beserta keterangan hari dan tanggal ke dalam body
+  let chatMessages = document.getElementById("chatMessages")
+ chatMessages.appendChild(separator);
+}
+
+// Fungsi untuk membandingkan dua tanggal berdasarkan
+function compareDates(timestampString1, timestampString2) {
+  // Mengambil bagian `yyyymmdd` dari string timestamp
+  const date1 = timestampString1.slice(0, 8);
+  const date2 = timestampString2.slice(0, 8);
+
+  if (date1 === date2) {
+      return 0; // Jika tanggal sama
+  } else if (date1 < date2) {
+      return 1; // Jika tanggal pertama lebih kecil dari tanggal kedua
+  } 
+}
+// ============================================= Modal Hasil Kegiatan Kelompok
+
+// // let btnShowModal = document.getElementById('tampilkanModal')
+// let modal = document.getElementById('modalHasilKegiatanKelompok')
+// let btnCloseModal = document.getElementById('close-modal-kelompok')
+
+// btnShowModal.addEventListener('click', () => {
+//     $('#modalHasilKegiatanKelompok').modal('show')
+// })
+
+// btnCloseModal.addEventListener('click', () => {
+//     $('#modalHasilKegiatanKelompok').modal('hide')
+// })
+
+// ================================== TABEL HASIL KERJA KELOMPOK 
+
+let tmpKelompok = document.getElementById('bodyTable')
+const queKelompok = query(ref(db, "dataSiswa/"));
+onValue(queKelompok, (snapshot) => {
+  tmpKelompok.innerHTML = "";
+    var no = 1;
+    const users = snapshot.val();
+
+    // Objek untuk menyimpan data pengguna yang dikelompokkan berdasarkan kelompok
+    const groupedUsers = {};
+
+    // Mengelompokkan pengguna berdasarkan kelompok
+    Object.values(users).forEach(user => {
+        const kelompok = user.kelompok;
+        if (!groupedUsers[kelompok]) {
+            groupedUsers[kelompok] = [];
+        }
+        groupedUsers[kelompok].push(user);
+    });
+
+    // Mengurutkan kelompok secara alfabetis
+    const sortedGroups = Object.keys(groupedUsers).sort();
+
+    // Membuat baris tabel untuk setiap kelompok
+    sortedGroups.forEach(kelompok => {
+        const usersInGroup = groupedUsers[kelompok];
+        let list = "";
+        let N = "";
+        let R = 0;
+        let r = 0;
+        
+        let listFile = "";
+        usersInGroup.forEach(user => {
+            
+
+            list += `<input class="form-check-input ms-2 mb-2" type="radio" id="anggotakelompok" name="namaanggota" value="${user.nama}" disabled>
+                    <label class="ms-2" for="namaanggota">${user.nama}</label><br>`;
+
+            try{
+                let namaFile = user.kerja_kelompok.materi1.files.nama_file
+                let urlFile = user.kerja_kelompok.materi1.files.url
+                let Nilai = user.kerja_kelompok.materi1.nilai
+
+                N += `<span>${Nilai}</span><br>`;
+                R += Nilai;
+                listFile += `<a href="${urlFile}">${namaFile}</a><br>`;
+
+
+            } catch(e){
+                //console.error(e)
+                listFile += `<t class="mb-5" >File Not Found !</t><br>`
+            }
+            
+        });
+
+        let tr = `
+            <tr class="m-1 ms-3">
+                <td class="text-center">${no}</td>
+                <td class="text-center"><label for="namakelompok">${kelompok}</label></td>
+                <td>${list}</td>
+                <td class="text-center">
+                    ${listFile}
+                </td>
+                <td class="text-center">${N}</td>
+                <td class="text-center">${R/4}</td>
+                <td class="text-center">${no}</td>
+
+            </tr>
+        `;
+       
+        tmpKelompok.innerHTML += tr;
+        no++;
+    });
+});
+
+
+    // =======================================================================================
   </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-    let nama = document.getElementById('nama');
+    let nama2 = document.getElementById('nama');
     let nm = sessionStorage.getItem('nama');
+    let username = sessionStorage.getItem('username');
 
-    nama.innerHTML = `<i class="fa-solid fa-user"></i> ${nm}`;
+    nama2.innerHTML = `<i class="fa-solid fa-user"></i> ${nm}`;
 
     let logout = document.getElementById("logout");
     logout.addEventListener("click", ()=>{
         // Membersihkan session storage
         sessionStorage.clear();
     });
+    isConfirmUser = true;
 
+    function openMenu(evt, menu) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(menu).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
   </script>
 </body> 
 </html>

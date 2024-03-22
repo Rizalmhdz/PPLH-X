@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PPLH|Kuis 1</title>
+    <title>PPLH|Kuis 5</title>
     <link rel="stylesheet" href="../css/style_kuis.css" />
     <link rel="stylesheet" href="../fontawesome/fontawesome/css/all.min.css">
     <link
@@ -50,8 +50,8 @@
 </nav>
 <!--Navbar end-->
 <div class="content_kegiatan-1">
-<h3>Kuis 1</h3>
-    <h3>Keseimbangan dan Perubahan Lingkungan Hidup</h3>  
+<h3>Kuis 5</h3>
+    <h3>Pencemaran Lingkungan Hidup</h3>  
     
 </div>
     <!--Area Progres bar end-->
@@ -110,32 +110,32 @@
                             </td>
                             <td><span id="kelas"></span></td>
                           </tr>
-                           <!-- ============================== status pengerjaan ============================== -->
-                          <tr>
-                            <td>Nilai </td>
-                            <td height="40" width="40">
-                                <center>:</center>
-                            </td>
-                            <td><span id="scores_status"></span></td>
-                          </tr>
-                          <tr>
-                            <td>waktu tersisa </td>
-                            <td height="40" width="40">
-                                <center>:</center>
-                            </td>
-                            <td><span id="time_left_status"></span></td>
-                          </tr>
-                          <tr>
-                            
-                          </tr>
-                        </table></center>
-                        <br>
-                        <center>
-                          <a href="1Keseimbangan.html" class="kembali">Kembali ke Materi</a>
-                          <button type="button" id="statusAction" class="mulai" style="display:none" onclick="startEva()">Mulai Kuis</button>
-                          <a href="2.1udara.html" id="statusActionDone" class="mulai" style="display:none;">Lanjut</a>
-                        </center>
-                    </div>	
+                         <!-- ============================== status pengerjaan ============================== -->
+                         <tr>
+                          <td>Nilai </td>
+                          <td height="40" width="40">
+                              <center>:</center>
+                          </td>
+                          <td><span id="scores_status"></span></td>
+                        </tr>
+                        <tr>
+                          <td>waktu tersisa </td>
+                          <td height="40" width="40">
+                              <center>:</center>
+                          </td>
+                          <td><span id="time_left_status"></span></td>
+                        </tr>
+                        <tr>
+                          
+                        </tr>
+                      </table></center>
+                      <br>
+                      <center>
+                        <a href="5dinamika.html" class="kembali">Kembali ke Materi</a>
+                        <button type="button" id="statusAction" class="mulai" style="display:none" onclick="startEva()">Mulai Kuis</button>
+                        <a href="#" id="statusActionDone" class="mulai" style="display:none;">Lanjut</a>
+                      </center>
+                  </div>	
                   
                   <br>
                   <br>
@@ -169,7 +169,7 @@
                 <div class="card border border-dark">
                   <div class="card-header bg-transparent border-dark">
                     <h5 class="nomor">
-                      Soal Kuis 1 |
+                      Soal Kuis 5 |
                       <div class="btn btn-sm btn-success col-sm-2 text-center" id="time">00 : 00</div>
                     </h5>
                   </div>
@@ -242,9 +242,9 @@
               </center>
               <h5 style="color: #555; text-shadow: none; padding-top: 0px; margin-top: 0px;" id="ucapan"></h5>
 
-              <a href="2.1udara.html" style="text-decoration: none; width: 150px;"  id="subbtn" class="btn btn-primary position-relative top-0 start-50 translate-middle-x">Lanjut Belajar</button></a> 
+              <a href="Kuis5_PilihanGanda.html" style="text-decoration: none; width: 150px;"  id="subbtn" class="btn btn-primary position-relative top-0 start-50 translate-middle-x">Lanjut Belajar</button></a> 
 
-              <a href="Kuis1_PilihanGanda.html" style="text-decoration: none;"><button id="btn-reload" class="btn btn-danger position-relative top-0 start-50 translate-middle-x">Ulangi Kuis</button></a>
+              <a href="Kuis5_PilihanGanda.html" style="text-decoration: none;"><button id="btn-reload" class="btn btn-danger position-relative top-0 start-50 translate-middle-x">Ulangi Kuis</button></a>
               <br>
           </div>
         </div>
@@ -262,7 +262,7 @@
 
     <!--My javascript-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../js/soalkuis1.js"></script>
+<script src="../js/soalkuis5.js"></script>
 <script>
 			function startEva(){
 				document.getElementById('opening_window').style.display="none";
@@ -331,7 +331,6 @@
         let correctAnswer = sessionStorage.getItem('correct');
 	      let wrongAnswer = sessionStorage.getItem('wrong');
 	      let namaUser = sessionStorage.getItem('nama');
-
 	      let questionLength = sessionStorage.getItem('questionLength');
 	      let newScore = document.querySelector('#new-score');
         let wrongCorrect = document.querySelector('#wrong-correct');
@@ -570,222 +569,222 @@
     </script>
 
 
-  <script type="module">
-// --------------------References---------------------------
-  	let element = document.getElementById("barProgres");
-  	let nama = document.getElementById('nama');
-  	let nisn = document.getElementById('nisn');
-  	let kelas = document.getElementById('kelas'); 
-    let nama1 = document.getElementById('nama1');
-  	let nisn1 = document.getElementById('nisn1');
-  	let kelas1 = document.getElementById('kelas1'); 
-  	let scores1 = document.getElementById('scores_status');
-  	let time_left1 = document.getElementById('time_left_status'); 
-  	let statusAction = document.getElementById('statusAction'); 
-  	let statusActionDone = document.getElementById('statusActionDone'); 
-  	var currentProgres = null; 
-    const submit = document.getElementById('sub-btn');
-    let statusPengerjaan = false;
-    let currentUser = null;
-    let scores_db = null;
-    let time_left_db = null;
-    let currentFullName = null;
-    let currentClass = null;
-    let currentUser1 = null;
-    let currentFullName1 = null;
-    let currentClass1 = null;
-    let currentKuis1 = null;
-
-    function toggleDone(status){
-      if(status){
-        statusAction.style.display = "none";
-        statusActionDone.style.display = "inline";
-      } else {
-        statusAction.style.display = "inline";
-        statusActionDone.style.display = "none";
-      }
-
-    }
-
-    
-
-//---------------------Function-----------------------------
-		function getProgres(){
-			let keepLoggedIn = localStorage.getItem("keepLoggedIn");
-
-			 if(!keepLoggedIn == "yes"){
-        currentProgres = localStorage.getItem('barprogres');
-      }
-      else{
-        currentProgres = sessionStorage.getItem('barprogres'); 
-      }
-		}
-
-
-
-
- //------------------FIREBASE CONFIG------------------------
-
-    // Import the functions you need from the SDKs you need
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
-        authDomain: "pplh-70ccb.firebaseapp.com",
-        projectId: "pplh-70ccb",
-        storageBucket: "pplh-70ccb.appspot.com",
-        messagingSenderId: "823611849079",
-        appId: "1:823611849079:web:a0f8c81197a46a2e1dc972"
-      };
-
-//----------------- Initialize Firebase --------------
-    const app = initializeApp(firebaseConfig);
-
-    import{getDatabase, ref, get, set, child, update }
-      from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-
-    const db = getDatabase(); 
-    // var submitButton = document.querySelector('#submit_');
-
-    submitButton.addEventListener('click', function () {
-        Swal.fire({
-          title: 'Apa kamu yakin mengakhiri menjawab?',
-          text: '',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Iya',
-          cancelButtonText: 'Batal',
-        }).then((result) => {
-          if (result.value) {
-            sessionStorage.setItem('timeLeftKuis1', showTime.innerHTML);
-            results();
-            UpdateData();
-		      	document.getElementById('quis_window').style.display="none"
-						document.getElementById('closing_window').style.display="block"
-          }
-        });
-      });
-
-// ----------------------Function-----------------
-
-  // ================================= get status quiz =====================
-  let nisnUser = sessionStorage.getItem('nisn');
-  let pathKuiz1User = ref(db, 'dataSiswa/' + nisnUser + '/kuis1');
-  function getNilai() {
-    get(pathKuiz1User)
-    .then((snapshot) => {
-        if (snapshot.exists()) {
-            let kuis = snapshot.val();
-            scores_db = typeof kuis.scores != "undefined" ? kuis.scores : "Belum Dikerjakan";
-            time_left_db = typeof kuis.time_left != "undefined" ? kuis.time_left : "Belum Dikerjakan";
-
-            
-            if(scores_db != "Belum Dikerjakan" && parseInt(scores_db) >= 75){
-               statusPengerjaan = true;
-            } else {
-              statusPengerjaan = false;
-            }
-            scores1.innerHTML = scores_db;
-            time_left1.innerHTML = time_left_db; 
-        } else {
-            scores_db = "Belum Dikerjakan";
-            time_left_db = "Belum Dikerjakan";
-            
-            statusPengerjaan = false;
-            scores1.innerHTML = scores_db; 
-            time_left1.innerHTML = time_left_db; 
-            console.log("Tidak ada record pada path:", pathKuiz1User);
-        }
-
-        toggleDone(statusPengerjaan)
-    })
-    .catch((error) => {
-        scores_db = "Belum Dikerjakan";
-        time_left_db = "Belum Dikerjakan";
-        statusPengerjaan = false;
-        toggleDone(statusPengerjaan)
-        scores1.innerHTML = scores_db; // Mengatur innerHTML di dalam fungsi catch()
-        time_left1.innerHTML = time_left_db; // Mengatur innerHTML di dalam fungsi catch()
-        console.error("Error:", error);
-    });
-}
-
-getNilai(); 
-
-
-
-	//-------------- update progres function in database---------------
-	  function UpdateData() {
-	  	// getUsername();
-      let currentUser = sessionStorage.getItem('nisn');
-      let currentKuis1 = sessionStorage.getItem('kuis1');
-      let timeLeftKuis1 = sessionStorage.getItem('timeLeftKuis1');
-	  	
-	  		update(ref(db, "dataSiswa/"+ currentUser),{
-	      	kuis1 : {
-            scores : currentKuis1,
-            time_left : timeLeftKuis1
-
-          }
-	    	})
-	    	.then(()=>{
-	      	alert("Nilai kuis berhasil diupdate.");
-          // location.href = "#.html"
-
-	    	})
-	    	.catch((error)=>{
-	      	alert("unsucsessful, error"+error);
-	    	});
-	  
-	  }
-
-    function getUsername(){
-      currentUser = sessionStorage.getItem('nisn');
-      currentClass = sessionStorage.getItem('kelas');
-      currentFullName = sessionStorage.getItem('nama');
-      currentUser1 = sessionStorage.getItem('nisn1');
-      currentClass1 = sessionStorage.getItem('kelas1');
-      currentFullName1 = sessionStorage.getItem('nama1');
-
-    }
-
-
-	  	getUsername();
-      nisn.innerText = currentUser;
-      nama.innerText = currentFullName;
-      kelas.innerText = currentClass;
-      nisn1.innerText = currentUser;
-      nama1.innerText = currentFullName;
-      kelas1.innerText = currentClass;
+    <script type="module">
+      // --------------------References---------------------------
+          let element = document.getElementById("barProgres");
+          let nama = document.getElementById('nama');
+          let nisn = document.getElementById('nisn');
+          let kelas = document.getElementById('kelas'); 
+          let nama1 = document.getElementById('nama1');
+          let nisn1 = document.getElementById('nisn1');
+          let kelas1 = document.getElementById('kelas1'); 
+          let scores1 = document.getElementById('scores_status');
+          let time_left1 = document.getElementById('time_left_status'); 
+          let statusAction = document.getElementById('statusAction'); 
+          let statusActionDone = document.getElementById('statusActionDone'); 
+          var currentProgres = null; 
+          const submit = document.getElementById('sub-btn');
+          let statusPengerjaan = false;
+          let currentUser = null;
+          let scores_db = null;
+          let time_left_db = null;
+          let currentFullName = null;
+          let currentClass = null;
+          let currentUser1 = null;
+          let currentFullName1 = null;
+          let currentClass1 = null;
+          let currentKuis1 = null;
       
-
-     
-	    // --------update data pada database--------------
-	 //  function UpdateData() {
-	 //    update(ref(db, "UserList/"+' username'),{
-	 //    	barprogres : currentProgres
-	 //    })
-	 //    .then(()=>{
-	 //      alert("data update successfully");
-
-	 //    })
-	 //    .catch((error)=>{
-	 //      alert("unsucsessful, error"+error);
-	 //    });
-	 //  }
-
-	 // updBtn.addEventListener('click',UpdateData);
-
-// --------------------ASSIGN THE EVENTS---------------------
-
-    // submit.addEventListener('click', UpdateData);
-
-	</script>
+          function toggleDone(status){
+            if(status){
+              statusAction.style.display = "none";
+              statusActionDone.style.display = "inline";
+            } else {
+              statusAction.style.display = "inline";
+              statusActionDone.style.display = "none";
+            }
+      
+          }
+      
+          
+      
+      //---------------------Function-----------------------------
+          function getProgres(){
+            let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+      
+             if(!keepLoggedIn == "yes"){
+              currentProgres = localStorage.getItem('barprogres');
+            }
+            else{
+              currentProgres = sessionStorage.getItem('barprogres'); 
+            }
+          }
+      
+      
+      
+      
+       //------------------FIREBASE CONFIG------------------------
+      
+          // Import the functions you need from the SDKs you need
+          // Import the functions you need from the SDKs you need
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+          // TODO: Add SDKs for Firebase products that you want to use
+          // https://firebase.google.com/docs/web/setup#available-libraries
+      
+          // Your web app's Firebase configuration
+          const firebaseConfig = {
+              apiKey: "AIzaSyBAEK9blcK9ZjeIT8kPPWk8_xv7jgwjYQo",
+              authDomain: "pplh-70ccb.firebaseapp.com",
+              projectId: "pplh-70ccb",
+              storageBucket: "pplh-70ccb.appspot.com",
+              messagingSenderId: "823611849079",
+              appId: "1:823611849079:web:a0f8c81197a46a2e1dc972"
+            };
+      
+      //----------------- Initialize Firebase --------------
+          const app = initializeApp(firebaseConfig);
+      
+          import{getDatabase, ref, get, set, child, update }
+            from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+      
+          const db = getDatabase(); 
+          // var submitButton = document.querySelector('#submit_');
+      
+          submitButton.addEventListener('click', function () {
+              Swal.fire({
+                title: 'Apa kamu yakin mengakhiri menjawab?',
+                text: '',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya',
+                cancelButtonText: 'Batal',
+              }).then((result) => {
+                if (result.value) {
+                  sessionStorage.setItem('timeLeftKuis1', showTime.innerHTML);
+                  results();
+                  UpdateData();
+                  document.getElementById('quis_window').style.display="none"
+                  document.getElementById('closing_window').style.display="block"
+                }
+              });
+            });
+      
+      // ----------------------Function-----------------
+      
+        // ================================= get status quiz =====================
+        let nisnUser = sessionStorage.getItem('nisn');
+        let pathKuiz1User = ref(db, 'dataSiswa/' + nisnUser + '/kuis5');
+        function getNilai() {
+          get(pathKuiz1User)
+          .then((snapshot) => {
+              if (snapshot.exists()) {
+                  let kuis = snapshot.val();
+                  scores_db = typeof kuis.scores != "undefined" ? kuis.scores : "Belum Dikerjakan";
+                  time_left_db = typeof kuis.time_left != "undefined" ? kuis.time_left : "Belum Dikerjakan";
+      
+                  
+                  if(scores_db != "Belum Dikerjakan" && parseInt(scores_db) >= 75){
+                     statusPengerjaan = true;
+                  } else {
+                    statusPengerjaan = false;
+                  }
+                  scores1.innerHTML = scores_db;
+                  time_left1.innerHTML = time_left_db; 
+              } else {
+                  scores_db = "Belum Dikerjakan";
+                  time_left_db = "Belum Dikerjakan";
+                  
+                  statusPengerjaan = false;
+                  scores1.innerHTML = scores_db; 
+                  time_left1.innerHTML = time_left_db; 
+                  console.log("Tidak ada record pada path:", pathKuiz1User);
+              }
+      
+              toggleDone(statusPengerjaan)
+          })
+          .catch((error) => {
+              scores_db = "Belum Dikerjakan";
+              time_left_db = "Belum Dikerjakan";
+              statusPengerjaan = false;
+              toggleDone(statusPengerjaan)
+              scores1.innerHTML = scores_db; // Mengatur innerHTML di dalam fungsi catch()
+              time_left1.innerHTML = time_left_db; // Mengatur innerHTML di dalam fungsi catch()
+              console.error("Error:", error);
+          });
+      }
+      
+      getNilai(); 
+      
+      
+      
+        //-------------- update progres function in database---------------
+          function UpdateData() {
+            // getUsername();
+            let currentUser = sessionStorage.getItem('nisn');
+            let currentKuis1 = sessionStorage.getItem('kuis1');
+            let timeLeftKuis1 = sessionStorage.getItem('timeLeftKuis1');
+            
+              update(ref(db, "dataSiswa/"+ currentUser),{
+                kuis5 : {
+                  scores : currentKuis1,
+                  time_left : timeLeftKuis1
+      
+                }
+              })
+              .then(()=>{
+                alert("Nilai kuis berhasil diupdate.");
+                // location.href = "#.html"
+      
+              })
+              .catch((error)=>{
+                alert("unsucsessful, error"+error);
+              });
+          
+          }
+      
+          function getUsername(){
+            currentUser = sessionStorage.getItem('nisn');
+            currentClass = sessionStorage.getItem('kelas');
+            currentFullName = sessionStorage.getItem('nama');
+            currentUser1 = sessionStorage.getItem('nisn1');
+            currentClass1 = sessionStorage.getItem('kelas1');
+            currentFullName1 = sessionStorage.getItem('nama1');
+      
+          }
+      
+      
+            getUsername();
+            nisn.innerText = currentUser;
+            nama.innerText = currentFullName;
+            kelas.innerText = currentClass;
+            nisn1.innerText = currentUser;
+            nama1.innerText = currentFullName;
+            kelas1.innerText = currentClass;
+            
+      
+           
+            // --------update data pada database--------------
+         //  function UpdateData() {
+         //    update(ref(db, "UserList/"+' username'),{
+         //    	barprogres : currentProgres
+         //    })
+         //    .then(()=>{
+         //      alert("data update successfully");
+      
+         //    })
+         //    .catch((error)=>{
+         //      alert("unsucsessful, error"+error);
+         //    });
+         //  }
+      
+         // updBtn.addEventListener('click',UpdateData);
+      
+      // --------------------ASSIGN THE EVENTS---------------------
+      
+          // submit.addEventListener('click', UpdateData);
+      
+        </script>
   </body>
 </html>

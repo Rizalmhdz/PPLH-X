@@ -86,10 +86,11 @@ const questions = [
         },
         correctAnswer: "d",
       },
+
       {
         question:
         "Berdasarkan sebuah penelitian pada tahun 2020, sebanyak 68% air warga di daerah X mengalami pencemaran. Diduga pencemaran disebabkan oleh limbah rumah tangga yang berasal dari rembesan air buangan ke dalam sarana air minum. Limbah rumah tangga yang dominan berupa....",
-        ansewers:{
+        answers:{
           a: "kaleng dan plastik",
           b: "feses manusia dan pestisida",
           c: "detergen dan bahan organik",
@@ -115,7 +116,7 @@ const questions = [
       {
         question:
         "Hasil Pertanian dipengaruhi oleh kualitas tanah sebagai media tanam. Limbah yang dapat menurunkan kualitas tanah, antara lain....",
-        ansewers:{
+        answers:{
           a: "kaleng dan kardus",
           b: "pupuk anorganik dan pupuk organik",
           c: "detergen dan biopestisida",

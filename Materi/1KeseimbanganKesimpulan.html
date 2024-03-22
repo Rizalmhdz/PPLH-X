@@ -380,6 +380,8 @@ function saveKesimpulan(kesimpulan){
             editKesimpulanBtn.style.display = "block"; 
                 displayKesimpulan.style.display = "block"; 
             console.log("Record Kesimpulan disimpan pada path:", pathRefKesimpulan);
+            alert('Kesimpulan Berhasil Disimpan');
+            getKesimpulan();
         })
         .catch((error) => {
             console.error("Error:", error);
