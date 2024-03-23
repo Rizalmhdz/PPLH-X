@@ -92,48 +92,7 @@
     <!-- CONTENT AREA START-->
     <div class="content">
     <!-------------------------------------------------------- Nilai Kuis dan Evaluasi ------------------------------------------------------------------>
-      <div class="card-header"><center>Nilai Kuis dan Evaluasi</center></div>
-        <!-----------------------------------------------Modal Tambah Data Siswa ------------------------------------------------------->
-        <!-- <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered " >
-              <div class="modal-content" style="background-color: white;">
-                <div class="modal-header">
-                  <h5 class="modal-title fw-bold text-dark " id="exampleModalLabel">TAMBAH DATA</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" >
-                  <div class="popup add">
-                    <form action="" style="background-color: white;">
-                      <div class="mb-3">
-                        <label>NISN :</label>
-                        <input type="text" class="form-control" id="tambahNisnbox">
-                      </div>
-                      <div class="mb-3">
-                        <label>Nama :</label>
-                        <input type="text" class="form-control" id="tambahNamabox">
-                      </div>
-                      <div class="mb-3">
-                        <label>Kelas :</label>
-                        <input type="text" class="form-control" id="tambahKelasbox">
-                      </div>
-                      <div class="mb-3">
-                        <label>Kelompok :</label>
-                        <input type="text" class="form-control" id="tambahKelompokbox">
-                      </div>
-                      <div class="mb-3">
-                        <label>Password :</label>
-                        <input type="text" class="form-control" id="tambahPasswordbox">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
-                        <button type="submit" class="btn btn-success" id="submit">Tambah</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
+      <div class="card-header"><center>Nilai Latihan</center></div>
         
         <br>
 
@@ -145,12 +104,12 @@
                     <th>No.</th>
                     <th>Nama</th>
                     <th>Kelas</th>
-                    <th>Kuis 1</th>
-                    <th>Kuis 2</th>
-                    <th>Kuis 3</th>
-                    <th>Kuis 4</th>
-                    <th>Kuis 5</th>
-                    <th>Kuis 6</th>
+                    <th>Latihan 1</th>
+                    <th>Latihan 2</th>
+                    <th>Latihan 3</th>
+                    <th>Latihan 4</th>
+                    <th>Latihan 5</th>
+                    <th>Latihan 6</th>
                     <th>Evaluasi</th>
                 </thead>
                 <tbody id="tbody1"></tbody>
@@ -347,18 +306,25 @@
                                 const users = snapshot;
                                 users.forEach(user => {
                                   const userVal = user.val();
+                                  let nilai1 = userVal?.kerja_kelompok?.materi1?.nilai || 0;
+                                  let nilai2 = userVal?.kerja_kelompok?.materi2?.nilai || 0;
+                                  let nilai3 = userVal?.kerja_kelompok?.materi3?.nilai || 0;
+                                  let nilai4 = userVal?.kerja_kelompok?.materi4?.nilai || 0;
+                                  let nilai5 = userVal?.kerja_kelompok?.materi5?.nilai || 0;
+                                  let nilai6 = userVal?.kerja_kelompok?.materi6?.nilai || 0;
+                                  let nilaiEvaluasi = userVal?.kerja_kelompok?.evaluasi?.nilai || 0;
                                     let tr = `
                                         <tr data-id = ${user.key}>
                                           <td>${no}</td>
                                           <td>${userVal.nama}</td>
                                           <td>${userVal.kelas}</td>
-                                          <td>${userVal.kuis1}</td>
-                                          <td>${userVal.kuis2}</td>
-                                          <td>${userVal.kuis3}</td>
-                                          <td>${userVal.kuis4}</td>
-                                          <td>${userVal.kuis5}</td>
-                                          <td>${userVal.kuis6}</td>
-                                          <td>${userVal.Evaluasi}</td>
+                                          <td>${ nilai1 }</td>
+                                          <td>${ nilai2 }</td>
+                                          <td>${ nilai3 }</td>
+                                          <td>${ nilai4 }</td>
+                                          <td>${ nilai5 }</td>
+                                          <td>${ nilai6 }</td>
+                                          <td>${ nilaiEvaluasi }</td>
 
                                             
                                         <tr>

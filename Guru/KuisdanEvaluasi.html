@@ -352,13 +352,13 @@
                                           <td>${no}</td>
                                           <td>${userVal.nama}</td>
                                           <td>${userVal.kelas}</td>
-                                          <td>${userVal.kuis1}</td>
-                                          <td>${userVal.kuis2}</td>
-                                          <td>${userVal.kuis3}</td>
-                                          <td>${userVal.kuis4}</td>
-                                          <td>${userVal.kuis5}</td>
-                                          <td>${userVal.kuis6}</td>
-                                          <td>${userVal.Evaluasi}</td>
+                                          <td>${typeof userVal.kuis1.scores != 'undefined' ? userVal.kuis1.scores : '0'} (${typeof userVal.kuis1.time_left != 'undefined' ? userVal.kuis1.time_left : '00:00'})</td>
+                                          <td>${typeof userVal.kuis2.scores != 'undefined' ? userVal.kuis2.scores : '0'} (${typeof userVal.kuis2.time_left != 'undefined' ? userVal.kuis2.time_left : '00:00'})</td>
+                                          <td>${typeof userVal.kuis3.scores != 'undefined' ? userVal.kuis3.scores : '0'} (${typeof userVal.kuis3.time_left != 'undefined' ? userVal.kuis3.time_left : '00:00'})</td>
+                                          <td>${typeof userVal.kuis4.scores != 'undefined' ? userVal.kuis4.scores : '0'} (${typeof userVal.kuis4.time_left != 'undefined' ? userVal.kuis4.time_left : '00:00'})</td>
+                                          <td>${typeof userVal.kuis5.scores != 'undefined' ? userVal.kuis5.scores : '0'} (${typeof userVal.kuis5.time_left != 'undefined' ? userVal.kuis5.time_left : '00:00'})</td>
+                                          <td>${typeof userVal.kuis6.scores != 'undefined' ? userVal.kuis6.scores : '0'} (${typeof userVal.kuis6.time_left != 'undefined' ? userVal.kuis6.time_left : '00:00'})</td>
+                                          <td>${typeof userVal.Evaluasi.scores != 'undefined' ? userVal.Evaluasi.scores : '0'} (${typeof userVal.Evaluasi.time_left != 'undefined' ? userVal.Evaluasi.time_left : '00:00'})</td>
 
                                             
                                         <tr>
